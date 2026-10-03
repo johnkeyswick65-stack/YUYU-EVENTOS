@@ -5831,3 +5831,9 @@ body.pagamento-aberto .event-detail {
     font-size: 52px;
   }
 }
+
+/* ===== EVENTOS.HTML — botão sem seta (a seta é da index) ===== */
+#eventsPage .event-bottom a::after,
+#eventsGrid .event-bottom a::after {
+  display: none !important;
+}
