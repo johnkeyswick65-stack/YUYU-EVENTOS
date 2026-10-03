@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Scanner · Painel YUYU EVENTOS</title>
+  <link rel="stylesheet" href="admin.css?v=3">
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg class="admin-brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="3" y="13" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="13" width="8" height="8" rx="1.5"></rect>
+        </svg>
+        <span class="admin-brand-text">YUYU <span class="admin-brand-accent">EVENTOS</span></span>
+        <span class="admin-brand-badge">Scanner</span>
+      </div>
+      <nav class="admin-nav">
+        <a class="admin-nav-link" href="dashboard.html">Dashboard</a>
+        <a class="admin-nav-link" href="eventos.html">Eventos</a>
+        <a class="admin-nav-link" href="bilhetes.html">Bilhetes</a>
+        <a class="admin-nav-link is-active" href="scanner.html">Scanner</a>
+      </nav>
+      <div class="admin-user">
+        <span class="admin-username" id="nomeAdmin">—</span>
+        <button type="button" class="admin-logout" id="btnSair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <h1 class="admin-title">Scanner</h1>
+    <p class="admin-subtitle">Leia QR ou código de barras para validar a entrada.</p>
+
+    <div class="scanner-layout">
+
+      <!-- Coluna esquerda: câmara -->
+      <div>
+        <div class="scanner-view" id="view">
+          <video id="video" playsinline muted></video>
+
+          <div class="scanner-placeholder" id="placeholder">
+            <div>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                <path d="M8 21h8M12 17v4"></path>
+              </svg>
+              <p>Toca em <strong>Iniciar scanner</strong> para abrir a câmara.</p>
+            </div>
+          </div>
+
+          <div class="scanner-frame" id="frame" style="display:none">
+            <div class="scanner-frame-inner"></div>
+          </div>
+
+          <div class="scanner-feedback" id="feedback">
+            <div class="scanner-feedback-card">
+              <div class="scanner-feedback-icon" id="fbIcon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5"></path>
+                </svg>
+              </div>
+              <h2 class="scanner-feedback-title" id="fbTitulo">—</h2>
+              <p class="scanner-feedback-msg" id="fbMensagem">—</p>
+              <div class="scanner-feedback-info" id="fbInfo" style="display:none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna direita: painel -->
+      <div class="scanner-panel">
+
+        <div class="scanner-stats">
+          <div class="scanner-stat">
+            <div class="scanner-stat-num" id="statTotal">0</div>
+            <div class="scanner-stat-lbl">Lidos</div>
+          </div>
+          <div class="scanner-stat">
+            <div class="scanner-stat-num" id="statValidos" style="color:#86efac">0</div>
+            <div class="scanner-stat-lbl">Válidos</div>
+          </div>
+        </div>
+
+        <div class="scanner-buttons">
+          <button type="button" class="scanner-btn scanner-btn-start" id="btnIniciar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M10 8l6 4-6 4z"></path>
+            </svg>
+            Iniciar scanner
+          </button>
+
+          <button type="button" class="scanner-btn scanner-btn-stop" id="btnParar" style="display:none">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="6" y="6" width="12" height="12" rx="2"></rect>
+            </svg>
+            Parar
+          </button>
+        </div>
+
+        <div class="scanner-manual">
+          <h3>Entrada manual</h3>
+          <form id="formManual">
+            <input type="text" id="inputManual" placeholder="YUYU-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
+            <button type="submit">Validar</button>
+          </form>
+        </div>
+
+        <div class="scanner-history">
+          <div class="scanner-history-head">
+            <h3>Últimas leituras</h3>
+            <div class="scanner-history-controls" id="histControls">
+              <button type="button" class="scanner-history-btn" id="btnSelecionar" style="display:none">Selecionar</button>
+              <button type="button" class="scanner-history-btn is-danger" id="btnEliminarSel" style="display:none">Eliminar (0)</button>
+              <button type="button" class="scanner-history-btn" id="btnCancelarSel" style="display:none">Cancelar</button>
+              <button type="button" class="scanner-history-btn" id="btnLimpar" style="display:none">Limpar tudo</button>
+            </div>
+          </div>
+          <div id="histLista">
+            <div class="scanner-history-empty">Sem leituras ainda.</div>
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="api.js?v=3"></script>
+  <script src="scanner.js?v=4"></script>
+
+</body>
+</html>

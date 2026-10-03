@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Entrar · Painel YUYU EVENTOS</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-page">
+
+  <div class="login-box">
+
+    <div class="login-brand">
+      <div class="login-brand-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="3" y="13" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="13" width="8" height="8" rx="1.5"></rect>
+        </svg>
+      </div>
+      <div class="login-brand-title">YUYU <span>EVENTOS</span></div>
+      <p class="login-brand-sub">Painel administrativo</p>
+    </div>
+
+    <form class="login-form" id="loginForm" autocomplete="on">
+
+      <div>
+        <label class="login-label" for="username">Utilizador</label>
+        <input
+          class="login-input"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="ex: zona-verde"
+          autocomplete="username"
+          required
+          autofocus>
+      </div>
+
+      <div>
+        <label class="login-label" for="password">Password</label>
+        <input
+          class="login-input"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="A sua password"
+          autocomplete="current-password"
+          required>
+      </div>
+
+      <div class="login-error" id="erro"></div>
+
+      <button type="submit" class="btn btn-primary login-btn" id="btnEntrar">
+        Entrar no painel
+      </button>
+
+    </form>
+
+    <p class="login-footer">Acesso restrito · YUYU EVENTOS</p>
+
+  </div>
+
+  <script src="api.js"></script>
+  <script>
+    /* Se já tem token válido, vai directo ao dashboard */
+    (async () => {
+      if (!Api.getToken()) return;
+      try {
+        await Api.me();
+        location.href = 'dashboard.html';
+      } catch (_) {
+        Api.clearToken();
+        Api.clearAdmin();
+      }
+    })();
+
+    const form = document.getElementById('loginForm');
+    const inputUser = document.getElementById('username');
+    const inputPass = document.getElementById('password');
+    const btn = document.getElementById('btnEntrar');
+    const erro = document.getElementById('erro');
+
+    function mostrarErro(msg) {
+      erro.textContent = msg;
+      erro.classList.add('is-visible');
+    }
+
+    function limparErro() {
+      erro.textContent = '';
+      erro.classList.remove('is-visible');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      limparErro();
+
+      const username = inputUser.value.trim();
+      const password = inputPass.value;
+
+      if (!username || !password) {
+        mostrarErro('Preenche o utilizador e a password.');
+        return;
+      }
+
+      btn.disabled = true;
+      const textoOriginal = btn.textContent;
+      btn.textContent = 'A entrar…';
+
+      try {
+        const resp = await Api.login(username, password);
+
+        if (!resp || !resp.ok || !resp.token) {
+          throw new Error('Resposta inesperada do servidor.');
+        }
+
+        Api.setToken(resp.token);
+        Api.setAdmin(resp.admin || { username });
+
+        location.href = 'dashboard.html';
+
+      } catch (err) {
+        if (err.status === 401) {
+          mostrarErro('Credenciais inválidas.');
+        } else if (err.message && err.message.includes('Failed to fetch')) {
+          mostrarErro('Não foi possível contactar o servidor.');
+        } else {
+          mostrarErro(err.message || 'Erro ao entrar.');
+        }
+        btn.disabled = false;
+        btn.textContent = textoOriginal;
+      }
+    });
+  </script>
+
+</body>
+</html>

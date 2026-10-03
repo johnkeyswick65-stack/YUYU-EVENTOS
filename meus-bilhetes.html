@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Meus bilhetes · YUYU EVENTOS</title>
+  <link rel="stylesheet" href="style.css?v=41">
+</head>
+<body>
+
+  <main class="meus-bilhetes-page">
+
+    <!-- Cabeçalho -->
+    <header class="mb-header">
+      <a href="index.html" class="mb-back" aria-label="Voltar">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 12H5"></path>
+          <path d="M11 18l-6-6 6-6"></path>
+        </svg>
+      </a>
+      <div>
+        <span class="mb-eyebrow">YUYU EVENTOS</span>
+        <h1 class="mb-title">Meus bilhetes</h1>
+      </div>
+    </header>
+
+    <!-- Formulário de login -->
+    <section class="mb-login" id="loginBox">
+      <p class="mb-sub">Introduz os dados que usaste na compra para veres os teus bilhetes.</p>
+
+      <form id="formLogin" class="mb-form" autocomplete="off">
+        <div class="mb-field">
+          <label for="codigo">Código do bilhete</label>
+          <input type="text" id="codigo" name="codigo" placeholder="YUYU-XXXXX-XXXXX"
+                 autocomplete="off" spellcheck="false" required>
+        </div>
+
+        <div class="mb-field">
+          <label for="telefone">Número de telefone</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="84 000 0000" required>
+        </div>
+
+        <div class="mb-field">
+          <label for="nome">Nome do titular</label>
+          <input type="text" id="nome" name="nome" placeholder="Nome que consta no bilhete" required>
+        </div>
+
+        <div class="mb-error" id="erroLogin"></div>
+
+        <button type="submit" class="mb-btn" id="btnEntrar">Ver os meus bilhetes</button>
+      </form>
+    </section>
+
+    <!-- Área dos bilhetes (oculta até login) -->
+    <section class="mb-lista" id="listaBox" hidden>
+
+      <!-- Perfil do cliente -->
+      <div class="mb-perfil">
+        <div class="mb-perfil-avatar" id="perfilAvatar">—</div>
+
+        <div class="mb-perfil-info">
+          <span class="mb-perfil-eyebrow">Bem-vindo</span>
+          <h2 class="mb-perfil-nome" id="perfilNome">—</h2>
+          <p class="mb-perfil-tel" id="perfilTelefone">—</p>
+        </div>
+
+        <button type="button" class="mb-perfil-sair" id="btnSair" aria-label="Sair">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <path d="M16 17l5-5-5-5"></path>
+            <path d="M21 12H9"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Estatísticas do cliente -->
+      <div class="mb-stats" id="mbStats">
+        <div class="mb-stat">
+          <div class="mb-stat-num" id="statTotal">0</div>
+          <div class="mb-stat-lbl">Bilhetes</div>
+        </div>
+        <div class="mb-stat">
+          <div class="mb-stat-num is-verde" id="statAtivos">0</div>
+          <div class="mb-stat-lbl">Ativos</div>
+        </div>
+        <div class="mb-stat">
+          <div class="mb-stat-num is-vermelho" id="statVip">0</div>
+          <div class="mb-stat-lbl">VIP</div>
+        </div>
+      </div>
+
+      <div class="mb-lista-titulo">
+        <span>Os meus bilhetes</span>
+      </div>
+
+      <div id="bilhetes"></div>
+    </section>
+
+  </main>
+
+  <script src="meus-bilhetes.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Eventos · Painel YUYU EVENTOS</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg class="admin-brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="3" y="13" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="13" width="8" height="8" rx="1.5"></rect>
+        </svg>
+        <span class="admin-brand-text">YUYU <span class="admin-brand-accent">EVENTOS</span></span>
+        <span class="admin-brand-badge">Painel</span>
+      </div>
+      <nav class="admin-nav">
+        <a class="admin-nav-link" href="dashboard.html">Dashboard</a>
+        <a class="admin-nav-link is-active" href="eventos.html">Eventos</a>
+        <a class="admin-nav-link" href="bilhetes.html">Bilhetes</a>
+        <a class="admin-nav-link" href="scanner.html">Scanner</a>
+      </nav>
+      <div class="admin-user">
+        <span class="admin-username" id="nomeAdmin">—</span>
+        <button type="button" class="admin-logout" id="btnSair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <h1 class="admin-title">Eventos</h1>
+    <p class="admin-subtitle">Cria, edita e gere todos os eventos do YUYU.</p>
+
+    <div class="admin-actions">
+      <div class="admin-filters" id="filtros">
+        <button type="button" class="admin-filter is-active" data-filter="todos">Todos</button>
+        <button type="button" class="admin-filter" data-filter="ativos">Ativos</button>
+        <button type="button" class="admin-filter" data-filter="inativos">Inativos</button>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="btnNovo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"></path><path d="M5 12h14"></path>
+        </svg>
+        Criar evento
+      </button>
+    </div>
+
+    <div id="loading" class="admin-loading">A carregar eventos…</div>
+    <div id="lista" class="admin-events"></div>
+
+  </main>
+
+  <!-- MODAL DE CRIAR/EDITAR -->
+  <div class="admin-modal-backdrop" id="modalBackdrop">
+    <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+      <div class="admin-modal-header">
+        <h2 id="modalTitulo">Criar evento</h2>
+        <button type="button" class="admin-modal-close" id="modalFechar" aria-label="Fechar">×</button>
+      </div>
+
+      <form id="formEvento" enctype="multipart/form-data">
+        <div class="admin-modal-body">
+
+          <div class="admin-alert" id="modalAlerta"></div>
+
+          <div class="form-row">
+            <label class="form-label" for="nome">Nome do evento *</label>
+            <input class="form-input" type="text" id="nome" name="nome" required maxlength="80">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="descricao">Descrição</label>
+            <textarea class="form-textarea" id="descricao" name="descricao" maxlength="500"></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-row">
+              <label class="form-label" for="data_evento">Data e hora *</label>
+              <input class="form-input" type="datetime-local" id="data_evento" name="data_evento" required>
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="categoria">Categoria</label>
+              <select class="form-select" id="categoria" name="categoria">
+                <option value="musica">Música</option>
+                <option value="festas">Festas</option>
+                <option value="desporto">Desporto</option>
+                <option value="cultura">Cultura</option>
+                <option value="outros" selected>Outros</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="local">Local *</label>
+            <input class="form-input" type="text" id="local" name="local" required maxlength="120" placeholder="ex: Xai-Xai, Gaza">
+          </div>
+
+          <div class="form-grid">
+            <div class="form-row">
+              <label class="form-label" for="preco_normal">Preço Normal (MT)</label>
+              <input class="form-input" type="number" id="preco_normal" name="preco_normal" min="0" value="0">
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="preco_vip">Preço VIP (MT)</label>
+              <input class="form-input" type="number" id="preco_vip" name="preco_vip" min="0" value="0">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="poster">Cartaz do evento</label>
+            <label class="form-file" for="poster">
+              Toque para escolher uma imagem (JPG, PNG, WEBP)
+            </label>
+            <input class="form-input" type="file" id="poster" name="poster" accept="image/*" hidden>
+            <img class="form-poster-preview" id="posterPreview" alt="Pré-visualização">
+          </div>
+
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn" id="modalCancelar"
+                  style="background:rgba(255,255,255,.06);color:#fff">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar evento</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="eventos.js"></script>
+
+</body>
+</html>

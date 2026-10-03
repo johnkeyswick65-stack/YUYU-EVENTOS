@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debug — YUYU</title>
+<style>
+body { font-family: monospace; background: #0a0a0a; color: #fff; padding: 20px; }
+h1 { color: #dc2626; font-size: 18px; }
+.linha { padding: 12px 14px; margin: 8px 0; border-radius: 8px; background: #1a1a1a; border-left: 4px solid #666; }
+.ok { border-left-color: #22c55e; }
+.erro { border-left-color: #ef4444; }
+.aviso { border-left-color: #f59e0b; }
+code { color: #fca5a5; word-break: break-all; font-size: 12px; }
+pre { background: #000; padding: 10px; border-radius: 8px; font-size: 11px; overflow-x: auto; max-height: 200px; }
+</style>
+</head>
+<body>
+<h1>Diagnóstico YUYU EVENTOS</h1>
+<div id="out"></div>
+
+<script>
+const out = document.getElementById('out');
+function log(msg, tipo = '') {
+  const d = document.createElement('div');
+  d.className = 'linha ' + tipo;
+  d.innerHTML = msg;
+  out.appendChild(d);
+}
+
+async function testar() {
+  log('URL da página: <code>' + location.href + '</code>');
+  log('Hostname: <code>' + location.hostname + '</code>');
+
+  const API_URL = (function () {
+    const h = location.hostname;
+    if (h === 'localhost' || h === '127.0.0.1' || h === '') return 'http://localhost:3000';
+    if (/^192\.168\./.test(h)) return 'http://' + h + ':3000';
+    if (/^10\./.test(h)) return 'http://' + h + ':3000';
+    if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(h)) return 'http://' + h + ':3000';
+    return 'https://yuyu-eventos-api.onrender.com';
+  })();
+
+  log('API_URL escolhida: <code>' + API_URL + '</code>', 'aviso');
+
+  // 1. Health
+  try {
+    const t0 = Date.now();
+    const r = await fetch(API_URL + '/api/health');
+    const d = await r.json();
+    const dt = Date.now() - t0;
+    log('✓ /api/health OK em ' + dt + 'ms<br>Resposta: <code>' + JSON.stringify(d) + '</code>', 'ok');
+  } catch (e) {
+    log('✗ /api/health falhou: <code>' + e.message + '</code>', 'erro');
+    return;
+  }
+
+  // 2. Eventos
+  try {
+    const t0 = Date.now();
+    const r = await fetch(API_URL + '/api/eventos');
+    const d = await r.json();
+    const dt = Date.now() - t0;
+    log('✓ /api/eventos OK em ' + dt + 'ms<br>Total: <b>' + (d.eventos ? d.eventos.length : 0) + '</b> eventos', 'ok');
+
+    if (d.eventos && d.eventos.length) {
+      let html = '<b>Lista:</b><pre>';
+      d.eventos.forEach(e => {
+        html += '• ' + e.nome + ' (slug: ' + e.slug + ')\n';
+      });
+      html += '</pre>';
+      log(html, 'ok');
+    } else {
+      log('Nenhum evento na API (a lista está vazia).', 'aviso');
+    }
+  } catch (e) {
+    log('✗ /api/eventos falhou: <code>' + e.message + '</code>', 'erro');
+  }
+
+  // 3. Elementos do HTML
+  ['eventsGrid', 'featuredEvents', 'eventDetail', 'eventDetail'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) log('✓ #' + id + ' existe (tag: ' + el.tagName + ')', 'ok');
+    else log('— #' + id + ' não existe (é normal se for da outra página)', '');
+  });
+
+  // 4. Scripts carregados
+  ['index-eventos.js', 'eventos-api.js', 'viewer.js'].forEach(s => {
+    const encontrado = Array.from(document.querySelectorAll('script')).some(x => x.src.includes(s));
+    if (encontrado) log('✓ ' + s + ' está carregado', 'ok');
+  });
+
+  log('<br><b>Se /api/eventos deu OK, o backend está acessível.</b>', 'aviso');
+  log('<b>Se /api/eventos falhou, é problema de CORS ou rede.</b>', 'aviso');
+}
+
+testar();
+</script>
+</body>
+</html>
