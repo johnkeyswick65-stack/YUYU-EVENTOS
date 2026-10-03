@@ -5,7 +5,7 @@ const API_URL = (function () {
   if (/^192\.168\./.test(h)) return 'http://' + h + ':3000';
   if (/^10\./.test(h)) return 'http://' + h + ':3000';
   if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(h)) return 'http://' + h + ':3000';
-  return 'https://yuyu-eventos-api.onrender.com';
+  return 'https://yuyu-backend-1b4x.onrender.com';
 })();
 
 /* ===== CLIENTE API YUYU ===== */
