@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="YUYU EVENTOS — Sabor do Verão.">
   <title>Sabor do Verão — YUYU EVENTOS</title>
-  <link rel="stylesheet" href="style.css?v=55">
+  <link rel="stylesheet" href="style.css?v=56">
 </head>
 
 <body>
@@ -161,14 +161,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const verEvento = document.getElementById("verEvento");
-
-  if (!verEvento) return;
+  // Nao fazer return aqui — o verEvento ja nao existe no HTML actual
   const verMais = document.getElementById("verMais");
   const eventsPage = document.getElementById("eventsPage");
   const eventDetail = document.getElementById("eventDetail");
   const eventBack = document.getElementById("eventBack");
 
   const poster = document.getElementById("eventPoster");
+  // poster só existe no card hardcoded antigo
   const detailPoster = document.getElementById("detailPoster");
 
   function abrirEvento() {
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eventDetail.setAttribute("aria-hidden", "true");
   }
 
-  verEvento.addEventListener("click", abrirEvento);
+  if (verEvento) verEvento.addEventListener("click", abrirEvento);
 
   /* Deep-link: se a URL tiver ?evento=slug, busca da API e abre o detalhe */
   (function () {
@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script src="viewer.js?v=1"></script>
 <script src="nav-cliente.js?v=2"></script>
-<script src="eventos-api.js?v=601"></script>
+<script src="eventos-api.js?v=700"></script>
 <script src="countdown.js?v=2"></script>
 <script src="pagamento.js?v=3"></script>
 <script src="explorar.js?v=1"></script>
