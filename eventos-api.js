@@ -64,7 +64,7 @@
               '<span class="price-normal"><small>Normal</small><strong>' + e.preco_normal + ' MT</strong></span>',
               '<span class="price-vip"><small>VIP</small><strong>' + e.preco_vip + ' MT</strong></span>',
             '</div>',
-            '<a href="eventos.html?evento=' + encodeURIComponent(e.slug) + '">Ver evento</a>',
+            '<button type="button" class="event-open" data-evento=\'' + escapar(JSON.stringify(e)) + '\'>Ver detalhes</button>',
           '</div>',
         '</div>',
       '</article>'
@@ -206,6 +206,28 @@
       })
       .catch(() => {});
   }
+
+  /* Delegação: clique em .event-open abre o detalhe com os dados do evento */
+  document.addEventListener('click', function (ev) {
+    var botao = ev.target.closest('.event-open');
+    if (!botao) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    var raw = botao.getAttribute('data-evento');
+    if (!raw) return;
+
+    try {
+      var evento = JSON.parse(raw);
+      if (typeof window.abrirEventoComDados === 'function') {
+        window.abrirEventoComDados(evento);
+      } else {
+        console.warn('[eventos-api] abrirEventoComDados ainda não está pronto');
+      }
+    } catch (erro) {
+      console.error('[eventos-api] Erro ao abrir evento:', erro);
+    }
+  });
 
   function iniciar() {
     carregar();
