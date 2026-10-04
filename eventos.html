@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="YUYU EVENTOS — Sabor do Verão.">
   <title>Sabor do Verão — YUYU EVENTOS</title>
-  <link rel="stylesheet" href="style.css?v=51">
+  <link rel="stylesheet" href="style.css?v=52">
 </head>
 
 <body>
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eventDetail.setAttribute("aria-hidden", "true");
   }
 
-  verEvento.addEventListener("click", abrirEvento);
+  if (verEvento) verEvento.addEventListener("click", abrirEvento);
 
   /* Deep-link: se a URL tiver ?evento=slug, busca da API e abre o detalhe */
   (function () {
