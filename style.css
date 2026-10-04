@@ -5873,3 +5873,34 @@ body.pagamento-aberto .event-detail {
 .event-bottom {
   gap: 18px !important;
 }
+
+/* ===== FIX REAL: display grid nos botoes ===== */
+.event-card .event-actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+  padding-top: 8px !important;
+  margin-top: 6px !important;
+}
+
+.event-card .event-actions > .btn-detalhes,
+.event-card .event-actions > .btn-evento {
+  padding: 15px 18px !important;
+  min-height: 50px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  border-radius: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  text-align: center !important;
+}
+
+@media (max-width: 420px) {
+  .event-card .event-actions {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
