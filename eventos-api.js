@@ -241,4 +241,18 @@
   } else {
     iniciar();
   }
+  /* Funcao global chamada pelo onclick do botao */
+  window.__yuyuAbrir = function (idx) {
+    var evento = (window.__yuyuEventos || [])[idx];
+    if (!evento) {
+      console.warn('[__yuyuAbrir] evento nao encontrado idx=' + idx);
+      return;
+    }
+    if (typeof window.abrirEventoComDados === 'function') {
+      window.abrirEventoComDados(evento);
+    } else {
+      console.warn('[__yuyuAbrir] abrirEventoComDados nao existe');
+    }
+  };
+
 })();
