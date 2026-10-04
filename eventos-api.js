@@ -10,6 +10,7 @@
   })();
 
   const CHAVE_CACHE = 'yuyu_eventos_cache';
+  window.__yuyuEventos = [];
 
   function escapar(s) {
     return String(s ?? '')
@@ -32,7 +33,7 @@
     return mapa[c] || 'Evento';
   }
 
-  function renderCard(e) {
+  function renderCard(e, idx) {
     const poster = e.poster_url || 'imagens/evento-demo.jpg';
     return [
       '<article class="event-card" data-category="' + escapar(e.categoria) + '">',
@@ -64,7 +65,7 @@
               '<span class="price-normal"><small>Normal</small><strong>' + e.preco_normal + ' MT</strong></span>',
               '<span class="price-vip"><small>VIP</small><strong>' + e.preco_vip + ' MT</strong></span>',
             '</div>',
-            '<button type="button" class="event-open" data-evento=\'' + escapar(JSON.stringify(e)) + '\'>Ver detalhes</button>',
+            '<button type="button" class="event-open" data-idx="' + idx + '">Ver detalhes</button>',
           '</div>',
         '</div>',
       '</article>'
@@ -115,7 +116,8 @@
   }
 
   function renderLista(grid, eventos) {
-    grid.innerHTML = eventos.map(renderCard).join('');
+    window.__yuyuEventos = eventos;
+    grid.innerHTML = eventos.map(function (e, i) { return renderCard(e, i); }).join('');
     grid.dataset.carregado = '1';
 
     // Reaplica countdown
@@ -207,27 +209,27 @@
       .catch(() => {});
   }
 
-  /* Delegação: clique em .event-open abre o detalhe com os dados do evento */
+  /* Clique em "Ver detalhes" abre a janela do evento */
   document.addEventListener('click', function (ev) {
     var botao = ev.target.closest('.event-open');
     if (!botao) return;
     ev.preventDefault();
     ev.stopPropagation();
 
-    var raw = botao.getAttribute('data-evento');
-    if (!raw) return;
+    var idx = parseInt(botao.getAttribute('data-idx'), 10);
+    var evento = (window.__yuyuEventos || [])[idx];
+    if (!evento) {
+      console.warn('[eventos-api] Evento nao encontrado no indice', idx);
+      return;
+    }
 
-    try {
-      var evento = JSON.parse(raw);
-      if (typeof window.abrirEventoComDados === 'function') {
-        window.abrirEventoComDados(evento);
-      } else {
-        console.warn('[eventos-api] abrirEventoComDados ainda não está pronto');
-      }
-    } catch (erro) {
-      console.error('[eventos-api] Erro ao abrir evento:', erro);
+    if (typeof window.abrirEventoComDados === 'function') {
+      window.abrirEventoComDados(evento);
+    } else {
+      console.warn('[eventos-api] abrirEventoComDados nao existe');
     }
   });
+
 
   function iniciar() {
     carregar();
