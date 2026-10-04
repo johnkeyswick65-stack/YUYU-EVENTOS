@@ -124,6 +124,52 @@
             <img class="form-poster-preview" id="posterPreview" alt="Pré-visualização">
           </div>
 
+          <h3 style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);color:#fca5a5;font-size:14px;letter-spacing:.06em;text-transform:uppercase">Empresa organizadora</h3>
+
+          <div class="form-row">
+            <label class="form-label" for="empresa_nome">Nome da empresa</label>
+            <input class="form-input" type="text" id="empresa_nome" name="empresa_nome" maxlength="120" placeholder="ex: Black Zone Crew">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="empresa_logo">Logo da empresa (formato cinema)</label>
+            <label class="form-file" for="empresa_logo">
+              Toque para escolher o logo
+            </label>
+            <input class="form-input" type="file" id="empresa_logo" name="empresa_logo" accept="image/*" hidden>
+            <img class="form-poster-preview" id="empresaLogoPreview" alt="Logo da empresa">
+          </div>
+
+          <h3 style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);color:#fca5a5;font-size:14px;letter-spacing:.06em;text-transform:uppercase">Fotos extra</h3>
+
+          <div class="form-row">
+            <label class="form-label" for="foto1">Foto extra 1</label>
+            <label class="form-file" for="foto1">
+              Toque para escolher a foto 1
+            </label>
+            <input class="form-input" type="file" id="foto1" name="foto1" accept="image/*" hidden>
+            <img class="form-poster-preview" id="foto1Preview" alt="Foto 1">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="foto1_descricao">Descrição da foto 1</label>
+            <input class="form-input" type="text" id="foto1_descricao" name="foto1_descricao" maxlength="200" placeholder="ex: Palco principal">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="foto2">Foto extra 2</label>
+            <label class="form-file" for="foto2">
+              Toque para escolher a foto 2
+            </label>
+            <input class="form-input" type="file" id="foto2" name="foto2" accept="image/*" hidden>
+            <img class="form-poster-preview" id="foto2Preview" alt="Foto 2">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="foto2_descricao">Descrição da foto 2</label>
+            <input class="form-input" type="text" id="foto2_descricao" name="foto2_descricao" maxlength="200" placeholder="ex: Zona VIP">
+          </div>
+
         </div>
 
         <div class="admin-modal-footer">

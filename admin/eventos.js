@@ -251,6 +251,30 @@
     const ficheiro = $posterInput.files && $posterInput.files[0];
     if (ficheiro) fd.append('poster', ficheiro);
 
+    // Empresa organizadora
+    const empresaNome = document.getElementById('empresa_nome');
+    if (empresaNome) fd.append('empresa_nome', empresaNome.value.trim());
+
+    const empresaLogoInput = document.getElementById('empresa_logo');
+    if (empresaLogoInput && empresaLogoInput.files[0]) {
+      fd.append('empresa_logo', empresaLogoInput.files[0]);
+    }
+
+    // Fotos extra
+    const foto1Input = document.getElementById('foto1');
+    if (foto1Input && foto1Input.files[0]) {
+      fd.append('foto1', foto1Input.files[0]);
+    }
+    const foto1Desc = document.getElementById('foto1_descricao');
+    if (foto1Desc) fd.append('foto1_descricao', foto1Desc.value.trim());
+
+    const foto2Input = document.getElementById('foto2');
+    if (foto2Input && foto2Input.files[0]) {
+      fd.append('foto2', foto2Input.files[0]);
+    }
+    const foto2Desc = document.getElementById('foto2_descricao');
+    if (foto2Desc) fd.append('foto2_descricao', foto2Desc.value.trim());
+
     try {
       if (eventoEditando) {
         await Api.put('/api/eventos/' + eventoEditando.id, fd);
@@ -287,5 +311,24 @@
     } catch (_) {}
     carregar();
   })();
+
+
+
+  /* Previews dos novos ficheiros */
+  function ativarPreview(inputId, previewId) {
+    var inp = document.getElementById(inputId);
+    var prev = document.getElementById(previewId);
+    if (!inp || !prev) return;
+    inp.addEventListener('change', function (ev) {
+      var f = ev.target.files && ev.target.files[0];
+      if (!f) return;
+      var url = URL.createObjectURL(f);
+      prev.src = url;
+      prev.classList.add('is-visible');
+    });
+  }
+  ativarPreview('empresa_logo', 'empresaLogoPreview');
+  ativarPreview('foto1', 'foto1Preview');
+  ativarPreview('foto2', 'foto2Preview');
 
 })();
