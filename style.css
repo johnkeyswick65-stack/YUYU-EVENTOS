@@ -5856,3 +5856,20 @@ body.pagamento-aberto .event-detail {
 .event-bottom {
   gap: 16px !important;
 }
+
+/* ===== ESPACO EXTRA BOTOES ===== */
+.event-actions {
+  gap: 12px !important;
+  margin-top: 6px !important;
+}
+
+.btn-detalhes,
+.btn-evento {
+  padding: 16px 20px !important;
+  font-size: 14px !important;
+  min-height: 50px !important;
+}
+
+.event-bottom {
+  gap: 18px !important;
+}
