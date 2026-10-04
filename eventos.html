@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="YUYU EVENTOS — Sabor do Verão.">
   <title>Sabor do Verão — YUYU EVENTOS</title>
-  <link rel="stylesheet" href="style.css?v=62">
+  <link rel="stylesheet" href="style.css?v=63">
 </head>
 
 <body>
@@ -141,6 +141,28 @@
 
       </div>
 
+      <div class="event-detail-empresa" id="detailEmpresaBox" hidden>
+        <span class="event-detail-empresa-label">Organizado por</span>
+        <div class="event-detail-empresa-info">
+          <img id="detailEmpresaLogo" class="event-detail-empresa-logo" alt="Logo" hidden>
+          <strong id="detailEmpresaNome">—</strong>
+        </div>
+      </div>
+
+      <div class="event-detail-galeria" id="detailGaleria" hidden>
+        <h3 class="event-detail-galeria-titulo">Galeria</h3>
+        <div class="event-detail-galeria-grid">
+          <figure class="event-detail-galeria-item" id="detailFoto1Box" hidden>
+            <img id="detailFoto1" alt="">
+            <figcaption id="detailFoto1Desc"></figcaption>
+          </figure>
+          <figure class="event-detail-galeria-item" id="detailFoto2Box" hidden>
+            <img id="detailFoto2" alt="">
+            <figcaption id="detailFoto2Desc"></figcaption>
+          </figure>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -232,8 +254,66 @@ document.addEventListener("DOMContentLoaded", () => {
     eventDetail.classList.add('event-detail-active');
     eventDetail.setAttribute('aria-hidden', 'false');
 
+    preencherEmpresaGaleria(evento);
+
     if (elPoster) obterCorDaCapa(elPoster);
   };
+
+  /* ===== FASE D: preencher empresa + galeria ===== */
+  function preencherEmpresaGaleria(ev) {
+    // Empresa
+    var box = document.getElementById('detailEmpresaBox');
+    var nomeEl = document.getElementById('detailEmpresaNome');
+    var logoEl = document.getElementById('detailEmpresaLogo');
+
+    if (ev.empresa_nome || ev.empresa_logo_url) {
+      if (nomeEl) nomeEl.textContent = ev.empresa_nome || 'Organização';
+      if (logoEl) {
+        if (ev.empresa_logo_url) {
+          logoEl.src = ev.empresa_logo_url;
+          logoEl.hidden = false;
+        } else {
+          logoEl.hidden = true;
+        }
+      }
+      if (box) box.hidden = false;
+    } else {
+      if (box) box.hidden = true;
+    }
+
+    // Galeria
+    var galBox = document.getElementById('detailGaleria');
+    var foto1Box = document.getElementById('detailFoto1Box');
+    var foto1Img = document.getElementById('detailFoto1');
+    var foto1Desc = document.getElementById('detailFoto1Desc');
+    var foto2Box = document.getElementById('detailFoto2Box');
+    var foto2Img = document.getElementById('detailFoto2');
+    var foto2Desc = document.getElementById('detailFoto2Desc');
+
+    var temFotos = false;
+
+    if (ev.foto1_url) {
+      foto1Img.src = ev.foto1_url;
+      foto1Img.alt = ev.foto1_descricao || 'Foto 1';
+      foto1Desc.textContent = ev.foto1_descricao || '';
+      foto1Box.hidden = false;
+      temFotos = true;
+    } else {
+      foto1Box.hidden = true;
+    }
+
+    if (ev.foto2_url) {
+      foto2Img.src = ev.foto2_url;
+      foto2Img.alt = ev.foto2_descricao || 'Foto 2';
+      foto2Desc.textContent = ev.foto2_descricao || '';
+      foto2Box.hidden = false;
+      temFotos = true;
+    } else {
+      foto2Box.hidden = true;
+    }
+
+    if (galBox) galBox.hidden = !temFotos;
+  }
 
   function fecharEvento() {
     document.body.classList.remove("evento-detalhe-aberto");
