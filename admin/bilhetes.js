@@ -26,7 +26,7 @@
   let eventos = [];
   const API_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '')
     ? 'http://localhost:3000'
-    : 'https://yuyu-eventos-api.onrender.com';
+    : 'https://yuyu-backend-1b4x.onrender.com';
 
   function escapar(t) {
     return String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
