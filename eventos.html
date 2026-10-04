@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="YUYU EVENTOS — Sabor do Verão.">
   <title>Sabor do Verão — YUYU EVENTOS</title>
-  <link rel="stylesheet" href="style.css?v=53">
+  <link rel="stylesheet" href="style.css?v=54">
 </head>
 
 <body>
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     eventDetail.setAttribute("aria-hidden", "true");
   }
 
-  if (verEvento) verEvento.addEventListener("click", abrirEvento);
+  verEvento.addEventListener("click", abrirEvento);
 
   /* Deep-link: se a URL tiver ?evento=slug, busca da API e abre o detalhe */
   (function () {
@@ -338,31 +338,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
-
-
-    console.log('[deep-link] A buscar:', slug);
-
-    fetch(apiBase + '/api/eventos/' + encodeURIComponent(slug))
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (d && d.ok && d.evento) {
-          console.log('[deep-link] Encontrado:', d.evento.nome);
-          if (typeof window.abrirEventoComDados === 'function') {
-            window.abrirEventoComDados(d.evento);
-          } else {
-            console.warn('[deep-link] abrirEventoComDados nao existe');
-            abrirEvento();
-          }
-        } else {
-          console.warn('[deep-link] Nao encontrado — fallback');
-          abrirEvento();
-        }
-      })
-      .catch(function (e) {
-        console.warn('[deep-link] Erro:', e.message);
-        abrirEvento();
-      });
-  })();
 
 </script>
 
