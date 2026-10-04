@@ -22,7 +22,41 @@ document.addEventListener("DOMContentLoaded", () => {
   let tierAtual = "VIP";
   let precoAtual = "250";
 
+  function atualizarPrecos() {
+    var ev = window.__eventoAtual;
+    if (!ev) return;
+
+    // Título e subtítulo da subjanela
+    var titulo = document.querySelector('.payment-title');
+    var subtitulo = document.querySelector('.payment-subtitle');
+    var headerSmall = document.querySelector('.payment-header-info small');
+    if (titulo) titulo.textContent = ev.nome || 'Evento';
+    if (headerSmall) headerSmall.textContent = ev.nome || 'Evento';
+    if (subtitulo) {
+      var d = new Date(ev.data_evento);
+      var meses = ['Janeiro','Fevereiro','Marco','Abril','Maio','Junho',
+                   'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+      subtitulo.textContent = d.getUTCDate() + ' de ' + meses[d.getUTCMonth()] + ' de ' + d.getUTCFullYear() + ' · ' + (ev.local || '');
+    }
+
+    // Botoes Normal / VIP
+    var tiers = document.querySelectorAll('.payment-tier');
+    if (tiers.length >= 2) {
+      tiers[0].dataset.price = String(ev.preco_normal || 0);
+      tiers[0].querySelector('.payment-tier-price').textContent = (ev.preco_normal || 0) + ' MT';
+      tiers[1].dataset.price = String(ev.preco_vip || 0);
+      tiers[1].querySelector('.payment-tier-price').textContent = (ev.preco_vip || 0) + ' MT';
+
+      // O tier activo por defeito passa a ser o VIP (indice 1)
+      tiers.forEach(function (t) { t.classList.remove('is-active'); });
+      tiers[1].classList.add('is-active');
+      precoAtual = String(ev.preco_vip || 0);
+      if (paymentAmount) paymentAmount.textContent = precoAtual + ' MT';
+    }
+  }
+
   function abrirPagamento() {
+    atualizarPrecos();
     document.body.classList.add("pagamento-aberto");
     paymentPage.setAttribute("aria-hidden", "false");
   }
