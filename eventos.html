@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="YUYU EVENTOS — Sabor do Verão.">
   <title>Sabor do Verão — YUYU EVENTOS</title>
-  <link rel="stylesheet" href="style.css?v=52">
+  <link rel="stylesheet" href="style.css?v=53">
 </head>
 
 <body>
@@ -339,23 +339,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-  /* ============================================================
-     DEEP-LINK: ?evento=slug  →  busca da API e abre o detalhe
-     ============================================================ */
-  (function () {
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get("evento");
-    if (!slug) return;
-
-    const apiBase = (function () {
-      const h = location.hostname;
-      if (h === 'localhost' || h === '127.0.0.1' || h === '') return 'http://localhost:3000';
-      if (/^192\.168\./.test(h)) return 'http://' + h + ':3000';
-      if (/^10\./.test(h)) return 'http://' + h + ':3000';
-      if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(h)) return 'http://' + h + ':3000';
-      return 'https://yuyu-backend-1b4x.onrender.com';
-    })();
 
     console.log('[deep-link] A buscar:', slug);
 
