@@ -65,7 +65,7 @@
               '<span class="price-normal"><small>Normal</small><strong>' + e.preco_normal + ' MT</strong></span>',
               '<span class="price-vip"><small>VIP</small><strong>' + e.preco_vip + ' MT</strong></span>',
             '</div>',
-            '<button type="button" class="event-open" data-idx="' + idx + '">Ver detalhes</button>',
+            '<button type="button" class="event-open" onclick="window.__yuyuAbrir(' + idx + ')">Ver detalhes</button>',
           '</div>',
         '</div>',
       '</article>'
