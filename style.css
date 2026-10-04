@@ -5837,3 +5837,22 @@ body.pagamento-aberto .event-detail {
 #eventsGrid .event-bottom a::after {
   display: none !important;
 }
+
+/* ===== Botões dos cards: mais espaço ===== */
+.event-actions {
+  gap: 10px !important;
+  margin-top: 4px;
+}
+
+.btn-detalhes,
+.btn-evento {
+  padding: 14px 18px !important;
+  font-size: 14px !important;
+  letter-spacing: .01em;
+  min-height: 46px;
+}
+
+/* Espaço extra entre os preços e os botões */
+.event-bottom {
+  gap: 16px !important;
+}
