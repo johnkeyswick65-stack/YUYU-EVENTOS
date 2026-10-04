@@ -69,7 +69,10 @@
               '<span class="price-normal"><small>Normal</small><strong>' + e.preco_normal + ' MT</strong></span>',
               '<span class="price-vip"><small>VIP</small><strong>' + e.preco_vip + ' MT</strong></span>',
             '</div>',
-            '<a href="eventos.html?evento=' + encodeURIComponent(e.slug) + '">Ver evento</a>',
+            '<div class="event-actions">',
+              '<a class="btn-detalhes" href="eventos.html?evento=' + encodeURIComponent(e.slug) + '">Ver detalhes</a>',
+              '<a class="btn-evento" href="eventos.html?evento=' + encodeURIComponent(e.slug) + '&comprar=1">Ver evento</a>',
+            '</div>',
           '</div>',
         '</div>',
       '</article>'
