@@ -105,22 +105,29 @@
 
       <section class="dash-section">
         <div class="dash-section-head">
-          <h2 class="dash-section-title">Manutenção</h2>
+          <h2 class="dash-section-title">Ficheiros no Cloudinary</h2>
+          <div class="arm-controlos">
+            <button type="button" class="admin-btn admin-btn-edit" id="armSelTodas">Selecionar todas órfãs</button>
+            <button type="button" class="admin-btn admin-btn-delete" id="armSelNenhuma">Limpar selecção</button>
+          </div>
         </div>
-        <div class="admin-card">
-          <p style="margin:0 0 12px;color:var(--cinza);font-size:14px">
-            Apagar imagens órfãs do Cloudinary que não estão associadas a nenhum evento.
-            Esta ação não pode ser desfeita.
-          </p>
-          <button type="button" class="btn btn-primary" id="btnLimpar">
+
+        <div class="arm-resumo" id="armResumo"></div>
+
+        <div class="arm-grid" id="armListaImagens">
+          <div class="dash-vazio">A carregar…</div>
+        </div>
+
+        <div class="arm-accao-bar" id="armAccaoBar" style="display:none">
+          <span id="armSelCount">0 selecionadas</span>
+          <button type="button" class="btn btn-primary" id="btnApagarSel">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 6h18"></path>
               <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
               <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
             </svg>
-            Limpar órfãs
+            Apagar selecionadas
           </button>
-          <span id="armLimparMsg" style="margin-left:12px;font-size:13px;color:var(--cinza)"></span>
         </div>
       </section>
 
@@ -128,7 +135,7 @@
   </main>
 
   <script src="api.js"></script>
-  <script src="armazenamento.js"></script>
+  <script src="armazenamento.js?v=2"></script>
 
 </body>
 </html>
