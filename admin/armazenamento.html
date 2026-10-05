@@ -93,9 +93,52 @@
         </div>
       </section>
 
-      <section class="dash-section">
-        <h2 class="dash-section-title">Imagens por tipo</h2>
-        <div class="admin-card arm-tipos" id="armTipos"></div>
+      <section class="files-section">
+
+        <!-- Toolbar -->
+        <div class="files-toolbar">
+          <div class="files-toolbar-left">
+            <button type="button" class="files-tb-btn" id="armAtualizar" title="Atualizar">
+              <svg viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            </button>
+            <div class="files-breadcrumb">
+              <span>Cloudinary</span>
+              <span class="files-sep">/</span>
+              <strong>yuyu-eventos</strong>
+            </div>
+          </div>
+
+          <div class="files-toolbar-right">
+            <div class="files-filter">
+              <button type="button" class="files-tb-btn is-active" data-filtro="todas">Todas</button>
+              <button type="button" class="files-tb-btn" data-filtro="uso">Em uso</button>
+              <button type="button" class="files-tb-btn" data-filtro="orfas">Órfãs</button>
+            </div>
+            <button type="button" class="files-tb-btn is-primary" id="armSelecionarTodas" title="Selecionar todas órfãs">
+              <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+            </button>
+            <button type="button" class="files-tb-btn is-danger" id="armApagar" disabled title="Apagar selecionadas">
+              <svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              <span id="armApagarCount"></span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Info da barra -->
+        <div class="files-info" id="armInfo"></div>
+
+        <!-- Grade de imagens -->
+        <div class="files-grid" id="armListaImagens">
+          <div class="dash-vazio">A carregar…</div>
+        </div>
+
+        <!-- Sidebar de preview -->
+        <aside class="files-preview" id="armPreview" hidden>
+          <button type="button" class="files-preview-close" id="armPreviewClose" aria-label="Fechar">×</button>
+          <img id="armPreviewImg" alt="">
+          <div class="files-preview-info" id="armPreviewInfo"></div>
+        </aside>
+
       </section>
 
       <section class="dash-section">
@@ -135,7 +178,7 @@
   </main>
 
   <script src="api.js"></script>
-  <script src="armazenamento.js?v=2"></script>
+  <script src="armazenamento.js?v=3"></script>
 
 </body>
 </html>

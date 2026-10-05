@@ -1,10 +1,11 @@
-/* ===== ARMAZENAMENTO ===== */
+/* ===== ARMAZENAMENTO — FILE MANAGER ===== */
 (function () {
   if (!Api.getToken()) { location.href = 'login.html'; return; }
 
   const $ = (id) => document.getElementById(id);
   let imagensCache = [];
   let selecionadas = new Set();
+  let filtroAtual = 'todas';
 
   function formatarMB(mb) {
     if (mb < 1) return (mb * 1024).toFixed(0) + ' KB';
@@ -76,7 +77,6 @@
       $('loading').style.display = 'none';
       $('conteudo').style.display = 'block';
 
-      // Carregar lista de imagens em paralelo
       carregarImagens();
     } catch (e) {
       $('loading').innerHTML = '<div style="color:#fca5a5">Erro: ' + escapar(e.message) + '</div>';
@@ -92,21 +92,11 @@
       imagensCache = r.imagens || [];
       selecionadas.clear();
 
-      // Resumo
-      $('armResumo').innerHTML = [
-        '<div class="arm-resumo-item">',
-          '<div class="arm-resumo-label">Total</div>',
-          '<div class="arm-resumo-num">' + r.total + ' · ' + r.total_mb + ' MB</div>',
-        '</div>',
-        '<div class="arm-resumo-item">',
-          '<div class="arm-resumo-label">Em uso</div>',
-          '<div class="arm-resumo-num is-uso">' + r.em_uso + ' · ' + r.em_uso_mb + ' MB</div>',
-        '</div>',
-        '<div class="arm-resumo-item">',
-          '<div class="arm-resumo-label">Órfãs</div>',
-          '<div class="arm-resumo-num is-orfao">' + r.orfas + ' · ' + r.orfas_mb + ' MB</div>',
-        '</div>'
-      ].join('');
+      $('armInfo').innerHTML =
+        '<span><strong>' + r.total + '</strong> ficheiros</span>' +
+        '<span>Total: <strong>' + r.total_mb + ' MB</strong></span>' +
+        '<span style="color:#86efac">Em uso: <strong>' + r.em_uso + '</strong> · ' + r.em_uso_mb + ' MB</span>' +
+        '<span style="color:#fcd34d">Órfãs: <strong>' + r.orfas + '</strong> · ' + r.orfas_mb + ' MB</span>';
 
       renderImagens();
     } catch (e) {
@@ -114,95 +104,130 @@
     }
   }
 
+  function filtradas() {
+    if (filtroAtual === 'uso') return imagensCache.filter(i => i.em_uso);
+    if (filtroAtual === 'orfas') return imagensCache.filter(i => i.orfa);
+    return imagensCache;
+  }
+
   function renderImagens() {
     const container = $('armListaImagens');
+    const lista = filtradas();
 
-    if (!imagensCache.length) {
-      container.innerHTML = '<div class="dash-vazio">Sem imagens no Cloudinary.</div>';
-      atualizarBarraAccao();
+    if (!lista.length) {
+      container.innerHTML = '<div class="dash-vazio">Sem imagens.</div>';
+      atualizarBotaoApagar();
       return;
     }
 
-    container.innerHTML = imagensCache.map(function (img, idx) {
+    container.innerHTML = lista.map(function (img) {
       const sel = selecionadas.has(img.public_id);
-      const classes = ['arm-item'];
+      const classes = ['files-item'];
       if (img.em_uso) classes.push('is-em-uso');
       if (sel) classes.push('is-selecionado');
 
       const badge = img.em_uso
-        ? '<span class="arm-item-badge is-uso">Em uso</span>'
-        : '<span class="arm-item-badge is-orfao">Órfã</span>';
+        ? '<span class="files-item-badge is-uso">Em uso</span>'
+        : '<span class="files-item-badge is-orfao">Órfã</span>';
 
-      const check = img.em_uso ? '' : '<div class="arm-item-check">✓</div>';
+      const check = img.em_uso ? '' : '<div class="files-item-check"></div>';
+
+      const subLinha = img.em_uso
+        ? '<span class="is-verde">' + escapar(img.tipo) + ' de ' + escapar(img.evento) + '</span>'
+        : '<span class="is-amarelo">Sem uso</span>';
 
       return [
-        '<div class="' + classes.join(' ') + '" data-idx="' + idx + '" data-pid="' + escapar(img.public_id) + '">',
-          badge,
+        '<div class="' + classes.join(' ') + '" data-pid="' + escapar(img.public_id) + '">',
           check,
-          '<img class="arm-item-img" src="' + escapar(img.thumbnail) + '" alt="" loading="lazy" onerror="this.style.opacity=0.3">',
-          '<div class="arm-item-info">',
+          badge,
+          '<img src="' + escapar(img.thumbnail) + '" alt="" loading="lazy" onerror="this.style.opacity=0.3">',
+          '<div class="files-item-info">',
             '<strong>' + img.kb + ' KB</strong>',
             '<span>' + escapar(img.formato.toUpperCase()) + ' · ' + img.largura + '×' + img.altura + '</span>',
-            img.em_uso
-              ? '<span style="color:#86efac">' + escapar(img.tipo) + ' de ' + escapar(img.evento) + '</span>'
-              : '<span style="color:#fcd34d">Sem uso</span>',
+            subLinha,
           '</div>',
         '</div>'
       ].join('');
     }).join('');
 
-    atualizarBarraAccao();
+    atualizarBotaoApagar();
   }
 
-  function atualizarBarraAccao() {
-    const bar = $('armAccaoBar');
+  function atualizarBotaoApagar() {
+    const btn = $('armApagar');
     const n = selecionadas.size;
-    if (n > 0) {
-      bar.style.display = 'flex';
-      $('armSelCount').textContent = n + ' selecionada' + (n > 1 ? 's' : '');
-    } else {
-      bar.style.display = 'none';
-    }
+    btn.disabled = n === 0;
+    $('armApagarCount').textContent = n > 0 ? n : '';
   }
 
-  // Clicar numa imagem alterna seleção (só se for órfã)
+  // Clique numa imagem
   $('armListaImagens').addEventListener('click', function (ev) {
-    const item = ev.target.closest('.arm-item');
+    const item = ev.target.closest('.files-item');
     if (!item) return;
-    if (item.classList.contains('is-em-uso')) return;
     const pid = item.getAttribute('data-pid');
-    if (!pid) return;
-    if (selecionadas.has(pid)) selecionadas.delete(pid);
-    else selecionadas.add(pid);
-    item.classList.toggle('is-selecionado');
-    atualizarBarraAccao();
+    const img = imagensCache.find(x => x.public_id === pid);
+    if (!img) return;
+
+    // Mostra preview
+    abrirPreview(img);
+
+    // Se for órfã, alterna seleção
+    if (img.orfa) {
+      if (selecionadas.has(pid)) selecionadas.delete(pid);
+      else selecionadas.add(pid);
+      item.classList.toggle('is-selecionado');
+      atualizarBotaoApagar();
+    }
   });
 
-  // Botão: selecionar todas as órfãs
-  $('armSelTodas').addEventListener('click', function () {
-    selecionadas.clear();
-    imagensCache.forEach(function (img) {
-      if (img.orfa) selecionadas.add(img.public_id);
+  function abrirPreview(img) {
+    $('armPreview').hidden = false;
+    $('armPreviewImg').src = img.url;
+    $('armPreviewInfo').innerHTML = [
+      '<div class="row"><span>Nome</span><span>' + escapar(img.public_id.split('/').pop()) + '</span></div>',
+      '<div class="row"><span>Tamanho</span><span>' + img.kb + ' KB</span></div>',
+      '<div class="row"><span>Formato</span><span>' + escapar(img.formato.toUpperCase()) + '</span></div>',
+      '<div class="row"><span>Dimensões</span><span>' + img.largura + ' × ' + img.altura + '</span></div>',
+      '<div class="row"><span>Estado</span><span style="color:' + (img.em_uso ? '#86efac' : '#fcd34d') + '">' + (img.em_uso ? 'Em uso' : 'Órfã') + '</span></div>',
+      img.em_uso ? '<div class="row"><span>Evento</span><span>' + escapar(img.evento) + '</span></div>' : '',
+      img.em_uso ? '<div class="row"><span>Tipo</span><span>' + escapar(img.tipo) + '</span></div>' : ''
+    ].join('');
+  }
+
+  $('armPreviewClose').addEventListener('click', function () {
+    $('armPreview').hidden = true;
+  });
+
+  // Filtros
+  document.querySelectorAll('[data-filtro]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-filtro]').forEach(x => x.classList.remove('is-active'));
+      b.classList.add('is-active');
+      filtroAtual = b.dataset.filtro;
+      renderImagens();
     });
+  });
+
+  // Selecionar todas órfãs
+  $('armSelecionarTodas').addEventListener('click', function () {
+    const lista = filtradas().filter(i => i.orfa);
+    const todasMarcadas = lista.every(i => selecionadas.has(i.public_id));
+    if (todasMarcadas) {
+      lista.forEach(i => selecionadas.delete(i.public_id));
+    } else {
+      lista.forEach(i => selecionadas.add(i.public_id));
+    }
     renderImagens();
   });
 
-  // Botão: limpar seleção
-  $('armSelNenhuma').addEventListener('click', function () {
-    selecionadas.clear();
-    renderImagens();
-  });
-
-  // Botão: apagar selecionadas
-  $('btnApagarSel').addEventListener('click', async function () {
+  // Apagar
+  $('armApagar').addEventListener('click', async function () {
     const n = selecionadas.size;
     if (!n) return;
     if (!confirm('Apagar ' + n + ' imagem(ns) do Cloudinary?\n\nEsta ação não pode ser desfeita.')) return;
 
     const btn = this;
     btn.disabled = true;
-    const txt = btn.textContent;
-    btn.textContent = 'A apagar…';
 
     try {
       const r = await Api.post('/api/admin/imagens/apagar', {
@@ -210,7 +235,7 @@
       });
 
       let msg = 'Apagadas ' + r.apagados + '.';
-      if (r.bloqueados) msg += ' ' + r.bloqueados + ' bloqueadas (em uso).';
+      if (r.bloqueados) msg += ' ' + r.bloqueados + ' bloqueadas.';
       if (r.erros && r.erros.length) msg += ' ' + r.erros.length + ' erros.';
       alert(msg);
 
@@ -219,11 +244,17 @@
       alert('Erro: ' + e.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = txt;
     }
   });
 
-  // Header
+  // Atualizar
+  $('armAtualizar').addEventListener('click', function () {
+    this.style.transform = 'rotate(360deg)';
+    this.style.transition = 'transform .5s';
+    setTimeout(() => { this.style.transform = ''; this.style.transition = ''; }, 500);
+    carregarImagens();
+  });
+
   $('btnSair').addEventListener('click', function () { Api.logout(); });
 
   (async function () {
