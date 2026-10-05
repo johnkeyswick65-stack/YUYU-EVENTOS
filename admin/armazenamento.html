@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Armazenamento · YUYU EVENTOS</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg class="admin-brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="3" y="13" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="13" width="8" height="8" rx="1.5"></rect>
+        </svg>
+        <span class="admin-brand-text">YUYU <span class="admin-brand-accent">EVENTOS</span></span>
+        <span class="admin-brand-badge">Painel</span>
+      </div>
+      <nav class="admin-nav">
+        <a class="admin-nav-link" href="dashboard.html">Dashboard</a>
+        <a class="admin-nav-link" href="eventos.html">Eventos</a>
+        <a class="admin-nav-link" href="bilhetes.html">Bilhetes</a>
+        <a class="admin-nav-link" href="scanner.html">Scanner</a>
+        <a class="admin-nav-link is-active" href="armazenamento.html">Armazenamento</a>
+      </nav>
+      <div class="admin-user">
+        <span class="admin-username" id="nomeAdmin">—</span>
+        <button type="button" class="admin-logout" id="btnSair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <h1 class="admin-title">Armazenamento</h1>
+    <p class="admin-subtitle">Uso de espaço no Cloudinary e na base de dados.</p>
+
+    <div id="loading" class="admin-loading">A carregar…</div>
+    <div id="conteudo" style="display:none">
+
+      <section class="arm-cloud">
+        <div class="arm-cloud-head">
+          <div>
+            <span class="arm-cloud-titulo">Cloudinary</span>
+            <p class="arm-cloud-plano" id="armPlano">Plano —</p>
+          </div>
+          <span class="arm-cloud-perc" id="armPerc">0%</span>
+        </div>
+
+        <div class="arm-bar">
+          <div class="arm-bar-fill" id="armBarFill"></div>
+        </div>
+
+        <div class="arm-nums">
+          <span><strong id="armUsado">0 MB</strong> usados</span>
+          <span>de <strong id="armLimite">25 GB</strong></span>
+        </div>
+      </section>
+
+      <section class="dash-kpis arm-kpis">
+        <div class="dash-kpi">
+          <div class="dash-kpi-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg>
+          </div>
+          <div class="dash-kpi-num" id="armFicheiros">0</div>
+          <div class="dash-kpi-label">Imagens no Cloudinary</div>
+        </div>
+        <div class="dash-kpi">
+          <div class="dash-kpi-icon">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+          </div>
+          <div class="dash-kpi-num" id="armRegistos">0</div>
+          <div class="dash-kpi-label">Registos na DB</div>
+        </div>
+        <div class="dash-kpi">
+          <div class="dash-kpi-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+          </div>
+          <div class="dash-kpi-num" id="armEventos">0</div>
+          <div class="dash-kpi-label">Eventos</div>
+        </div>
+        <div class="dash-kpi">
+          <div class="dash-kpi-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v1a2 2 0 0 0 0 4v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-1a2 2 0 0 0 0-4V9z"></path></svg>
+          </div>
+          <div class="dash-kpi-num" id="armBilhetes">0</div>
+          <div class="dash-kpi-label">Bilhetes</div>
+        </div>
+      </section>
+
+      <section class="dash-section">
+        <h2 class="dash-section-title">Imagens por tipo</h2>
+        <div class="admin-card arm-tipos" id="armTipos"></div>
+      </section>
+
+      <section class="dash-section">
+        <h2 class="dash-section-title">Top eventos por imagens</h2>
+        <div class="admin-card" id="armTop"></div>
+      </section>
+
+      <section class="dash-section">
+        <div class="dash-section-head">
+          <h2 class="dash-section-title">Manutenção</h2>
+        </div>
+        <div class="admin-card">
+          <p style="margin:0 0 12px;color:var(--cinza);font-size:14px">
+            Apagar imagens órfãs do Cloudinary que não estão associadas a nenhum evento.
+            Esta ação não pode ser desfeita.
+          </p>
+          <button type="button" class="btn btn-primary" id="btnLimpar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Limpar órfãs
+          </button>
+          <span id="armLimparMsg" style="margin-left:12px;font-size:13px;color:var(--cinza)"></span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="api.js"></script>
+  <script src="armazenamento.js"></script>
+
+</body>
+</html>
