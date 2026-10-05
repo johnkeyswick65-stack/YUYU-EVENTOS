@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0a0a">
   <title>Armazenamento · YUYU EVENTOS</title>
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=10">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
   <main class="admin-main">
 
     <h1 class="admin-title">Armazenamento</h1>
-    <p class="admin-subtitle">Uso de espaço no Cloudinary e na base de dados.</p>
+    <p class="admin-subtitle">Gestão de ficheiros no Cloudinary.</p>
 
     <div id="loading" class="admin-loading">A carregar…</div>
     <div id="conteudo" style="display:none">
@@ -51,11 +51,9 @@
           </div>
           <span class="arm-cloud-perc" id="armPerc">0%</span>
         </div>
-
         <div class="arm-bar">
           <div class="arm-bar-fill" id="armBarFill"></div>
         </div>
-
         <div class="arm-nums">
           <span><strong id="armUsado">0 MB</strong> usados</span>
           <span>de <strong id="armLimite">25 GB</strong></span>
@@ -68,7 +66,7 @@
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg>
           </div>
           <div class="dash-kpi-num" id="armFicheiros">0</div>
-          <div class="dash-kpi-label">Imagens no Cloudinary</div>
+          <div class="dash-kpi-label">Imagens</div>
         </div>
         <div class="dash-kpi">
           <div class="dash-kpi-icon">
@@ -95,7 +93,6 @@
 
       <section class="files-section">
 
-        <!-- Toolbar -->
         <div class="files-toolbar">
           <div class="files-toolbar-left">
             <button type="button" class="files-tb-btn" id="armAtualizar" title="Atualizar">
@@ -124,54 +121,18 @@
           </div>
         </div>
 
-        <!-- Info da barra -->
         <div class="files-info" id="armInfo"></div>
 
-        <!-- Grade de imagens -->
         <div class="files-grid" id="armListaImagens">
           <div class="dash-vazio">A carregar…</div>
         </div>
 
-        <!-- Sidebar de preview -->
         <aside class="files-preview" id="armPreview" hidden>
           <button type="button" class="files-preview-close" id="armPreviewClose" aria-label="Fechar">×</button>
           <img id="armPreviewImg" alt="">
           <div class="files-preview-info" id="armPreviewInfo"></div>
         </aside>
 
-      </section>
-
-      <section class="dash-section">
-        <h2 class="dash-section-title">Top eventos por imagens</h2>
-        <div class="admin-card" id="armTop"></div>
-      </section>
-
-      <section class="dash-section">
-        <div class="dash-section-head">
-          <h2 class="dash-section-title">Ficheiros no Cloudinary</h2>
-          <div class="arm-controlos">
-            <button type="button" class="admin-btn admin-btn-edit" id="armSelTodas">Selecionar todas órfãs</button>
-            <button type="button" class="admin-btn admin-btn-delete" id="armSelNenhuma">Limpar selecção</button>
-          </div>
-        </div>
-
-        <div class="arm-resumo" id="armResumo"></div>
-
-        <div class="arm-grid" id="armListaImagens">
-          <div class="dash-vazio">A carregar…</div>
-        </div>
-
-        <div class="arm-accao-bar" id="armAccaoBar" style="display:none">
-          <span id="armSelCount">0 selecionadas</span>
-          <button type="button" class="btn btn-primary" id="btnApagarSel">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 6h18"></path>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-            </svg>
-            Apagar selecionadas
-          </button>
-        </div>
       </section>
 
     </div>

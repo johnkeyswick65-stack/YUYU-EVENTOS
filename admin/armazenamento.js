@@ -17,24 +17,6 @@
     return String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
-  function renderBarras(container, itens) {
-    const max = Math.max(1, ...itens.map(i => i.valor));
-    container.innerHTML = itens.map(function (i) {
-      const perc = Math.round((i.valor / max) * 100);
-      return [
-        '<div class="dash-bar">',
-          '<div class="dash-bar-top">',
-            '<span class="dash-bar-label">' + escapar(i.label) + '</span>',
-            '<span class="dash-bar-num">' + i.valor + '</span>',
-          '</div>',
-          '<div class="dash-bar-track">',
-            '<div class="dash-bar-fill ' + (i.classe || '') + '" style="width:' + perc + '%"></div>',
-          '</div>',
-        '</div>'
-      ].join('');
-    }).join('');
-  }
-
   async function carregar() {
     try {
       const d = await Api.get('/api/admin/armazenamento');
@@ -46,33 +28,9 @@
       $('armLimite').textContent = formatarMB(c.limite_mb);
       $('armPlano').textContent = 'Plano ' + (c.plano || 'Free');
       $('armFicheiros').textContent = c.ficheiros;
-
       $('armRegistos').textContent = d.base_dados.total_registos;
       $('armEventos').textContent = d.base_dados.eventos;
       $('armBilhetes').textContent = d.base_dados.bilhetes;
-
-      renderBarras($('armTipos'), [
-        { label: 'Posters', valor: d.imagens.posters, classe: 'is-vermelho' },
-        { label: 'Logos', valor: d.imagens.logos, classe: 'is-azul' },
-        { label: 'Fotos extra', valor: d.imagens.fotos_extra, classe: 'is-verde' }
-      ]);
-
-      const top = d.top_eventos || [];
-      if (!top.length) {
-        $('armTop').innerHTML = '<div class="dash-vazio">Sem eventos.</div>';
-      } else {
-        $('armTop').innerHTML = top.map(function (e) {
-          return [
-            '<div class="dash-ev">',
-              '<div>',
-                '<div class="dash-ev-nome">' + escapar(e.nome) + '</div>',
-                '<div class="dash-ev-sub">' + e.total_imagens + ' imagem(ns)</div>',
-              '</div>',
-              '<div class="dash-ev-receita">' + e.total_imagens + '</div>',
-            '</div>'
-          ].join('');
-        }).join('');
-      }
 
       $('loading').style.display = 'none';
       $('conteudo').style.display = 'block';
@@ -155,12 +113,12 @@
 
   function atualizarBotaoApagar() {
     const btn = $('armApagar');
+    if (!btn) return;
     const n = selecionadas.size;
     btn.disabled = n === 0;
     $('armApagarCount').textContent = n > 0 ? n : '';
   }
 
-  // Clique numa imagem
   $('armListaImagens').addEventListener('click', function (ev) {
     const item = ev.target.closest('.files-item');
     if (!item) return;
@@ -168,10 +126,8 @@
     const img = imagensCache.find(x => x.public_id === pid);
     if (!img) return;
 
-    // Mostra preview
     abrirPreview(img);
 
-    // Se for órfã, alterna seleção
     if (img.orfa) {
       if (selecionadas.has(pid)) selecionadas.delete(pid);
       else selecionadas.add(pid);
@@ -198,7 +154,6 @@
     $('armPreview').hidden = true;
   });
 
-  // Filtros
   document.querySelectorAll('[data-filtro]').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('[data-filtro]').forEach(x => x.classList.remove('is-active'));
@@ -208,10 +163,9 @@
     });
   });
 
-  // Selecionar todas órfãs
   $('armSelecionarTodas').addEventListener('click', function () {
     const lista = filtradas().filter(i => i.orfa);
-    const todasMarcadas = lista.every(i => selecionadas.has(i.public_id));
+    const todasMarcadas = lista.length > 0 && lista.every(i => selecionadas.has(i.public_id));
     if (todasMarcadas) {
       lista.forEach(i => selecionadas.delete(i.public_id));
     } else {
@@ -220,7 +174,6 @@
     renderImagens();
   });
 
-  // Apagar
   $('armApagar').addEventListener('click', async function () {
     const n = selecionadas.size;
     if (!n) return;
@@ -247,7 +200,6 @@
     }
   });
 
-  // Atualizar
   $('armAtualizar').addEventListener('click', function () {
     this.style.transform = 'rotate(360deg)';
     this.style.transition = 'transform .5s';
