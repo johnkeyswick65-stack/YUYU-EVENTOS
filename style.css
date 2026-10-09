@@ -2266,7 +2266,7 @@ body.image-viewer-open {
   gap: 11px;
 
   background:
-    linear-gradient(135deg, var(--cor-primaria, #dc2626), #b80610);
+    linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
 
   color: #fff;
 }
@@ -2672,7 +2672,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   align-items: center !important;
   gap: 11px !important;
 
-  background: linear-gradient(135deg,var(--cor-primaria, #dc2626),#b80610) !important;
+  background: linear-gradient(135deg,var(--cor-primaria, #dc2626),var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
 }
 
@@ -3894,7 +3894,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
   font-weight: 800;
   font-size: 13px;
@@ -3929,7 +3929,7 @@ body.pagamento-aberto .event-detail {
 
 /* O card de dica (passo 2) mantém o tom vermelho para combinar */
 .payment-chat-hint .payment-chat-avatar {
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
   box-shadow: 0 4px 12px rgba(220, 38, 38, .35);
 }
@@ -4110,7 +4110,7 @@ body.pagamento-aberto .event-detail {
 
 /* Avatar do hint também fica vermelho */
 .payment-chat-hint .payment-chat-avatar {
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
   box-shadow: 0 4px 12px rgba(220, 38, 38, .35) !important;
 }
@@ -4138,7 +4138,7 @@ body.pagamento-aberto .event-detail {
   gap: 12px;
   align-items: center;
   padding: 12px 16px;
-  background: linear-gradient(135deg, var(--cor-escura, #7f1d1d), #450a0a);
+  background: linear-gradient(135deg, var(--cor-escura, #7f1d1d), var(--cor-escura, #7f1d1d));
   border-bottom: 1px solid rgba(220, 38, 38, .35);
 }
 
@@ -4148,7 +4148,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
   font-weight: 800;
   font-size: 14px;
@@ -4718,7 +4718,7 @@ body.pagamento-aberto .event-detail {
 
 /* Chips de filtro ativos */
 .explore-chip.is-active {
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
   box-shadow: 0 6px 16px rgba(220, 38, 38, .35) !important;
 }
@@ -4753,7 +4753,7 @@ body.pagamento-aberto .event-detail {
 
 /* Botão Ver evento */
 .event-open {
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
   box-shadow: 0 10px 24px rgba(220, 38, 38, .35) !important;
 }
@@ -4789,7 +4789,7 @@ body.pagamento-aberto .event-detail {
 
 /* Botão Comprar bilhete (fixo) */
 .event-detail-buy {
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
   box-shadow:
     0 12px 28px rgba(220, 38, 38, .4),
@@ -4858,7 +4858,7 @@ body.pagamento-aberto .event-detail {
   box-sizing: border-box !important;
 
   border-radius: 999px !important;
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
   font-size: 14px !important;
   font-weight: 800 !important;
@@ -4880,7 +4880,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .event-bottom a:hover {
-  background: linear-gradient(135deg, #ef4444, var(--cor-escura, #7f1d1d)) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   box-shadow: 0 14px 28px rgba(220, 38, 38, .42) !important;
 }
 
@@ -5007,7 +5007,7 @@ body.pagamento-aberto .event-detail {
   padding: 15px 22px;
   border: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
   font: inherit;
   font-size: 15px;
@@ -5179,7 +5179,7 @@ body.pagamento-aberto .event-detail {
   top: 0;
   bottom: 0;
   width: 6px;
-  background: linear-gradient(180deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
+  background: linear-gradient(180deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
 }
 
 .mb-ticket.is-pendente::before { background: linear-gradient(180deg, #d97706, #92400e); }
@@ -5409,7 +5409,7 @@ body.pagamento-aberto .event-detail {
 .mb-btn-ticket:active { transform: scale(.97); }
 
 .mb-btn-ticket.is-primario {
-  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
   box-shadow: 0 8px 18px rgba(220, 38, 38, .3);
 }
