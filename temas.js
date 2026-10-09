@@ -27,58 +27,38 @@
 
   /* Cria o botão e o painel */
   function criarUI() {
-    if (document.querySelector('.tema-toggle')) return;
+    // Procura containers onde inserir os temas (menu mobile + desktop)
+    const menus = document.querySelectorAll('#mobileMenu, .mobile-menu');
 
-    const botao = document.createElement('button');
-    botao.className = 'tema-toggle';
-    botao.setAttribute('aria-label', 'Escolher tema');
-    botao.innerHTML = `
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-      </svg>
-    `;
+    menus.forEach(function (menu) {
+      if (menu.querySelector('.tema-menu-seccao')) return;
 
-    const painel = document.createElement('div');
-    painel.className = 'tema-panel';
-    painel.innerHTML = `
-      <h3>Escolher tema</h3>
-      <button type="button" class="tema-opcao" data-tema="vermelho">
-        <span class="tema-cor vermelho"></span> Vermelho + Preto
-      </button>
-      <button type="button" class="tema-opcao" data-tema="laranja">
-        <span class="tema-cor laranja"></span> Laranja + Preto
-      </button>
-      <button type="button" class="tema-opcao" data-tema="castanho">
-        <span class="tema-cor castanho"></span> Castanho + Preto
-      </button>
-      <button type="button" class="tema-opcao" data-tema="azul">
-        <span class="tema-cor azul"></span> Azul + Preto
-      </button>
-    `;
+      const sec = document.createElement('div');
+      sec.className = 'tema-menu-seccao';
+      sec.innerHTML = `
+        <span class="tema-menu-titulo">Tema</span>
+        <div class="tema-menu-cores">
+          <button type="button" class="tema-menu-cor vermelho" data-tema="vermelho" aria-label="Vermelho"></button>
+          <button type="button" class="tema-menu-cor laranja" data-tema="laranja" aria-label="Laranja"></button>
+          <button type="button" class="tema-menu-cor castanho" data-tema="castanho" aria-label="Castanho"></button>
+          <button type="button" class="tema-menu-cor azul" data-tema="azul" aria-label="Azul"></button>
+        </div>
+      `;
 
-    document.body.appendChild(botao);
-    document.body.appendChild(painel);
-
-    botao.addEventListener('click', function (ev) {
-      ev.stopPropagation();
-      painel.classList.toggle('is-open');
+      menu.appendChild(sec);
     });
 
-    painel.addEventListener('click', function (ev) {
-      const b = ev.target.closest('.tema-opcao');
-      if (!b) return;
-      aplicar(b.dataset.tema);
-      painel.classList.remove('is-open');
+    // Atualizar selecção
+    document.querySelectorAll('.tema-menu-cor').forEach(function (b) {
+      b.classList.toggle('is-active', b.dataset.tema === actual());
+      b.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        aplicar(b.dataset.tema);
+        document.querySelectorAll('.tema-menu-cor').forEach(function (x) {
+          x.classList.toggle('is-active', x.dataset.tema === actual());
+        });
+      });
     });
-
-    document.addEventListener('click', function (ev) {
-      if (!painel.contains(ev.target) && !botao.contains(ev.target)) {
-        painel.classList.remove('is-open');
-      }
-    });
-
-    atualizarPainel(actual());
   }
 
   if (document.readyState === 'loading') {

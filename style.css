@@ -6227,3 +6227,111 @@ html[data-tema="azul"] {
 .tema-cor.laranja { background: #f97316; }
 .tema-cor.castanho { background: #a16207; }
 .tema-cor.azul { background: #2563eb; }
+
+/* ===== TEMAS NO MENU MOBILE ===== */
+.tema-menu-seccao {
+  padding: 16px 20px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.tema-menu-titulo {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 12px;
+}
+
+.tema-menu-cores {
+  display: flex;
+  gap: 12px;
+}
+
+.tema-menu-cor {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,.15);
+  cursor: pointer;
+  transition: transform .15s, border-color .18s;
+}
+
+.tema-menu-cor:active { transform: scale(.9); }
+.tema-menu-cor.is-active {
+  border-color: #fff;
+  transform: scale(1.1);
+}
+
+.tema-menu-cor.vermelho { background: #dc2626; }
+.tema-menu-cor.laranja  { background: #f97316; }
+.tema-menu-cor.castanho { background: #a16207; }
+.tema-menu-cor.azul     { background: #2563eb; }
+
+/* ===== APLICAR A COR EM TODO O SITE ===== */
+/* Botões principais */
+.btn-explore,
+.explore-chip.is-active,
+.event-open,
+.event-detail-buy,
+.mb-btn,
+.mb-btn-ticket.is-primario,
+.payment-composer-send,
+.floating-message,
+.hero-button,
+.btn-evento,
+.event-bottom a,
+.mb-btn-mini,
+.admin-btn-edit,
+.btn-primary {
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
+  border-color: var(--cor-primaria, #dc2626) !important;
+  color: #fff !important;
+}
+
+.floating-message svg,
+.floating-message img { color: #fff; }
+
+/* Detalhes/acentos */
+.explore-eyebrow,
+.explore-count strong,
+.event-category,
+.mb-eyebrow,
+.mb-perfil-eyebrow,
+.mb-ticket-codigo,
+.explore-title span,
+h1 span,
+h2 span {
+  color: var(--cor-clara, #fca5a5) !important;
+}
+
+/* Linhas e bordas decorativas */
+.explore-search:focus-within {
+  border-color: var(--cor-primaria, #dc2626) !important;
+}
+
+.hero-location,
+.hero-location-time { color: var(--cor-clara, #fca5a5) !important; }
+
+/* Preço VIP */
+.price-vip strong,
+.event-prices .price-vip strong {
+  color: var(--cor-clara, #fca5a5) !important;
+}
+
+/* Botões de filtro ativos */
+.explore-chip.is-active {
+  background: var(--cor-primaria, #dc2626) !important;
+  border-color: var(--cor-primaria, #dc2626) !important;
+  color: #fff !important;
+}
+
+/* Admin */
+.admin-nav-link.is-active {
+  color: var(--cor-clara, #fca5a5) !important;
+  background: rgba(220, 38, 38, .18) !important;
+}
+
+.admin-brand-accent { color: var(--cor-primaria, #dc2626) !important; }
