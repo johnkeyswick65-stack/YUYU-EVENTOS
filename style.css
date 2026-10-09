@@ -5996,3 +5996,48 @@ body.pagamento-aberto .event-detail {
   color: rgba(255, 255, 255, .75);
   background: rgba(0, 0, 0, .3);
 }
+
+/* ===== ANIMAÇÃO: anéis pulsantes no botão WhatsApp ===== */
+.floating-message {
+  position: fixed;
+  z-index: 999;
+}
+
+/* Anel 1 */
+.floating-message::before,
+.floating-message::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #e50914;
+  pointer-events: none;
+  animation: ringPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Anel 2 — desfasado */
+.floating-message::after {
+  animation-delay: 1.25s;
+}
+
+@keyframes ringPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* Garante que o ícone fica acima dos anéis */
+.floating-message svg,
+.floating-message img {
+  position: relative;
+  z-index: 2;
+}
