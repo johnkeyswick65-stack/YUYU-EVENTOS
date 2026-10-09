@@ -6335,3 +6335,97 @@ h2 span {
 }
 
 .admin-brand-accent { color: var(--cor-primaria, #dc2626) !important; }
+
+/* ===== APLICAR TEMA AOS ELEMENTOS RESTANTES ===== */
+
+/* Faixa vertical do hero + "YUYU EVENTOS" */
+.hero-eyebrow,
+.hero-location,
+.hero-location-separator,
+.hero-location-time,
+.hero::before,
+.hero::after,
+.section-label,
+.explore-eyebrow {
+  color: var(--cor-clara, #fca5a5) !important;
+}
+
+/* Título grande com destaque */
+.hero h1 span,
+.hero h1 em,
+.hero-title span,
+.hero-title em {
+  color: var(--cor-primaria, #dc2626) !important;
+}
+
+/* Faixa vertical decorativa à esquerda do hero */
+.hero::before {
+  background: var(--cor-primaria, #dc2626) !important;
+}
+
+/* Countdown anel */
+.countdown-ring,
+.event-countdown .countdown-ring {
+  border-color: var(--cor-primaria, #dc2626) !important;
+  color: var(--cor-primaria, #dc2626) !important;
+}
+
+.countdown-number {
+  color: var(--cor-clara, #fca5a5) !important;
+}
+
+.event-pending,
+.event-pending svg {
+  border-color: var(--cor-primaria, #dc2626) !important;
+  color: var(--cor-primaria, #dc2626) !important;
+}
+
+.event-pending span {
+  color: var(--cor-clara, #fca5a5) !important;
+}
+
+/* Barra lateral nos cards de evento */
+.event-side-bar {
+  background: var(--cor-primaria, #dc2626) !important;
+}
+
+/* Botão WhatsApp flutuante */
+.floating-message,
+.floating-message svg {
+  border-color: var(--cor-primaria, #dc2626) !important;
+  color: var(--cor-primaria, #dc2626) !important;
+}
+
+.floating-message {
+  background: #0b0b0b !important;
+}
+
+/* Animação box-shadow — cor do tema */
+.floating-message {
+  animation: ringPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Botões secundários e links */
+.mb-logout,
+.mb-ticket-estado.is-ativo,
+.event-back {
+  border-color: var(--cor-primaria, #dc2626) !important;
+  color: var(--cor-clara, #fca5a5) !important;
+}
+
+.event-back {
+  background: rgba(220, 38, 38, .18) !important;
+}
+
+/* Placeholder da pesquisa em hover */
+input:focus,
+.explore-search input:focus,
+.mb-field input:focus {
+  border-color: var(--cor-primaria, #dc2626) !important;
+}
+
+/* Imagens e efeitos */
+.event-image::before,
+.event-image::after {
+  background: var(--cor-primaria, #dc2626) !important;
+}
