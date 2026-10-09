@@ -3,7 +3,7 @@
   --card: #111111;
   --card-2: #151515;
   --border: #252525;
-  --red: #e50914;
+  --red: var(--cor-primaria, #dc2626);
   --white: #ffffff;
   --muted: #929292;
 }
@@ -617,11 +617,11 @@ input {
   width: 58px;
   height: 58px;
 
-  border: 2px solid #e50914;
+  border: 2px solid var(--cor-primaria, #dc2626);
   border-radius: 50%;
 
   background: #0b0b0b;
-  color: #e50914;
+  color: var(--cor-primaria, #dc2626);
 
   display: flex;
   align-items: center;
@@ -643,7 +643,7 @@ input {
 }
 
 .floating-message:hover {
-  background: #e50914;
+  background: var(--cor-primaria, #dc2626);
   color: #ffffff;
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(229, 9, 20, .3);
@@ -681,7 +681,7 @@ input {
   background:
     repeating-conic-gradient(
       from 0deg,
-      #e50914 0deg 5deg,
+      var(--cor-primaria, #dc2626) 0deg 5deg,
       transparent 5deg 13deg
     );
   animation: blackhole-spin 4s linear infinite;
@@ -696,7 +696,7 @@ input {
   border-radius: 50%;
   background: #000;
   box-shadow:
-    0 0 8px #e50914,
+    0 0 8px var(--cor-primaria, #dc2626),
     0 0 16px rgba(229, 9, 20, .8);
   z-index: -1;
 }
@@ -811,7 +811,7 @@ input {
   position: absolute;
   width: 70px;
   height: 2px;
-  background: #e50914;
+  background: var(--cor-primaria, #dc2626);
   border-radius: 999px;
   top: 0;
   left: 0;
@@ -915,7 +915,7 @@ input {
   background: conic-gradient(
     from 0deg,
     transparent 0deg 345deg,
-    #e50914 345deg 360deg
+    var(--cor-primaria, #dc2626) 345deg 360deg
   );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -953,8 +953,8 @@ input {
     from 0deg,
     transparent 0deg,
     transparent 330deg,
-    #e50914 350deg,
-    #e50914 360deg
+    var(--cor-primaria, #dc2626) 350deg,
+    var(--cor-primaria, #dc2626) 360deg
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -987,7 +987,7 @@ input {
   left: -70px;
   width: 70px;
   height: 2px;
-  background: #e50914;
+  background: var(--cor-primaria, #dc2626);
   border-radius: 999px;
   z-index: 20;
   animation: linha-contorno 4s linear infinite;
@@ -1066,7 +1066,7 @@ input {
   position: absolute;
   width: 55px;
   height: 2px;
-  background: #e50914;
+  background: var(--cor-primaria, #dc2626);
   border-radius: 999px;
   top: 0;
   left: 0;
@@ -1108,7 +1108,7 @@ input {
   height: 2px !important;
   min-width: 80px;
   min-height: 2px;
-  background: #e50914 !important;
+  background: var(--cor-primaria, #dc2626) !important;
   border-radius: 999px;
 }
 
@@ -1189,7 +1189,7 @@ input {
 }
 
 .logo > span b {
-  color: #e50914;
+  color: var(--cor-primaria, #dc2626);
 }
 
 .logo > span i {
@@ -1261,7 +1261,7 @@ input {
 }
 
 .hero-location-separator {
-  color: #e50914;
+  color: var(--cor-primaria, #dc2626);
   font-weight: 700;
 }
 
@@ -2114,7 +2114,7 @@ body.image-viewer-open {
 }
 
 .hero-location-separator {
-  color: #e50914;
+  color: var(--cor-primaria, #dc2626);
   font-weight: 700;
 }
 
@@ -2266,7 +2266,7 @@ body.image-viewer-open {
   gap: 11px;
 
   background:
-    linear-gradient(135deg, #e50914, #b80610);
+    linear-gradient(135deg, var(--cor-primaria, #dc2626), #b80610);
 
   color: #fff;
 }
@@ -2467,7 +2467,7 @@ body.image-viewer-open {
   border: 0 !important;
   border-radius: 50% !important;
 
-  background: #e50914 !important;
+  background: var(--cor-primaria, #dc2626) !important;
   color: #fff !important;
 
   cursor: pointer !important;
@@ -2672,7 +2672,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   align-items: center !important;
   gap: 11px !important;
 
-  background: linear-gradient(135deg,#e50914,#b80610) !important;
+  background: linear-gradient(135deg,var(--cor-primaria, #dc2626),#b80610) !important;
   color: #fff !important;
 }
 
@@ -3019,7 +3019,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  background: #e50914 !important;
+  background: var(--cor-primaria, #dc2626) !important;
   color: #ffffff !important;
   border: 0 !important;
   padding: 12px 22px !important;
@@ -3034,7 +3034,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
 .cta-section > .hero-button:hover,
 .cta-section > .hero-button:visited,
 .cta-section > .hero-button:active {
-  background: #e50914 !important;
+  background: var(--cor-primaria, #dc2626) !important;
   color: #ffffff !important;
 }
 
@@ -3046,7 +3046,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
 .cta-section > .hero-button {
   position: relative !important;
   z-index: 20 !important;
-  background: #e50914 !important;
+  background: var(--cor-primaria, #dc2626) !important;
   color: #fff !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -3822,7 +3822,7 @@ body.pagamento-aberto .event-detail {
   border: 0;
   border-radius: 10px;
   background: rgba(239, 68, 68, .18);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
@@ -3894,7 +3894,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #dc2626, #991b1b);
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
   color: #fff;
   font-weight: 800;
   font-size: 13px;
@@ -3929,7 +3929,7 @@ body.pagamento-aberto .event-detail {
 
 /* O card de dica (passo 2) mantém o tom vermelho para combinar */
 .payment-chat-hint .payment-chat-avatar {
-  background: linear-gradient(135deg, #dc2626, #991b1b);
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
   color: #fff;
   box-shadow: 0 4px 12px rgba(220, 38, 38, .35);
 }
@@ -3976,7 +3976,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 14px;
   background: rgba(220, 38, 38, .08);
   border: 1px solid rgba(220, 38, 38, .25);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   max-width: calc(100% - 40px);
 }
 
@@ -4049,7 +4049,7 @@ body.pagamento-aberto .event-detail {
 
 .payment-composer-plus {
   background: rgba(220, 38, 38, .18);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
 }
 
 .payment-composer-plus:hover { background: rgba(220, 38, 38, .3); }
@@ -4110,7 +4110,7 @@ body.pagamento-aberto .event-detail {
 
 /* Avatar do hint também fica vermelho */
 .payment-chat-hint .payment-chat-avatar {
-  background: linear-gradient(135deg, #dc2626, #991b1b) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
   color: #fff !important;
   box-shadow: 0 4px 12px rgba(220, 38, 38, .35) !important;
 }
@@ -4138,7 +4138,7 @@ body.pagamento-aberto .event-detail {
   gap: 12px;
   align-items: center;
   padding: 12px 16px;
-  background: linear-gradient(135deg, #7f1d1d, #450a0a);
+  background: linear-gradient(135deg, var(--cor-escura, #7f1d1d), #450a0a);
   border-bottom: 1px solid rgba(220, 38, 38, .35);
 }
 
@@ -4148,7 +4148,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #dc2626, #991b1b);
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
   color: #fff;
   font-weight: 800;
   font-size: 14px;
@@ -4239,7 +4239,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .payment-chat-bubble strong {
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
 }
 
 /* Bolha enviada */
@@ -4304,7 +4304,7 @@ body.pagamento-aberto .event-detail {
   height: 22px;
   flex-shrink: 0;
   fill: none;
-  stroke: #fca5a5;
+  stroke: var(--cor-clara, #fca5a5);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -4704,11 +4704,11 @@ body.pagamento-aberto .event-detail {
 /* Cabeçalho explorar */
 .explore-eyebrow {
   background: rgba(220, 38, 38, .16) !important;
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 .explore-count strong {
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 .explore-search:focus-within {
@@ -4718,7 +4718,7 @@ body.pagamento-aberto .event-detail {
 
 /* Chips de filtro ativos */
 .explore-chip.is-active {
-  background: linear-gradient(135deg, #dc2626, #991b1b) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
   color: #fff !important;
   box-shadow: 0 6px 16px rgba(220, 38, 38, .35) !important;
 }
@@ -4726,7 +4726,7 @@ body.pagamento-aberto .event-detail {
 /* Categoria do card */
 .event-category {
   background: rgba(220, 38, 38, .16) !important;
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Card hover */
@@ -4744,16 +4744,16 @@ body.pagamento-aberto .event-detail {
 }
 
 .event-prices .price-vip small {
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 .event-prices .price-vip strong {
-  color: #fecaca !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Botão Ver evento */
 .event-open {
-  background: linear-gradient(135deg, #dc2626, #991b1b) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
   color: #fff !important;
   box-shadow: 0 10px 24px rgba(220, 38, 38, .35) !important;
 }
@@ -4764,7 +4764,7 @@ body.pagamento-aberto .event-detail {
 
 /* Empty state */
 .explore-empty strong {
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* ===== DETALHE DO EVENTO ===== */
@@ -4780,16 +4780,16 @@ body.pagamento-aberto .event-detail {
 }
 
 .event-detail-prices div:last-child small {
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 .event-detail-prices div:last-child strong {
-  color: #fecaca !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Botão Comprar bilhete (fixo) */
 .event-detail-buy {
-  background: linear-gradient(135deg, #dc2626, #991b1b) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
   color: #fff !important;
   box-shadow:
     0 12px 28px rgba(220, 38, 38, .4),
@@ -4806,7 +4806,7 @@ body.pagamento-aberto .event-detail {
 /* Eyebrow */
 .payment-eyebrow {
   background: rgba(220, 38, 38, .18) !important;
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Tier ativo (VIP/Normal) */
@@ -4821,7 +4821,7 @@ body.pagamento-aberto .event-detail {
 /* Botão de copiar */
 .payment-copy {
   background: rgba(220, 38, 38, .18) !important;
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Valor a pagar */
@@ -4832,14 +4832,14 @@ body.pagamento-aberto .event-detail {
 }
 
 .payment-amount strong {
-  color: #fecaca !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Upload */
 .payment-upload {
   border-color: rgba(220, 38, 38, .5) !important;
   background: rgba(220, 38, 38, .06) !important;
-  color: #fca5a5 !important;
+  color: var(--cor-clara, #fca5a5) !important;
 }
 
 .payment-upload:active {
@@ -4858,7 +4858,7 @@ body.pagamento-aberto .event-detail {
   box-sizing: border-box !important;
 
   border-radius: 999px !important;
-  background: linear-gradient(135deg, #dc2626, #991b1b) !important;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d))) !important;
   color: #fff !important;
   font-size: 14px !important;
   font-weight: 800 !important;
@@ -4880,7 +4880,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .event-bottom a:hover {
-  background: linear-gradient(135deg, #ef4444, #b91c1c) !important;
+  background: linear-gradient(135deg, #ef4444, var(--cor-escura, #7f1d1d)) !important;
   box-shadow: 0 14px 28px rgba(220, 38, 38, .42) !important;
 }
 
@@ -4934,7 +4934,7 @@ body.pagamento-aberto .event-detail {
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   background: rgba(220, 38, 38, .16);
   padding: 4px 10px;
   border-radius: 999px;
@@ -5007,7 +5007,7 @@ body.pagamento-aberto .event-detail {
   padding: 15px 22px;
   border: 0;
   border-radius: 999px;
-  background: linear-gradient(135deg, #dc2626, #991b1b);
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
   color: #fff;
   font: inherit;
   font-size: 15px;
@@ -5026,7 +5026,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 10px;
   background: rgba(239, 68, 68, .12);
   border: 1px solid rgba(239, 68, 68, .3);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   font-size: 13px;
   text-align: center;
 }
@@ -5053,7 +5053,7 @@ body.pagamento-aberto .event-detail {
   cursor: pointer;
   transition: background .18s;
 }
-.mb-logout:hover { background: rgba(220, 38, 38, .25); color: #fca5a5; }
+.mb-logout:hover { background: rgba(220, 38, 38, .25); color: var(--cor-clara, #fca5a5); }
 
 /* Cartão de bilhete */
 .mb-card {
@@ -5068,7 +5068,7 @@ body.pagamento-aberto .event-detail {
 .mb-card.is-ativo { border-left-color: #22c55e; }
 .mb-card.is-pendente { border-left-color: #f59e0b; }
 .mb-card.is-cancelado { border-left-color: #52525b; opacity: .7; }
-.mb-card.is-usado { border-left-color: #dc2626; }
+.mb-card.is-usado { border-left-color: var(--cor-primaria, #dc2626); }
 
 .mb-card-head {
   display: flex;
@@ -5082,7 +5082,7 @@ body.pagamento-aberto .event-detail {
   font-family: ui-monospace, Menlo, monospace;
   font-size: 14px;
   font-weight: 800;
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   letter-spacing: .05em;
 }
 
@@ -5095,12 +5095,12 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-tipo.is-normal { background: rgba(59, 130, 246, .18); color: #93c5fd; }
-.mb-tipo.is-vip { background: rgba(220, 38, 38, .2); color: #fca5a5; }
+.mb-tipo.is-vip { background: rgba(220, 38, 38, .2); color: var(--cor-clara, #fca5a5); }
 
 .mb-estado.is-pendente { background: rgba(245, 158, 11, .18); color: #fcd34d; }
 .mb-estado.is-ativo { background: rgba(34, 197, 94, .18); color: #86efac; }
 .mb-estado.is-cancelado { background: rgba(255, 255, 255, .08); color: rgba(255,255,255,.65); }
-.mb-estado.is-usado { background: rgba(220, 38, 38, .22); color: #fca5a5; }
+.mb-estado.is-usado { background: rgba(220, 38, 38, .22); color: var(--cor-clara, #fca5a5); }
 
 .mb-evento {
   margin: 0 0 4px;
@@ -5120,7 +5120,7 @@ body.pagamento-aberto .event-detail {
   padding: 6px 14px;
   border-radius: 999px;
   background: rgba(220, 38, 38, .14);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   font-weight: 800;
   font-size: 15px;
   margin-bottom: 14px;
@@ -5139,7 +5139,7 @@ body.pagamento-aberto .event-detail {
   border: 0;
   border-radius: 10px;
   background: rgba(220, 38, 38, .16);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   font: inherit;
   font-size: 13px;
   font-weight: 700;
@@ -5179,7 +5179,7 @@ body.pagamento-aberto .event-detail {
   top: 0;
   bottom: 0;
   width: 6px;
-  background: linear-gradient(180deg, #dc2626, #991b1b);
+  background: linear-gradient(180deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
 }
 
 .mb-ticket.is-pendente::before { background: linear-gradient(180deg, #d97706, #92400e); }
@@ -5206,7 +5206,7 @@ body.pagamento-aberto .event-detail {
   text-transform: uppercase;
 }
 
-.mb-ticket-brand strong { color: #fca5a5; }
+.mb-ticket-brand strong { color: var(--cor-clara, #fca5a5); }
 
 .mb-ticket-brand span { color: #fff; }
 
@@ -5214,8 +5214,8 @@ body.pagamento-aberto .event-detail {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #dc2626;
-  box-shadow: 0 0 8px #dc2626;
+  background: var(--cor-primaria, #dc2626);
+  box-shadow: 0 0 8px var(--cor-primaria, #dc2626);
 }
 
 .mb-ticket-tipo {
@@ -5230,7 +5230,7 @@ body.pagamento-aberto .event-detail {
 .mb-ticket-tipo.is-normal { background: rgba(59, 130, 246, .18); color: #93c5fd; }
 .mb-ticket-tipo.is-vip {
   background: linear-gradient(135deg, rgba(220, 38, 38, .3), rgba(153, 27, 27, .3));
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   box-shadow: inset 0 0 0 1px rgba(220, 38, 38, .4);
 }
 
@@ -5281,7 +5281,7 @@ body.pagamento-aberto .event-detail {
   color: #fff;
 }
 
-.mb-ticket-info-value.is-preco { color: #fca5a5; font-size: 18px; }
+.mb-ticket-info-value.is-preco { color: var(--cor-clara, #fca5a5); font-size: 18px; }
 
 /* Linha perfurada com recortes */
 .mb-ticket-perf {
@@ -5344,7 +5344,7 @@ body.pagamento-aberto .event-detail {
   font-size: 15px;
   font-weight: 800;
   letter-spacing: .06em;
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   word-break: break-all;
 }
 
@@ -5362,7 +5362,7 @@ body.pagamento-aberto .event-detail {
 .mb-ticket-estado.is-pendente { background: rgba(245, 158, 11, .18); color: #fcd34d; }
 .mb-ticket-estado.is-ativo { background: rgba(34, 197, 94, .18); color: #86efac; }
 .mb-ticket-estado.is-cancelado { background: rgba(255, 255, 255, .08); color: rgba(255,255,255,.65); }
-.mb-ticket-estado.is-usado { background: rgba(220, 38, 38, .22); color: #fca5a5; }
+.mb-ticket-estado.is-usado { background: rgba(220, 38, 38, .22); color: var(--cor-clara, #fca5a5); }
 
 /* Barra de codigo de barras estilizada (visual, nao real) */
 .mb-ticket-barcode {
@@ -5409,7 +5409,7 @@ body.pagamento-aberto .event-detail {
 .mb-btn-ticket:active { transform: scale(.97); }
 
 .mb-btn-ticket.is-primario {
-  background: linear-gradient(135deg, #dc2626, #991b1b);
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, var(--cor-escura, #7f1d1d)));
   color: #fff;
   box-shadow: 0 8px 18px rgba(220, 38, 38, .3);
 }
@@ -5450,7 +5450,7 @@ body.pagamento-aberto .event-detail {
   font-weight: 800;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
 }
 
 .mb-ticket-date-sep {
@@ -5527,7 +5527,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #dc2626, #7f1d1d);
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
   font-size: 24px;
   font-weight: 900;
@@ -5548,7 +5548,7 @@ body.pagamento-aberto .event-detail {
   font-weight: 800;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   margin-bottom: 2px;
 }
 
@@ -5577,7 +5577,7 @@ body.pagamento-aberto .event-detail {
   display: grid;
   place-items: center;
   background: rgba(220, 38, 38, .14);
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   cursor: pointer;
   transition: background .18s, transform .12s;
 }
@@ -5621,7 +5621,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-stat-num.is-verde { color: #86efac; }
-.mb-stat-num.is-vermelho { color: #fca5a5; }
+.mb-stat-num.is-vermelho { color: var(--cor-clara, #fca5a5); }
 
 .mb-stat-lbl {
   font-size: 10px;
@@ -5679,7 +5679,7 @@ body.pagamento-aberto .event-detail {
       transparent 4px,
       transparent 8px
     ),
-    linear-gradient(180deg, #dc2626, #7f1d1d);
+    linear-gradient(180deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   background-blend-mode: overlay;
 }
 
@@ -5696,7 +5696,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-ticket-brand strong {
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   font-size: 14px;
 }
 
@@ -5716,7 +5716,7 @@ body.pagamento-aberto .event-detail {
   right: 0;
   width: 3px;
   height: 100%;
-  background: linear-gradient(180deg, #dc2626, transparent);
+  background: linear-gradient(180deg, var(--cor-primaria, #dc2626), transparent);
 }
 
 .mb-ticket-date-day {
@@ -5725,7 +5725,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-ticket-date-mes {
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   font-size: 10px;
 }
 
@@ -5956,7 +5956,7 @@ body.pagamento-aberto .event-detail {
   font-weight: 800;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: #fca5a5;
+  color: var(--cor-clara, #fca5a5);
   margin: 0 0 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, .08);
@@ -6010,7 +6010,7 @@ body.pagamento-aberto .event-detail {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2px solid #e50914;
+  border: 2px solid var(--cor-primaria, #dc2626);
   pointer-events: none;
   animation: ringPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
