@@ -2,9 +2,9 @@
 /* ===== SISTEMA DE TEMAS ===== */
 :root,
 html[data-tema="vermelho"] {
-  --cor-primaria: var(--cor-primaria, #dc2626);
-  --cor-escura: var(--cor-escura, #7f1d1d);
-  --cor-clara: var(--cor-clara, #fca5a5);
+  --cor-primaria: #dc2626;
+  --cor-escura: #7f1d1d;
+  --cor-clara: #fca5a5;
   --cor-brilho: rgba(220, 38, 38, .35);
   --rgb-primaria: 220, 38, 38;
   --cor-pulse: rgba(220, 38, 38, 0.75);
@@ -6029,13 +6029,13 @@ body.pagamento-aberto .event-detail {
 @keyframes ringPulse {
   0% {
     box-shadow:
-      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.75)),
-      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.75));
+      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.75),
+      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.75);
   }
   60% {
     box-shadow:
       0 0 0 22px transparent,
-      0 0 0 11px rgba(var(--rgb-primaria, 220, 38, 38), 0.6));
+      0 0 0 11px rgba(var(--rgb-primaria, 220, 38, 38), 0.6);
   }
   100% {
     box-shadow:
@@ -6056,41 +6056,11 @@ body.pagamento-aberto .event-detail {
   animation: ringPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@keyframes ringPulse {
-  0% {
-    box-shadow:
-      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.7),
-      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.7);
-  }
-  60% {
-    box-shadow:
-      0 0 0 22px rgba(var(--rgb-primaria, 220, 38, 38), 0),
-      0 0 0 11px rgba(var(--rgb-primaria, 220, 38, 38), 0.6);
-  }
-  100% {
-    box-shadow:
-      0 0 0 22px rgba(var(--rgb-primaria, 220, 38, 38), 0),
-      0 0 0 22px rgba(var(--rgb-primaria, 220, 38, 38), 0);
-  }
-}
+
 
 /* ===== SISTEMA DE TEMAS ===== */
 
-/* Tema padrão (vermelho) */
-:root,
-html[data-tema="vermelho"] {
-  --cor-primaria: var(--cor-primaria, #dc2626);
-  --cor-escura: var(--cor-escura, #7f1d1d);
-  --cor-clara: var(--cor-clara, #fca5a5);
-  --cor-brilho: rgba(220, 38, 38, .35);
-}
 
-html[data-tema="laranja"] {
-  --cor-primaria: #f97316;
-  --cor-escura: #9a3412;
-  --cor-clara: #fdba74;
-  --cor-brilho: rgba(249, 115, 22, .35);
-}
 
 html[data-tema="castanho"] {
   --cor-primaria: #a16207;
