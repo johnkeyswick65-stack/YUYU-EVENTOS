@@ -6,6 +6,7 @@ html[data-tema="vermelho"] {
   --cor-escura: var(--cor-escura, #7f1d1d);
   --cor-clara: var(--cor-clara, #fca5a5);
   --cor-brilho: rgba(220, 38, 38, .35);
+  --rgb-primaria: 220, 38, 38;
   --cor-pulse: rgba(220, 38, 38, 0.75);
 }
 
@@ -14,6 +15,7 @@ html[data-tema="laranja"] {
   --cor-escura: #9a3412;
   --cor-clara: #fdba74;
   --cor-brilho: rgba(249, 115, 22, .35);
+  --rgb-primaria: 249, 115, 22;
 }
 
 html[data-tema="castanho"] {
@@ -21,6 +23,7 @@ html[data-tema="castanho"] {
   --cor-escura: #713f12;
   --cor-clara: #fde047;
   --cor-brilho: rgba(161, 98, 7, .35);
+  --rgb-primaria: 161, 98, 7;
 }
 
 html[data-tema="azul"] {
@@ -28,6 +31,7 @@ html[data-tema="azul"] {
   --cor-escura: #1e3a8a;
   --cor-clara: #93c5fd;
   --cor-brilho: rgba(37, 99, 235, .35);
+  --rgb-primaria: 37, 99, 235;
 }
 
 :root {
@@ -648,7 +652,7 @@ input {
   background: var(--cor-primaria, #dc2626);
   color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(229, 9, 20, .3);
+  box-shadow: 0 10px 30px rgba(var(--rgb-primaria, 220, 38, 38), .3);
 }
 
 .floating-message:active {
@@ -699,7 +703,7 @@ input {
   background: #000;
   box-shadow:
     0 0 8px var(--cor-primaria, #dc2626),
-    0 0 16px rgba(229, 9, 20, .8);
+    0 0 16px rgba(var(--rgb-primaria, 220, 38, 38), .8);
   z-index: -1;
 }
 
@@ -795,11 +799,11 @@ input {
 
 .search-box {
   border: 2px solid var(--red);
-  box-shadow: 0 0 0 1px rgba(229, 9, 20, .15);
+  box-shadow: 0 0 0 1px rgba(var(--rgb-primaria, 220, 38, 38), .15);
 }
 
 .search-box:focus-within {
-  box-shadow: 0 0 0 2px rgba(229, 9, 20, .18);
+  box-shadow: 0 0 0 2px rgba(var(--rgb-primaria, 220, 38, 38), .18);
 }
 
 .search-box {
@@ -1143,16 +1147,16 @@ input {
 /* Brilho suave no botão WhatsApp */
 .floating-message {
   box-shadow:
-    0 0 8px rgba(229, 9, 20, .35),
-    0 0 18px rgba(229, 9, 20, .18),
+    0 0 8px rgba(var(--rgb-primaria, 220, 38, 38), .35),
+    0 0 18px rgba(var(--rgb-primaria, 220, 38, 38), .18),
     0 8px 25px rgba(0, 0, 0, .5);
 }
 
 .floating-message:hover {
   box-shadow:
-    0 0 10px rgba(229, 9, 20, .5),
-    0 0 24px rgba(229, 9, 20, .25),
-    0 10px 30px rgba(229, 9, 20, .3);
+    0 0 10px rgba(var(--rgb-primaria, 220, 38, 38), .5),
+    0 0 24px rgba(var(--rgb-primaria, 220, 38, 38), .25),
+    0 10px 30px rgba(var(--rgb-primaria, 220, 38, 38), .3);
 }
 
 
@@ -2160,7 +2164,7 @@ body.image-viewer-open {
   content: "";
   position: absolute;
   inset: -8px;
-  border: 2px solid rgba(229, 9, 20, .65);
+  border: 2px solid rgba(var(--rgb-primaria, 220, 38, 38), .65);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
@@ -2798,7 +2802,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   left: 135px;
   width: 55px;
   height: 100%;
-  background: rgba(229, 9, 20, 0.18);
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.18);
   z-index: 1;
   pointer-events: none;
 }
@@ -2811,7 +2815,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   width: 135px !important;
   height: 100% !important;
   top: 0 !important;
-  background: rgba(229, 9, 20, 0.18) !important;
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.18) !important;
   z-index: 1 !important;
   pointer-events: none !important;
 }
@@ -2998,7 +3002,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   left: 135px;
   width: 55px;
   height: 100%;
-  background: rgba(229, 9, 20, 0.18);
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.18);
   z-index: 2;
   pointer-events: none;
 }
@@ -3010,7 +3014,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   left: 0;
   width: 135px;
   height: 100%;
-  background: rgba(229, 9, 20, 0.18);
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.18);
   z-index: 1;
   pointer-events: none;
 }
@@ -6025,13 +6029,13 @@ body.pagamento-aberto .event-detail {
 @keyframes ringPulse {
   0% {
     box-shadow:
-      0 0 0 0 var(--cor-pulse, rgba(220, 38, 38, 0.75)),
-      0 0 0 0 var(--cor-pulse, rgba(220, 38, 38, 0.75));
+      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.75)),
+      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.75));
   }
   60% {
     box-shadow:
       0 0 0 22px transparent,
-      0 0 0 11px var(--cor-pulse, rgba(220, 38, 38, 0.6));
+      0 0 0 11px rgba(var(--rgb-primaria, 220, 38, 38), 0.6));
   }
   100% {
     box-shadow:
@@ -6055,18 +6059,18 @@ body.pagamento-aberto .event-detail {
 @keyframes ringPulse {
   0% {
     box-shadow:
-      0 0 0 0 rgba(229, 9, 20, 0.7),
-      0 0 0 0 rgba(229, 9, 20, 0.7);
+      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.7),
+      0 0 0 0 rgba(var(--rgb-primaria, 220, 38, 38), 0.7);
   }
   60% {
     box-shadow:
-      0 0 0 22px rgba(229, 9, 20, 0),
-      0 0 0 11px rgba(229, 9, 20, 0.6);
+      0 0 0 22px rgba(var(--rgb-primaria, 220, 38, 38), 0),
+      0 0 0 11px rgba(var(--rgb-primaria, 220, 38, 38), 0.6);
   }
   100% {
     box-shadow:
-      0 0 0 22px rgba(229, 9, 20, 0),
-      0 0 0 22px rgba(229, 9, 20, 0);
+      0 0 0 22px rgba(var(--rgb-primaria, 220, 38, 38), 0),
+      0 0 0 22px rgba(var(--rgb-primaria, 220, 38, 38), 0);
   }
 }
 
