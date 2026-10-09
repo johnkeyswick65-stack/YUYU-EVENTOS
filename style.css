@@ -646,7 +646,7 @@ input {
   background: var(--cor-primaria, #dc2626);
   color: #ffffff;
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(229, 9, 20, .3);
+  box-shadow: 0 10px 30px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .3);
 }
 
 .floating-message:active {
@@ -697,7 +697,7 @@ input {
   background: #000;
   box-shadow:
     0 0 8px var(--cor-primaria, #dc2626),
-    0 0 16px rgba(229, 9, 20, .8);
+    0 0 16px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .8);
   z-index: -1;
 }
 
@@ -793,11 +793,11 @@ input {
 
 .search-box {
   border: 2px solid var(--red);
-  box-shadow: 0 0 0 1px rgba(229, 9, 20, .15);
+  box-shadow: 0 0 0 1px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .15);
 }
 
 .search-box:focus-within {
-  box-shadow: 0 0 0 2px rgba(229, 9, 20, .18);
+  box-shadow: 0 0 0 2px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .18);
 }
 
 .search-box {
@@ -1141,16 +1141,16 @@ input {
 /* Brilho suave no botão WhatsApp */
 .floating-message {
   box-shadow:
-    0 0 8px rgba(229, 9, 20, .35),
-    0 0 18px rgba(229, 9, 20, .18),
+    0 0 8px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .35),
+    0 0 18px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .18),
     0 8px 25px rgba(0, 0, 0, .5);
 }
 
 .floating-message:hover {
   box-shadow:
-    0 0 10px rgba(229, 9, 20, .5),
-    0 0 24px rgba(229, 9, 20, .25),
-    0 10px 30px rgba(229, 9, 20, .3);
+    0 0 10px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .5),
+    0 0 24px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .25),
+    0 10px 30px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .3);
 }
 
 
@@ -1220,7 +1220,7 @@ input {
   text-shadow:
     0 0 4px rgba(255,255,255,.75),
     0 0 10px rgba(255,255,255,.45),
-    0 0 18px rgba(229,9,20,.35);
+    0 0 18px var(--cor-brilho-base, rgba(220, 38, 38,.35);
 }
 
 .footer-logo span {
@@ -2158,7 +2158,7 @@ body.image-viewer-open {
   content: "";
   position: absolute;
   inset: -8px;
-  border: 2px solid rgba(229, 9, 20, .65);
+  border: 2px solid var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, .65);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
@@ -2236,7 +2236,7 @@ body.image-viewer-open {
 
   box-shadow:
     0 25px 70px rgba(0,0,0,.65),
-    0 0 30px rgba(229,9,20,.12);
+    0 0 30px var(--cor-brilho-base, rgba(220, 38, 38,.12);
 
   z-index: 9998;
 
@@ -2335,7 +2335,7 @@ body.image-viewer-open {
   padding: 18px 14px 12px;
 
   background:
-    radial-gradient(circle at 15% 15%, rgba(229,9,20,.07), transparent 30%),
+    radial-gradient(circle at 15% 15%, var(--cor-brilho-base, rgba(220, 38, 38,.07), transparent 30%),
     #111;
 
   overflow-y: auto;
@@ -2417,10 +2417,10 @@ body.image-viewer-open {
 }
 
 #whatsappMessage:focus {
-  border-color: rgba(229,9,20,.7);
+  border-color: var(--cor-brilho-base, rgba(220, 38, 38,.7);
 
   box-shadow:
-    0 0 0 3px rgba(229,9,20,.08);
+    0 0 0 3px var(--cor-brilho-base, rgba(220, 38, 38,.08);
 }
 
 
@@ -2638,7 +2638,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
 
   box-shadow:
     0 25px 70px rgba(0,0,0,.65),
-    0 0 30px rgba(229,9,20,.12) !important;
+    0 0 30px var(--cor-brilho-base, rgba(220, 38, 38,.12) !important;
 
   z-index: 9998 !important;
 
@@ -2723,7 +2723,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   padding: 18px 14px 14px !important;
 
   background:
-    radial-gradient(circle at 15% 15%, rgba(229,9,20,.07), transparent 30%),
+    radial-gradient(circle at 15% 15%, var(--cor-brilho-base, rgba(220, 38, 38,.07), transparent 30%),
     #111 !important;
 
   overflow: hidden !important;
@@ -2796,7 +2796,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   left: 135px;
   width: 55px;
   height: 100%;
-  background: rgba(229, 9, 20, 0.18);
+  background: var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.18);
   z-index: 1;
   pointer-events: none;
 }
@@ -2809,7 +2809,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   width: 135px !important;
   height: 100% !important;
   top: 0 !important;
-  background: rgba(229, 9, 20, 0.18) !important;
+  background: var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.18) !important;
   z-index: 1 !important;
   pointer-events: none !important;
 }
@@ -2996,7 +2996,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   left: 135px;
   width: 55px;
   height: 100%;
-  background: rgba(229, 9, 20, 0.18);
+  background: var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.18);
   z-index: 2;
   pointer-events: none;
 }
@@ -3008,7 +3008,7 @@ EOFcd ~/YUYU-EVENTOS && cat >> style.css <<'EOF'
   left: 0;
   width: 135px;
   height: 100%;
-  background: rgba(229, 9, 20, 0.18);
+  background: var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.18);
   z-index: 1;
   pointer-events: none;
 }
@@ -3874,7 +3874,7 @@ body.pagamento-aberto .event-detail {
 /* ===== FUNDO VERMELHO DA SUBJANELA DE PAGAMENTO ===== */
 .payment-page {
   background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(220, 38, 38, .22), transparent 60%),
+    radial-gradient(1200px 600px at 50% -10%, var(--cor-brilho, rgba(220, 38, 38, .22), transparent 60%),
     radial-gradient(900px 500px at 50% 110%, rgba(153, 27, 27, .18), transparent 65%),
     #0b0505 !important;
 }
@@ -3898,15 +3898,15 @@ body.pagamento-aberto .event-detail {
   color: #fff;
   font-weight: 800;
   font-size: 13px;
-  box-shadow: 0 4px 12px rgba(220, 38, 38, .35);
+  box-shadow: 0 4px 12px var(--cor-brilho, rgba(220, 38, 38, .35);
 }
 
 .payment-chat-input {
   width: 100%;
   padding: 14px 16px;
   border-radius: 4px 16px 16px 16px;
-  border: 1px solid rgba(220, 38, 38, .28);
-  background: rgba(220, 38, 38, .06);
+  border: 1px solid var(--cor-brilho, rgba(220, 38, 38, .28);
+  background: var(--cor-brilho, rgba(220, 38, 38, .06);
   color: #fff;
   font: inherit;
   font-size: 14px;
@@ -3922,21 +3922,21 @@ body.pagamento-aberto .event-detail {
 }
 
 .payment-chat-input:focus {
-  border-color: rgba(220, 38, 38, .7);
-  background: rgba(220, 38, 38, .1);
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, .12);
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .7);
+  background: var(--cor-brilho, rgba(220, 38, 38, .1);
+  box-shadow: 0 0 0 4px var(--cor-brilho, rgba(220, 38, 38, .12);
 }
 
 /* O card de dica (passo 2) mantém o tom vermelho para combinar */
 .payment-chat-hint .payment-chat-avatar {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
-  box-shadow: 0 4px 12px rgba(220, 38, 38, .35);
+  box-shadow: 0 4px 12px var(--cor-brilho, rgba(220, 38, 38, .35);
 }
 
 .payment-chat-hint .payment-chat-bubble {
-  border-color: rgba(220, 38, 38, .22);
-  background: rgba(220, 38, 38, .06);
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .22);
+  background: var(--cor-brilho, rgba(220, 38, 38, .06);
 }
 
 /* ===== COMPOSER DE CHAT NA SUBJANELA ===== */
@@ -3947,7 +3947,7 @@ body.pagamento-aberto .event-detail {
   padding: 10px;
   border-radius: 22px;
   background: rgba(255, 255, 255, .035);
-  border: 1px solid rgba(220, 38, 38, .18);
+  border: 1px solid var(--cor-brilho, rgba(220, 38, 38, .18);
 }
 
 /* Preview com X no canto */
@@ -3974,8 +3974,8 @@ body.pagamento-aberto .event-detail {
   gap: 10px;
   padding: 12px 14px;
   border-radius: 14px;
-  background: rgba(220, 38, 38, .08);
-  border: 1px solid rgba(220, 38, 38, .25);
+  background: var(--cor-brilho, rgba(220, 38, 38, .08);
+  border: 1px solid var(--cor-brilho, rgba(220, 38, 38, .25);
   color: var(--cor-clara, #fca5a5);
   max-width: calc(100% - 40px);
 }
@@ -4020,7 +4020,7 @@ body.pagamento-aberto .event-detail {
 
 .payment-composer-remove:active {
   transform: scale(.9);
-  background: rgba(220, 38, 38, .9);
+  background: var(--cor-brilho, rgba(220, 38, 38, .9);
 }
 
 /* Barra: + texto ➤ */
@@ -4048,11 +4048,11 @@ body.pagamento-aberto .event-detail {
 }
 
 .payment-composer-plus {
-  background: rgba(220, 38, 38, .18);
+  background: var(--cor-brilho, rgba(220, 38, 38, .18);
   color: var(--cor-clara, #fca5a5);
 }
 
-.payment-composer-plus:hover { background: rgba(220, 38, 38, .3); }
+.payment-composer-plus:hover { background: var(--cor-brilho, rgba(220, 38, 38, .3); }
 .payment-composer-plus:active { transform: scale(.92); }
 
 .payment-composer-plus svg {
@@ -4112,7 +4112,7 @@ body.pagamento-aberto .event-detail {
 .payment-chat-hint .payment-chat-avatar {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
-  box-shadow: 0 4px 12px rgba(220, 38, 38, .35) !important;
+  box-shadow: 0 4px 12px var(--cor-brilho, rgba(220, 38, 38, .35) !important;
 }
 
 /* ===== Respeitar o atributo [hidden] em todos os elementos ===== */
@@ -4127,7 +4127,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 22px;
   overflow: hidden;
   background: rgba(15, 5, 5, .72);
-  border: 1px solid rgba(220, 38, 38, .28);
+  border: 1px solid var(--cor-brilho, rgba(220, 38, 38, .28);
   box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
 }
 
@@ -4139,7 +4139,7 @@ body.pagamento-aberto .event-detail {
   align-items: center;
   padding: 12px 16px;
   background: linear-gradient(135deg, var(--cor-escura, #7f1d1d), var(--cor-escura, #7f1d1d));
-  border-bottom: 1px solid rgba(220, 38, 38, .35);
+  border-bottom: 1px solid var(--cor-brilho, rgba(220, 38, 38, .35);
 }
 
 .payment-chat-header .payment-chat-avatar {
@@ -4199,8 +4199,8 @@ body.pagamento-aberto .event-detail {
   max-height: 260px;
   overflow-y: auto;
   background-image:
-    radial-gradient(circle at 20% 20%, rgba(220, 38, 38, .06) 0, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(220, 38, 38, .05) 0, transparent 40%);
+    radial-gradient(circle at 20% 20%, var(--cor-brilho, rgba(220, 38, 38, .06) 0, transparent 40%),
+    radial-gradient(circle at 80% 80%, var(--cor-brilho, rgba(220, 38, 38, .05) 0, transparent 40%);
 }
 
 /* Mensagem — base */
@@ -4284,7 +4284,7 @@ body.pagamento-aberto .event-detail {
 
 .payment-chat-remove:active {
   transform: scale(.88);
-  background: rgba(220, 38, 38, .95);
+  background: var(--cor-brilho, rgba(220, 38, 38, .95);
 }
 
 /* Anexo tipo "documento" */
@@ -4324,7 +4324,7 @@ body.pagamento-aberto .event-detail {
   gap: 8px;
   padding: 10px;
   background: rgba(0, 0, 0, .4);
-  border-top: 1px solid rgba(220, 38, 38, .22);
+  border-top: 1px solid var(--cor-brilho, rgba(220, 38, 38, .22);
   border-radius: 0;
   border-left: 0;
   border-right: 0;
@@ -4344,7 +4344,7 @@ body.pagamento-aberto .event-detail {
   background: rgba(11, 5, 5, .82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(220, 38, 38, .25);
+  border-bottom: 1px solid var(--cor-brilho, rgba(220, 38, 38, .25);
   box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
 }
 
@@ -4355,7 +4355,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(220, 38, 38, .18);
+  background: var(--cor-brilho, rgba(220, 38, 38, .18);
   color: #fff;
   cursor: pointer;
   transition: transform .12s, background .18s;
@@ -4363,7 +4363,7 @@ body.pagamento-aberto .event-detail {
 
 .payment-header-back:active {
   transform: scale(.92);
-  background: rgba(220, 38, 38, .32);
+  background: var(--cor-brilho, rgba(220, 38, 38, .32);
 }
 
 .payment-header-back svg {
@@ -4703,7 +4703,7 @@ body.pagamento-aberto .event-detail {
 
 /* Cabeçalho explorar */
 .explore-eyebrow {
-  background: rgba(220, 38, 38, .16) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .16) !important;
   color: var(--cor-clara, #fca5a5) !important;
 }
 
@@ -4712,35 +4712,35 @@ body.pagamento-aberto .event-detail {
 }
 
 .explore-search:focus-within {
-  border-color: rgba(220, 38, 38, .65) !important;
-  background: rgba(220, 38, 38, .06) !important;
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .65) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .06) !important;
 }
 
 /* Chips de filtro ativos */
 .explore-chip.is-active {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
-  box-shadow: 0 6px 16px rgba(220, 38, 38, .35) !important;
+  box-shadow: 0 6px 16px var(--cor-brilho, rgba(220, 38, 38, .35) !important;
 }
 
 /* Categoria do card */
 .event-category {
-  background: rgba(220, 38, 38, .16) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .16) !important;
   color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Card hover */
 .event-card:hover {
-  border-color: rgba(220, 38, 38, .35) !important;
-  box-shadow: 0 20px 44px rgba(220, 38, 38, .18) !important;
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .35) !important;
+  box-shadow: 0 20px 44px var(--cor-brilho, rgba(220, 38, 38, .18) !important;
 }
 
 /* Preços */
 .event-prices .price-vip {
-  border-color: rgba(220, 38, 38, .55) !important;
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .55) !important;
   background: linear-gradient(135deg,
-    rgba(220, 38, 38, .16),
-    rgba(220, 38, 38, .04)) !important;
+    var(--cor-brilho, rgba(220, 38, 38, .16),
+    var(--cor-brilho, rgba(220, 38, 38, .04)) !important;
 }
 
 .event-prices .price-vip small {
@@ -4755,11 +4755,11 @@ body.pagamento-aberto .event-detail {
 .event-open {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
-  box-shadow: 0 10px 24px rgba(220, 38, 38, .35) !important;
+  box-shadow: 0 10px 24px var(--cor-brilho, rgba(220, 38, 38, .35) !important;
 }
 
 .event-open:active {
-  box-shadow: 0 5px 14px rgba(220, 38, 38, .28) !important;
+  box-shadow: 0 5px 14px var(--cor-brilho, rgba(220, 38, 38, .28) !important;
 }
 
 /* Empty state */
@@ -4770,12 +4770,12 @@ body.pagamento-aberto .event-detail {
 /* ===== DETALHE DO EVENTO ===== */
 /* Preço VIP no detalhe */
 .event-detail-prices div:last-child {
-  border-color: rgba(220, 38, 38, .65) !important;
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .65) !important;
   background: linear-gradient(135deg,
-    rgba(220, 38, 38, .16),
-    rgba(220, 38, 38, .04)) !important;
+    var(--cor-brilho, rgba(220, 38, 38, .16),
+    var(--cor-brilho, rgba(220, 38, 38, .04)) !important;
   box-shadow:
-    0 8px 24px rgba(220, 38, 38, .25),
+    0 8px 24px var(--cor-brilho, rgba(220, 38, 38, .25),
     inset 0 1px 0 rgba(255, 255, 255, .06) !important;
 }
 
@@ -4792,43 +4792,43 @@ body.pagamento-aberto .event-detail {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
   color: #fff !important;
   box-shadow:
-    0 12px 28px rgba(220, 38, 38, .4),
+    0 12px 28px var(--cor-brilho, rgba(220, 38, 38, .4),
     inset 0 1px 0 rgba(255, 255, 255, .2) !important;
 }
 
 .event-detail-buy:active {
   box-shadow:
-    0 6px 18px rgba(220, 38, 38, .32),
+    0 6px 18px var(--cor-brilho, rgba(220, 38, 38, .32),
     inset 0 1px 0 rgba(255, 255, 255, .2) !important;
 }
 
 /* ===== SUBJANELA DE PAGAMENTO ===== */
 /* Eyebrow */
 .payment-eyebrow {
-  background: rgba(220, 38, 38, .18) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .18) !important;
   color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Tier ativo (VIP/Normal) */
 .payment-tier.is-active {
-  border-color: rgba(220, 38, 38, .75) !important;
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .75) !important;
   background: linear-gradient(135deg,
-    rgba(220, 38, 38, .18),
-    rgba(220, 38, 38, .04)) !important;
-  box-shadow: 0 10px 26px rgba(220, 38, 38, .25) !important;
+    var(--cor-brilho, rgba(220, 38, 38, .18),
+    var(--cor-brilho, rgba(220, 38, 38, .04)) !important;
+  box-shadow: 0 10px 26px var(--cor-brilho, rgba(220, 38, 38, .25) !important;
 }
 
 /* Botão de copiar */
 .payment-copy {
-  background: rgba(220, 38, 38, .18) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .18) !important;
   color: var(--cor-clara, #fca5a5) !important;
 }
 
 /* Valor a pagar */
 .payment-amount {
   background: linear-gradient(135deg,
-    rgba(220, 38, 38, .18),
-    rgba(220, 38, 38, .05)) !important;
+    var(--cor-brilho, rgba(220, 38, 38, .18),
+    var(--cor-brilho, rgba(220, 38, 38, .05)) !important;
 }
 
 .payment-amount strong {
@@ -4837,13 +4837,13 @@ body.pagamento-aberto .event-detail {
 
 /* Upload */
 .payment-upload {
-  border-color: rgba(220, 38, 38, .5) !important;
-  background: rgba(220, 38, 38, .06) !important;
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .5) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .06) !important;
   color: var(--cor-clara, #fca5a5) !important;
 }
 
 .payment-upload:active {
-  background: rgba(220, 38, 38, .14) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .14) !important;
 }
 
 /* ===== BOTÃO "VER EVENTO" NOS CARDS DA INDEX ===== */
@@ -4865,7 +4865,7 @@ body.pagamento-aberto .event-detail {
   letter-spacing: .02em !important;
   text-decoration: none !important;
 
-  box-shadow: 0 10px 22px rgba(220, 38, 38, .32) !important;
+  box-shadow: 0 10px 22px var(--cor-brilho, rgba(220, 38, 38, .32) !important;
   transition: transform .12s, box-shadow .18s, background .18s !important;
 }
 
@@ -4881,7 +4881,7 @@ body.pagamento-aberto .event-detail {
 
 .event-bottom a:hover {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d)) !important;
-  box-shadow: 0 14px 28px rgba(220, 38, 38, .42) !important;
+  box-shadow: 0 14px 28px var(--cor-brilho, rgba(220, 38, 38, .42) !important;
 }
 
 .event-bottom a:hover::after {
@@ -4890,7 +4890,7 @@ body.pagamento-aberto .event-detail {
 
 .event-bottom a:active {
   transform: scale(.98) !important;
-  box-shadow: 0 6px 14px rgba(220, 38, 38, .28) !important;
+  box-shadow: 0 6px 14px var(--cor-brilho, rgba(220, 38, 38, .28) !important;
 }
 
 /* ===== MEUS BILHETES (login cliente) ===== */
@@ -4913,7 +4913,7 @@ body.pagamento-aberto .event-detail {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: rgba(220, 38, 38, .16);
+  background: var(--cor-brilho, rgba(220, 38, 38, .16);
   color: #fff;
   flex-shrink: 0;
 }
@@ -4935,7 +4935,7 @@ body.pagamento-aberto .event-detail {
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--cor-clara, #fca5a5);
-  background: rgba(220, 38, 38, .16);
+  background: var(--cor-brilho, rgba(220, 38, 38, .16);
   padding: 4px 10px;
   border-radius: 999px;
 }
@@ -4992,9 +4992,9 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-field input:focus {
-  border-color: rgba(220, 38, 38, .7);
-  background: rgba(220, 38, 38, .06);
-  box-shadow: 0 0 0 4px rgba(220, 38, 38, .12);
+  border-color: var(--cor-brilho, rgba(220, 38, 38, .7);
+  background: var(--cor-brilho, rgba(220, 38, 38, .06);
+  box-shadow: 0 0 0 4px var(--cor-brilho, rgba(220, 38, 38, .12);
 }
 
 .mb-field input#codigo {
@@ -5013,11 +5013,11 @@ body.pagamento-aberto .event-detail {
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 12px 26px rgba(220, 38, 38, .35);
+  box-shadow: 0 12px 26px var(--cor-brilho, rgba(220, 38, 38, .35);
   transition: transform .12s, box-shadow .18s;
 }
 
-.mb-btn:active { transform: scale(.98); box-shadow: 0 6px 18px rgba(220, 38, 38, .28); }
+.mb-btn:active { transform: scale(.98); box-shadow: 0 6px 18px var(--cor-brilho, rgba(220, 38, 38, .28); }
 .mb-btn:disabled { opacity: .55; cursor: not-allowed; }
 
 .mb-error {
@@ -5053,7 +5053,7 @@ body.pagamento-aberto .event-detail {
   cursor: pointer;
   transition: background .18s;
 }
-.mb-logout:hover { background: rgba(220, 38, 38, .25); color: var(--cor-clara, #fca5a5); }
+.mb-logout:hover { background: var(--cor-brilho, rgba(220, 38, 38, .25); color: var(--cor-clara, #fca5a5); }
 
 /* Cartão de bilhete */
 .mb-card {
@@ -5095,12 +5095,12 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-tipo.is-normal { background: rgba(59, 130, 246, .18); color: #93c5fd; }
-.mb-tipo.is-vip { background: rgba(220, 38, 38, .2); color: var(--cor-clara, #fca5a5); }
+.mb-tipo.is-vip { background: var(--cor-brilho, rgba(220, 38, 38, .2); color: var(--cor-clara, #fca5a5); }
 
 .mb-estado.is-pendente { background: rgba(245, 158, 11, .18); color: #fcd34d; }
 .mb-estado.is-ativo { background: rgba(34, 197, 94, .18); color: #86efac; }
 .mb-estado.is-cancelado { background: rgba(255, 255, 255, .08); color: rgba(255,255,255,.65); }
-.mb-estado.is-usado { background: rgba(220, 38, 38, .22); color: var(--cor-clara, #fca5a5); }
+.mb-estado.is-usado { background: var(--cor-brilho, rgba(220, 38, 38, .22); color: var(--cor-clara, #fca5a5); }
 
 .mb-evento {
   margin: 0 0 4px;
@@ -5119,7 +5119,7 @@ body.pagamento-aberto .event-detail {
   display: inline-block;
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(220, 38, 38, .14);
+  background: var(--cor-brilho, rgba(220, 38, 38, .14);
   color: var(--cor-clara, #fca5a5);
   font-weight: 800;
   font-size: 15px;
@@ -5138,7 +5138,7 @@ body.pagamento-aberto .event-detail {
   padding: 9px 14px;
   border: 0;
   border-radius: 10px;
-  background: rgba(220, 38, 38, .16);
+  background: var(--cor-brilho, rgba(220, 38, 38, .16);
   color: var(--cor-clara, #fca5a5);
   font: inherit;
   font-size: 13px;
@@ -5149,7 +5149,7 @@ body.pagamento-aberto .event-detail {
 }
 
 .mb-btn-mini:active { transform: scale(.96); }
-.mb-btn-mini:hover { background: rgba(220, 38, 38, .3); }
+.mb-btn-mini:hover { background: var(--cor-brilho, rgba(220, 38, 38, .3); }
 
 .mb-vazio {
   padding: 40px 20px;
@@ -5229,9 +5229,9 @@ body.pagamento-aberto .event-detail {
 
 .mb-ticket-tipo.is-normal { background: rgba(59, 130, 246, .18); color: #93c5fd; }
 .mb-ticket-tipo.is-vip {
-  background: linear-gradient(135deg, rgba(220, 38, 38, .3), rgba(153, 27, 27, .3));
+  background: linear-gradient(135deg, var(--cor-brilho, rgba(220, 38, 38, .3), rgba(153, 27, 27, .3));
   color: var(--cor-clara, #fca5a5);
-  box-shadow: inset 0 0 0 1px rgba(220, 38, 38, .4);
+  box-shadow: inset 0 0 0 1px var(--cor-brilho, rgba(220, 38, 38, .4);
 }
 
 /* Corpo principal */
@@ -5362,7 +5362,7 @@ body.pagamento-aberto .event-detail {
 .mb-ticket-estado.is-pendente { background: rgba(245, 158, 11, .18); color: #fcd34d; }
 .mb-ticket-estado.is-ativo { background: rgba(34, 197, 94, .18); color: #86efac; }
 .mb-ticket-estado.is-cancelado { background: rgba(255, 255, 255, .08); color: rgba(255,255,255,.65); }
-.mb-ticket-estado.is-usado { background: rgba(220, 38, 38, .22); color: var(--cor-clara, #fca5a5); }
+.mb-ticket-estado.is-usado { background: var(--cor-brilho, rgba(220, 38, 38, .22); color: var(--cor-clara, #fca5a5); }
 
 /* Barra de codigo de barras estilizada (visual, nao real) */
 .mb-ticket-barcode {
@@ -5411,7 +5411,7 @@ body.pagamento-aberto .event-detail {
 .mb-btn-ticket.is-primario {
   background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
   color: #fff;
-  box-shadow: 0 8px 18px rgba(220, 38, 38, .3);
+  box-shadow: 0 8px 18px var(--cor-brilho, rgba(220, 38, 38, .3);
 }
 
 .mb-btn-ticket.is-secundario {
@@ -5515,7 +5515,7 @@ body.pagamento-aberto .event-detail {
   margin-bottom: 16px;
   border-radius: 20px;
   background:
-    radial-gradient(circle at 100% 0%, rgba(220, 38, 38, .18) 0%, transparent 60%),
+    radial-gradient(circle at 100% 0%, var(--cor-brilho, rgba(220, 38, 38, .18) 0%, transparent 60%),
     linear-gradient(180deg, #16161a 0%, #101013 100%);
   border: 1px solid rgba(255, 255, 255, .08);
   box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
@@ -5533,7 +5533,7 @@ body.pagamento-aberto .event-detail {
   font-weight: 900;
   letter-spacing: -.02em;
   box-shadow:
-    0 10px 22px rgba(220, 38, 38, .4),
+    0 10px 22px var(--cor-brilho, rgba(220, 38, 38, .4),
     inset 0 1px 0 rgba(255, 255, 255, .15);
   text-transform: uppercase;
 }
@@ -5576,13 +5576,13 @@ body.pagamento-aberto .event-detail {
   border: 0;
   display: grid;
   place-items: center;
-  background: rgba(220, 38, 38, .14);
+  background: var(--cor-brilho, rgba(220, 38, 38, .14);
   color: var(--cor-clara, #fca5a5);
   cursor: pointer;
   transition: background .18s, transform .12s;
 }
 
-.mb-perfil-sair:hover { background: rgba(220, 38, 38, .3); }
+.mb-perfil-sair:hover { background: var(--cor-brilho, rgba(220, 38, 38, .3); }
 .mb-perfil-sair:active { transform: scale(.92); }
 
 .mb-perfil-sair svg {
@@ -5752,7 +5752,7 @@ body.pagamento-aberto .event-detail {
 .mb-ticket-codigo {
   font-size: 17px;
   letter-spacing: .1em;
-  text-shadow: 0 0 20px rgba(220, 38, 38, .35);
+  text-shadow: 0 0 20px var(--cor-brilho, rgba(220, 38, 38, .35);
 }
 
 /* Badges maiores */
@@ -5794,10 +5794,10 @@ body.pagamento-aberto .event-detail {
   font-size: 68px;
   font-weight: 900;
   letter-spacing: .12em;
-  color: rgba(220, 38, 38, .18);
+  color: var(--cor-brilho, rgba(220, 38, 38, .18);
   pointer-events: none;
   z-index: 5;
-  text-shadow: 0 0 30px rgba(220, 38, 38, .3);
+  text-shadow: 0 0 30px var(--cor-brilho, rgba(220, 38, 38, .3);
 }
 
 /* Estado CANCELADO — riscar suave */
@@ -6022,16 +6022,19 @@ body.pagamento-aberto .event-detail {
 
 @keyframes ringPulse {
   0% {
-    transform: scale(1);
-    opacity: 0.8;
+    box-shadow:
+      0 0 0 0 var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.7)),
+      0 0 0 0 var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.7));
   }
-  70% {
-    transform: scale(1.9);
-    opacity: 0;
+  60% {
+    box-shadow:
+      0 0 0 22px transparent,
+      0 0 0 11px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.6));
   }
   100% {
-    transform: scale(1.9);
-    opacity: 0;
+    box-shadow:
+      0 0 0 22px transparent,
+      0 0 0 22px transparent;
   }
 }
 
@@ -6050,18 +6053,18 @@ body.pagamento-aberto .event-detail {
 @keyframes ringPulse {
   0% {
     box-shadow:
-      0 0 0 0 rgba(229, 9, 20, 0.7),
-      0 0 0 0 rgba(229, 9, 20, 0.7);
+      0 0 0 0 var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.7),
+      0 0 0 0 var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.7);
   }
   60% {
     box-shadow:
-      0 0 0 22px rgba(229, 9, 20, 0),
-      0 0 0 11px rgba(229, 9, 20, 0.6);
+      0 0 0 22px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0),
+      0 0 0 11px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0.6);
   }
   100% {
     box-shadow:
-      0 0 0 22px rgba(229, 9, 20, 0),
-      0 0 0 22px rgba(229, 9, 20, 0);
+      0 0 0 22px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0),
+      0 0 0 22px var(--cor-brilho, var(--cor-brilho, rgba(220, 38, 38, 0);
   }
 }
 
@@ -6073,7 +6076,7 @@ html[data-tema="vermelho"] {
   --cor-primaria: #dc2626;
   --cor-escura: #7f1d1d;
   --cor-clara: #fca5a5;
-  --cor-brilho: rgba(220, 38, 38, .35);
+  --cor-brilho: var(--cor-brilho, rgba(220, 38, 38, .35);
 }
 
 html[data-tema="laranja"] {
@@ -6331,7 +6334,7 @@ h2 span {
 /* Admin */
 .admin-nav-link.is-active {
   color: var(--cor-clara, #fca5a5) !important;
-  background: rgba(220, 38, 38, .18) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .18) !important;
 }
 
 .admin-brand-accent { color: var(--cor-primaria, #dc2626) !important; }
@@ -6414,7 +6417,7 @@ h2 span {
 }
 
 .event-back {
-  background: rgba(220, 38, 38, .18) !important;
+  background: var(--cor-brilho, rgba(220, 38, 38, .18) !important;
 }
 
 /* Placeholder da pesquisa em hover */
@@ -6428,4 +6431,19 @@ input:focus,
 .event-image::before,
 .event-image::after {
   background: var(--cor-primaria, #dc2626) !important;
+}
+
+/* ===== Barra lateral dos cards: opacidade suave ===== */
+.event-side-bar {
+  background: var(--cor-primaria, #dc2626) !important;
+  opacity: 0.5 !important;
+}
+
+.event-side-area {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0) 100%
+  ) !important;
 }
