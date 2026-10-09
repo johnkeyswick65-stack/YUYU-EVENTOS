@@ -2389,3 +2389,81 @@ input, textarea, select {
   .acc-ip { grid-template-columns: 1fr; }
   .acc-ip-acoes { justify-content: flex-end; }
 }
+
+/* ===== ESTATÍSTICAS COM ABAS ===== */
+.stats-card {
+  padding: 0;
+  border-radius: 18px;
+  background: var(--preto-2);
+  border: 1px solid var(--borda);
+  overflow: hidden;
+}
+
+.stats-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--borda);
+  background: rgba(0, 0, 0, .25);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.stats-tabs::-webkit-scrollbar { display: none; }
+
+.stats-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, .6);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .18s, border-color .18s, background .18s;
+}
+
+.stats-tab svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stats-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, .03);
+}
+
+.stats-tab.is-active {
+  color: #fca5a5;
+  border-bottom-color: #dc2626;
+  background: rgba(220, 38, 38, .06);
+}
+
+.stats-canvas-wrap {
+  position: relative;
+  padding: 24px 20px;
+  height: 340px;
+}
+
+@media (max-width: 520px) {
+  .stats-canvas-wrap { height: 280px; padding: 16px 12px; }
+  .stats-tab { padding: 12px 14px; font-size: 12px; }
+  .stats-tab svg { width: 14px; height: 14px; }
+}
+
+.stats-vazio {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--cinza);
+  font-size: 14px;
+}

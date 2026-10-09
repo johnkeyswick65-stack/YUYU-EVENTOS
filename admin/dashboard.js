@@ -230,4 +230,234 @@
     setInterval(refreshSilencioso, 50000);
   })();
 
+
+
+  /* ===== GRÁFICOS ===== */
+  let chartInstance = null;
+  let statsDados = null;
+  let statsTab = 'dia';
+
+  const COR_PRINCIPAL = '#dc2626';
+  const COR_ESCURA = '#7f1d1d';
+  const COR_CLARA = '#fca5a5';
+  const COR_CINZA = '#52525b';
+
+  async function carregarStats() {
+    try {
+      const r = await Api.get('/api/admin/stats-graficos');
+      statsDados = r;
+      desenharStats();
+    } catch (e) {
+      console.warn('Erro stats:', e.message);
+    }
+  }
+
+  function destruirChart() {
+    if (chartInstance) {
+      chartInstance.destroy();
+      chartInstance = null;
+    }
+  }
+
+  function desenharStats() {
+    if (!statsDados) return;
+    destruirChart();
+
+    const canvas = document.getElementById('statsCanvas');
+    const vazio = document.getElementById('statsVazio');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+
+    if (statsTab === 'dia') {
+      const dados = statsDados.bilhetes_dia || [];
+      const temDados = dados.some(d => d.total > 0);
+      if (!temDados) {
+        canvas.style.display = 'none';
+        vazio.hidden = false;
+        return;
+      }
+      canvas.style.display = 'block';
+      vazio.hidden = true;
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dados.map(d => d.dia),
+          datasets: [{
+            label: 'Bilhetes emitidos',
+            data: dados.map(d => d.total),
+            borderColor: COR_PRINCIPAL,
+            backgroundColor: 'rgba(220, 38, 38, 0.15)',
+            borderWidth: 3,
+            tension: 0.35,
+            fill: true,
+            pointBackgroundColor: COR_PRINCIPAL,
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            pointHoverRadius: 7
+          }]
+        },
+        options: opcoesBase()
+      });
+    }
+
+    if (statsTab === 'evento') {
+      const dados = statsDados.vendas_evento || [];
+      const temDados = dados.some(d => d.bilhetes > 0);
+      if (!temDados) {
+        canvas.style.display = 'none';
+        vazio.hidden = false;
+        return;
+      }
+      canvas.style.display = 'block';
+      vazio.hidden = true;
+
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: dados.map(d => d.nome),
+          datasets: [{
+            label: 'Bilhetes',
+            data: dados.map(d => d.bilhetes),
+            backgroundColor: dados.map((_, i) => i === 0 ? COR_PRINCIPAL : COR_ESCURA),
+            borderColor: COR_PRINCIPAL,
+            borderWidth: 0,
+            borderRadius: 8,
+            barThickness: 40
+          }]
+        },
+        options: Object.assign(opcoesBase(), {
+          indexAxis: 'y',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1a1a1a',
+              borderColor: COR_PRINCIPAL,
+              borderWidth: 1,
+              titleColor: '#fff',
+              bodyColor: '#fff',
+              padding: 12,
+              callbacks: {
+                label: function (ctx) {
+                  const ev = dados[ctx.dataIndex];
+                  return [
+                    ctx.parsed.x + ' bilhetes',
+                    ev.receita + ' MT em receita'
+                  ];
+                }
+              }
+            }
+          }
+        })
+      });
+    }
+
+    if (statsTab === 'receita') {
+      const dados = statsDados.receita_mes || [];
+      const temDados = dados.some(d => d.receita > 0);
+      if (!temDados) {
+        canvas.style.display = 'none';
+        vazio.hidden = false;
+        return;
+      }
+      canvas.style.display = 'block';
+      vazio.hidden = true;
+
+      chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: dados.map(d => d.mes),
+          datasets: [{
+            label: 'Receita (MT)',
+            data: dados.map(d => d.receita),
+            backgroundColor: 'rgba(220, 38, 38, 0.7)',
+            borderColor: COR_PRINCIPAL,
+            borderWidth: 0,
+            borderRadius: 8,
+            barThickness: 40
+          }]
+        },
+        options: Object.assign(opcoesBase(), {
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1a1a1a',
+              borderColor: COR_PRINCIPAL,
+              borderWidth: 1,
+              titleColor: '#fff',
+              bodyColor: '#fff',
+              padding: 12,
+              callbacks: {
+                label: function (ctx) {
+                  return ctx.parsed.y.toLocaleString('pt-PT') + ' MT';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 12 } }
+            },
+            y: {
+              grid: { color: 'rgba(255,255,255,0.06)' },
+              ticks: {
+                color: 'rgba(255,255,255,0.6)',
+                font: { size: 12 },
+                callback: function (v) { return v.toLocaleString('pt-PT') + ' MT'; }
+              }
+            }
+          }
+        })
+      });
+    }
+  }
+
+  function opcoesBase() {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a1a',
+          borderColor: COR_PRINCIPAL,
+          borderWidth: 1,
+          titleColor: '#fff',
+          bodyColor: '#fff',
+          titleFont: { size: 13, weight: 'bold' },
+          bodyFont: { size: 13 },
+          padding: 12,
+          displayColors: false
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 12 } }
+        },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 12 }, precision: 0 },
+          beginAtZero: true
+        }
+      }
+    };
+  }
+
+  /* Abas */
+  document.addEventListener('click', function (ev) {
+    const b = ev.target.closest('.stats-tab');
+    if (!b) return;
+    document.querySelectorAll('.stats-tab').forEach(x => x.classList.remove('is-active'));
+    b.classList.add('is-active');
+    statsTab = b.dataset.tab;
+    desenharStats();
+  });
+
+  /* Arranque — carrega stats depois do dashboard */
+  setTimeout(carregarStats, 500);
+
 })();
