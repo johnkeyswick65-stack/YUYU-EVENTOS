@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0a0a">
   <title>Aparência · YUYU EVENTOS</title>
-  <link rel="stylesheet" href="admin.css?v=12">
+  <link rel="stylesheet" href="admin.css?v=14">
 </head>
 <body>
 
@@ -39,94 +39,152 @@
 
   <main class="admin-main">
 
-    <h1 class="admin-title">Aparência</h1>
-    <p class="admin-subtitle">Edita o hero da página inicial e os temas de cor.</p>
+    <div class="ap-top">
+      <span class="ap-top-eyebrow">Personalização</span>
+      <h1 class="ap-top-title">Aparência</h1>
+      <p class="ap-top-desc">Controla a imagem, textos e cores do site público.</p>
+    </div>
 
     <div id="loading" class="admin-loading">A carregar…</div>
     <div id="conteudo" style="display:none">
 
       <!-- HERO -->
-      <section class="dash-section">
-        <h2 class="dash-section-title">Imagem do Hero</h2>
-        <div class="admin-card">
-          <div class="ap-img-wrap">
-            <img id="heroPreview" alt="Preview" class="ap-img-preview" hidden>
-            <div id="heroPlaceholder" class="ap-img-placeholder">Sem imagem</div>
-            <label class="ap-img-upload" for="heroInput">
-              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg>
-              <span>Escolher imagem</span>
-            </label>
-            <input type="file" id="heroInput" accept="image/*" hidden>
+      <section class="ap-sec">
+        <div class="ap-sec-head">
+          <div class="ap-sec-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
           </div>
-          <p class="ap-aviso">Recomendado: 1600×900 px, formato JPG/PNG. Máximo 8 MB.</p>
+          <div class="ap-sec-info">
+            <h2>Imagem do Hero</h2>
+            <p>Fundo da secção principal da página inicial.</p>
+          </div>
+        </div>
+
+        <div class="ap-sec-body">
+          <div class="ap-hero-grid">
+            <div class="ap-hero-img">
+              <img id="heroPreview" alt="Preview" hidden>
+              <div id="heroPlaceholder" class="ap-hero-empty">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+                <span>Sem imagem</span>
+              </div>
+              <label class="ap-hero-overlay" for="heroInput">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg>
+                <span>Trocar imagem</span>
+              </label>
+              <input type="file" id="heroInput" accept="image/*" hidden>
+            </div>
+
+            <div class="ap-hero-info">
+              <div class="ap-hint">
+                <strong>Formato recomendado:</strong> 1600×900 px (16:9), JPG ou PNG, até 8 MB.
+              </div>
+              <div class="ap-hint">
+                <strong>Dica:</strong> imagens com ambiente noturno, pessoas ou movimento contrastam melhor com o texto.
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- TEXTOS DO HERO -->
-      <section class="dash-section">
-        <h2 class="dash-section-title">Textos do Hero</h2>
-        <div class="admin-card">
+      <!-- TEXTOS -->
+      <section class="ap-sec">
+        <div class="ap-sec-head">
+          <div class="ap-sec-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"></path></svg>
+          </div>
+          <div class="ap-sec-info">
+            <h2>Textos do Hero</h2>
+            <p>Label, título, subtítulo e chamada para ação.</p>
+          </div>
+        </div>
+
+        <div class="ap-sec-body">
           <div class="ap-form">
 
             <div class="ap-field">
-              <label for="heroLabel">Label (pequeno em cima)</label>
-              <input type="text" id="heroLabel" maxlength="60">
-            </div>
-
-            <div class="ap-field">
-              <label for="heroTitulo">Título (linha 1)</label>
-              <input type="text" id="heroTitulo" maxlength="60">
-            </div>
-
-            <div class="ap-field">
-              <label for="heroDestaque">Título (linha 2 — colorida)</label>
-              <input type="text" id="heroDestaque" maxlength="60">
-            </div>
-
-            <div class="ap-field">
-              <label for="heroSubtitulo">Subtítulo</label>
-              <textarea id="heroSubtitulo" rows="2" maxlength="200"></textarea>
+              <label for="heroLabel">Label superior</label>
+              <input type="text" id="heroLabel" maxlength="60" placeholder="YUYU EVENTOS">
+              <span class="ap-hint-sm">Texto pequeno acima do título.</span>
             </div>
 
             <div class="ap-grid-2">
               <div class="ap-field">
+                <label for="heroTitulo">Título (linha 1)</label>
+                <input type="text" id="heroTitulo" maxlength="60" placeholder="Seu próximo momento">
+              </div>
+              <div class="ap-field">
+                <label for="heroDestaque">Destaque (linha 2)</label>
+                <input type="text" id="heroDestaque" maxlength="60" placeholder="começa aqui.">
+                <span class="ap-hint-sm">Aparece na cor do tema.</span>
+              </div>
+            </div>
+
+            <div class="ap-field">
+              <label for="heroSubtitulo">Subtítulo</label>
+              <textarea id="heroSubtitulo" rows="2" maxlength="200" placeholder="Descubra eventos, encontre experiências..."></textarea>
+            </div>
+
+            <div class="ap-divider"></div>
+
+            <div class="ap-grid-2">
+              <div class="ap-field">
                 <label for="heroBotao">Texto do botão</label>
-                <input type="text" id="heroBotao" maxlength="40">
+                <input type="text" id="heroBotao" maxlength="40" placeholder="Explorar eventos">
               </div>
               <div class="ap-field">
                 <label for="heroBotaoLink">Link do botão</label>
-                <input type="text" id="heroBotaoLink" maxlength="60">
+                <input type="text" id="heroBotaoLink" maxlength="60" placeholder="eventos.html">
               </div>
             </div>
 
             <div class="ap-field">
               <label for="heroPlaceholder">Placeholder da pesquisa</label>
-              <input type="text" id="heroPlaceholder" maxlength="60">
+              <input type="text" id="heroPlaceholder" maxlength="60" placeholder="Pesquisar eventos...">
             </div>
 
-            <button type="button" class="btn btn-primary" id="btnGuardarHero">Guardar alterações</button>
-            <span id="heroMsg" class="ap-msg"></span>
+            <div class="ap-save-bar">
+              <button type="button" class="ap-btn-save" id="btnGuardarHero">
+                <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+                Guardar alterações
+              </button>
+              <span id="heroMsg" class="ap-msg"></span>
+            </div>
+
           </div>
         </div>
       </section>
 
       <!-- TEMAS -->
-      <section class="dash-section">
-        <h2 class="dash-section-title">Temas de cor</h2>
-        <div class="admin-card">
-          <p class="ap-aviso">Edita as 4 cores dos temas. Usa código hexadecimal (ex: <code>#dc2626</code>).</p>
-          <div id="listaTemas" class="ap-temas"></div>
-          <button type="button" class="btn btn-primary" id="btnGuardarTemas" style="margin-top:14px">Guardar temas</button>
-          <span id="temasMsg" class="ap-msg"></span>
+      <section class="ap-sec">
+        <div class="ap-sec-head">
+          <div class="ap-sec-icon">
+            <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+          </div>
+          <div class="ap-sec-info">
+            <h2>Temas de cor</h2>
+            <p>4 paletas aplicadas a todo o site público.</p>
+          </div>
+        </div>
+
+        <div class="ap-sec-body">
+          <div id="listaTemas" class="ap-temas-grid"></div>
+
+          <div class="ap-save-bar">
+            <button type="button" class="ap-btn-save" id="btnGuardarTemas">
+              <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+              Guardar temas
+            </button>
+            <span id="temasMsg" class="ap-msg"></span>
+          </div>
         </div>
       </section>
 
     </div>
-
   </main>
 
   <script src="api.js"></script>
-  <script src="aparencia.js?v=2"></script>
+  <script src="aparencia.js?v=3"></script>
 
 </body>
 </html>
