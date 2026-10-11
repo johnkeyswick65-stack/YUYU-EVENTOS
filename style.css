@@ -6674,3 +6674,61 @@ input:focus,
 .tema-menu-cor {
   display: none !important;
 }
+
+/* ===== MENU MOBILE — EFEITO VIDRO FOSCO ===== */
+@media (max-width: 720px) {
+
+  .mobile-menu {
+    background: rgba(20, 20, 24, 0.55) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.65),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .mobile-menu.open {
+    display: block !important;
+    animation: menuGlassFade .28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes menuGlassFade {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.98);
+      backdrop-filter: blur(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      backdrop-filter: blur(24px) saturate(180%);
+    }
+  }
+
+  .mobile-menu a {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background .18s, border-color .18s, transform .12s;
+  }
+
+  .mobile-menu a:hover,
+  .mobile-menu a:active {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-menu a.active {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(var(--rgb-primaria, 220, 38, 38), 0.3);
+  }
+}
+
+/* Vidro fosco para painéis/modais do site */
+.tema-panel,
+.files-preview,
+.payment-page,
+.event-detail {
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
