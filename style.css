@@ -6860,3 +6860,111 @@ input:focus,
   fill: none; stroke: currentColor;
   stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
+
+/* ===== RODAPÉ DENTRO DO MENU MOBILE ===== */
+.menu-link-politica {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 16px !important;
+  margin-bottom: 4px !important;
+}
+
+.menu-link-politica svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex-shrink: 0 !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  opacity: .75 !important;
+}
+
+.menu-footer {
+  margin-top: 14px;
+  padding: 20px 16px 4px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-footer .footer-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.menu-footer .footer-logo strong {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+
+.menu-footer .footer-logo strong b {
+  color: #fff;
+}
+
+.menu-footer .footer-logo strong i {
+  font-style: normal;
+  color: var(--cor-primaria, #dc2626);
+}
+
+.menu-footer .footer-logo span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  opacity: .55;
+}
+
+.menu-footer-tag {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, .55);
+  line-height: 1.5;
+}
+
+.menu-footer .footer-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 6px 0;
+}
+
+.menu-footer .footer-links button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .03);
+  color: rgba(255, 255, 255, .75);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .18s, color .18s, border-color .18s;
+}
+
+.menu-footer .footer-links button:hover {
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, .2);
+}
+
+.menu-footer .footer-links svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.menu-footer-copy {
+  font-size: 10px;
+  opacity: .4;
+  line-height: 1.4;
+}
+
+/* Em mobile, o rodapé antigo nunca aparece */
+@media (max-width: 720px) {
+  .site-footer { display: none !important; }
+}
