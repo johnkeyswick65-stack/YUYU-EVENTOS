@@ -7820,3 +7820,52 @@ html body .event-card:hover {
 .menu-acordeao-conteudo a {
   padding-left: 16px !important;
 }
+
+/* ===== CABEÇALHO DO MENU MOBILE ===== */
+.menu-cabecalho {
+  padding: 6px 16px 14px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.menu-cabecalho-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.menu-cabecalho-logo strong {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.menu-cabecalho-logo strong b {
+  color: #fff;
+}
+
+.menu-cabecalho-logo strong i {
+  font-style: normal;
+  color: var(--cor-primaria, #dc2626);
+}
+
+.menu-cabecalho-logo span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  opacity: .55;
+}
+
+.menu-cabecalho-sub {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .45);
+}
