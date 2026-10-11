@@ -165,6 +165,7 @@
   /* Upload da imagem do hero */
   $('heroInput').addEventListener('change', async function (ev) {
     const f = ev.target.files && ev.target.files[0];
+    alert('[1] Ficheiro escolhido: ' + (f ? f.name : 'NENHUM'));
     if (!f) return;
 
     const btn = $('btnGuardarHero');
@@ -179,11 +180,14 @@
     try {
       const fd = new FormData();
       fd.append('imagem', f);
+      alert('[2] A enviar para o backend...');
       const r = await Api.post('/api/admin/hero/imagem', fd);
+      alert('[3] Resposta: ' + JSON.stringify(r));
 
       configAtual.hero.imagem_url = r.imagem_url;
       msg($('heroMsg'), 'Imagem enviada ✓', 'ok');
     } catch (e) {
+      alert('[4] ERRO: ' + e.message);
       msg($('heroMsg'), 'Erro: ' + e.message, 'erro');
     } finally {
       btn.disabled = false;
