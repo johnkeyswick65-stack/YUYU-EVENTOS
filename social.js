@@ -304,6 +304,10 @@ async function enviarComentario(slug, nome, texto, nav, fechar) {
     });
   }
 
+  /* Expor para o viewer usar */
+  window.__abrirComentarios = abrirComentarios;
+  window.__abrirPartilha = abrirPartilha;
+
   /* ============ BARRA ============ */
   function criarBarra(slug, contexto) {
     const barra = document.createElement('div');
