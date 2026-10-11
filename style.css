@@ -6965,9 +6965,7 @@ input:focus,
 }
 
 /* Em mobile, o rodapé antigo nunca aparece */
-@media (max-width: 720px) {
-  .site-footer { display: none !important; }
-}
+/* (removido: rodapé visível em mobile) */
 
 /* Fix: link da política — só o SVG próprio, sem o ::before genérico */
 .mobile-menu a.menu-link-politica::before {
