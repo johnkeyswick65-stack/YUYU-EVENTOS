@@ -7127,3 +7127,285 @@ input:focus,
     font-size: 9px !important;
   }
 }
+
+/* ===== EDGE PANEL (tipo Samsung) ===== */
+
+/* Aplicar brilho a toda a página */
+html {
+  filter: brightness(var(--page-brightness, 1));
+  transition: filter .2s ease;
+}
+
+/* Modo PC forçado (viewport 1280) — o layout mantém-se em desktop */
+html.force-desktop body {
+  min-width: 1280px;
+}
+
+/* ---------- ABA lateral fina ---------- */
+.edge-tab {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 64px;
+  border-radius: 8px 0 0 8px;
+  border: 0;
+  background: rgba(20, 20, 24, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  z-index: 9990;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, .35);
+  transition: width .18s ease, background .18s ease, opacity .25s ease;
+}
+
+.edge-tab:hover {
+  width: 28px;
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.9);
+  color: #fff;
+}
+
+.edge-tab svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.edge-tab.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(30px);
+}
+
+/* ---------- Painel lateral ---------- */
+.edge-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  max-width: 88vw;
+  background: rgba(17, 17, 20, 0.92);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.6);
+  z-index: 9991;
+  transform: translateX(105%);
+  transition: transform .32s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.edge-panel.is-open {
+  transform: translateX(0);
+}
+
+/* Cabeçalho */
+.edge-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.edge-title {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.edge-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .18s;
+}
+
+.edge-close:hover {
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.5);
+}
+
+.edge-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Corpo */
+.edge-body {
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+/* Item */
+.edge-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background .18s, border-color .18s, transform .12s;
+}
+
+.edge-item:hover,
+.edge-item:active {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(-2px);
+}
+
+.edge-ic {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(var(--rgb-primaria, 220, 38, 38), 0.15);
+  color: var(--cor-clara, #fca5a5);
+}
+
+.edge-ic svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.edge-label {
+  flex: 1;
+}
+
+/* Slider (brilho) — ocupa toda a linha */
+.edge-item.edge-slider {
+  cursor: default;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 14px;
+}
+
+.edge-item.edge-slider:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.edge-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.edge-slider-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edge-slider-val {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--cor-clara, #fca5a5);
+  font-weight: 700;
+}
+
+.edge-item.edge-slider input[type=range] {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(
+    90deg,
+    var(--cor-primaria, #dc2626) 0%,
+    var(--cor-primaria, #dc2626) var(--p, 100%),
+    rgba(255, 255, 255, 0.12) var(--p, 100%),
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+
+.edge-item.edge-slider input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--cor-primaria, #dc2626);
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.edge-item.edge-slider input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--cor-primaria, #dc2626);
+  cursor: pointer;
+}
+
+/* Overlay escuro quando o painel abre */
+body.edge-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9989;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: edgeFade .25s ease;
+}
+
+@keyframes edgeFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Em ecrãs muito pequenos, o painel ocupa mais espaço */
+@media (max-width: 400px) {
+  .edge-panel {
+    width: 86vw;
+  }
+}
