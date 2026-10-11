@@ -7912,30 +7912,22 @@ html body .event-card:hover {
   stroke-linejoin: round;
 }
 
-/* ===== HERO: caixa de hora/localização com cores de Moçambique ===== */
+
+
+/* ===== HERO: hora/localização com faixa das cores de Moçambique ===== */
 .hero-location {
   position: relative;
-  padding: 10px 16px !important;
-  border-radius: 12px !important;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0, 151, 57, .18) 0%,
-      rgba(0, 0, 0, .25) 25%,
-      rgba(252, 225, 0, .16) 50%,
-      rgba(255, 255, 255, .08) 75%,
-      rgba(210, 16, 52, .2) 100%
-    ) !important;
+  padding: 8px 14px 10px !important;
+  border-radius: 10px !important;
+  background: rgba(0, 0, 0, .45) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
   border: 1px solid rgba(255, 255, 255, .12) !important;
-  backdrop-filter: blur(10px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
-  box-shadow:
-    0 6px 18px rgba(0, 0, 0, .3),
-    inset 0 1px 0 rgba(255, 255, 255, .1) !important;
   overflow: hidden;
+  width: fit-content;
 }
 
-/* Faixa fina das cores na base da caixa */
+/* Faixa fina das cores na base */
 .hero-location::after {
   content: "";
   position: absolute;
@@ -7945,31 +7937,18 @@ html body .event-card:hover {
   height: 3px;
   background: linear-gradient(
     90deg,
-    #009739 0%,
-    #009739 20%,
-    #ffffff 20%,
-    #ffffff 22%,
-    #000000 22%,
-    #000000 42%,
-    #ffffff 42%,
-    #ffffff 44%,
-    #fce100 44%,
-    #fce100 64%,
-    #ffffff 64%,
-    #ffffff 66%,
-    #d21034 66%,
-    #d21034 100%
+    #009739 0%, #009739 22%,
+    #000000 22%, #000000 40%,
+    #fce100 40%, #fce100 58%,
+    #ffffff 58%, #ffffff 72%,
+    #d21034 72%, #d21034 100%
   );
-  border-radius: 0 0 12px 12px;
-  opacity: .85;
 }
 
-/* Ajustar cor do texto para realçar sobre o fundo */
 .hero-location-time,
 .hero-location-separator,
 .hero-location #heroPlace {
   color: #fff !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
   position: relative;
   z-index: 1;
 }
