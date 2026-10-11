@@ -7,7 +7,7 @@
   const tab = document.createElement('button');
   tab.className = 'edge-tab';
   tab.setAttribute('aria-label', 'Abrir ferramentas');
-  tab.innerHTML = '<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg>';
+  tab.innerHTML = '<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="2.2" fill="currentColor" stroke="none"/><circle cx="15" cy="9" r="2.2" fill="currentColor" stroke="none"/><circle cx="9" cy="15" r="2.2" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="2.2" fill="currentColor" stroke="none"/></svg>';
   document.body.appendChild(tab);
 
   /* ---------- Painel ---------- */
@@ -153,11 +153,13 @@
 
   slider.value = brilhoGuardado;
   valorEl.textContent = brilhoGuardado + '%';
+  slider.style.setProperty('--p', brilhoGuardado + '%');
   document.documentElement.style.setProperty('--page-brightness', (brilhoGuardado / 100));
 
   slider.addEventListener('input', function () {
     const v = slider.value;
     valorEl.textContent = v + '%';
+    slider.style.setProperty('--p', v + '%');
     document.documentElement.style.setProperty('--page-brightness', (v / 100));
     localStorage.setItem('yuyu_brilho', v);
   });
