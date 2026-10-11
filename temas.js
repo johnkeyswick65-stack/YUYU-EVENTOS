@@ -1,69 +1,52 @@
-/* ===== SISTEMA DE TEMAS ===== */
+/* ===== TEMAS ===== */
 (function () {
-  const TEMAS = ['vermelho', 'laranja', 'castanho', 'azul'];
-  const CHAVE = 'yuyu_tema';
-  const PADRAO = 'vermelho';
+  const API_URL = (function () {
+    const h = location.hostname;
+    if (h === 'localhost' || h === '127.0.0.1' || h === '') return 'http://localhost:3000';
+    if (/^192\.168\./.test(h)) return 'http://' + h + ':3000';
+    if (/^10\./.test(h)) return 'http://' + h + ':3000';
+    if (/^172\.(1[6-9]|2\d|3[0-1])\./.test(h)) return 'http://' + h + ':3000';
+    return 'https://yuyu-backend-1b4x.onrender.com';
+  })();
 
-  function aplicar(tema) {
-    if (!TEMAS.includes(tema)) tema = PADRAO;
-    document.documentElement.setAttribute('data-tema', tema);
-    try { localStorage.setItem(CHAVE, tema); } catch (_) {}
-    atualizarPainel(tema);
-  }
+  async function carregar() {
+    try {
+      const res = await fetch(API_URL + '/api/config-publica');
+      if (!res.ok) return;
+      const d = await res.json();
+      if (!d || !d.ok || !d.config) return;
 
-  function actual() {
-    try { return localStorage.getItem(CHAVE) || PADRAO; }
-    catch (_) { return PADRAO; }
-  }
+      // Tema ativo definido pelo admin
+      let ativo = d.config.tema_ativo || 'vermelho';
+      if (typeof ativo !== 'string') ativo = 'vermelho';
 
-  function atualizarPainel(tema) {
-    document.querySelectorAll('.tema-opcao').forEach(b => {
-      b.classList.toggle('is-active', b.dataset.tema === tema);
-    });
-  }
+      document.documentElement.setAttribute('data-tema', ativo);
 
-  /* Aplica imediatamente (antes do HTML pintar) */
-  aplicar(actual());
-
-  /* Cria o botão e o painel */
-  function criarUI() {
-    // Procura containers onde inserir os temas (menu mobile + desktop)
-    const menus = document.querySelectorAll('#mobileMenu, .mobile-menu');
-
-    menus.forEach(function (menu) {
-      if (menu.querySelector('.tema-menu-seccao')) return;
-
-      const sec = document.createElement('div');
-      sec.className = 'tema-menu-seccao';
-      sec.innerHTML = `
-        <span class="tema-menu-titulo">Tema</span>
-        <div class="tema-menu-cores">
-          <button type="button" class="tema-menu-cor vermelho" data-tema="vermelho" aria-label="Vermelho"></button>
-          <button type="button" class="tema-menu-cor laranja" data-tema="laranja" aria-label="Laranja"></button>
-          <button type="button" class="tema-menu-cor castanho" data-tema="castanho" aria-label="Castanho"></button>
-          <button type="button" class="tema-menu-cor azul" data-tema="azul" aria-label="Azul"></button>
-        </div>
-      `;
-
-      menu.appendChild(sec);
-    });
-
-    // Atualizar selecção
-    document.querySelectorAll('.tema-menu-cor').forEach(function (b) {
-      b.classList.toggle('is-active', b.dataset.tema === actual());
-      b.addEventListener('click', function (ev) {
-        ev.stopPropagation();
-        aplicar(b.dataset.tema);
-        document.querySelectorAll('.tema-menu-cor').forEach(function (x) {
-          x.classList.toggle('is-active', x.dataset.tema === actual());
-        });
-      });
-    });
+      // Cores dinâmicas dos temas (definidas no admin)
+      if (d.config.temas && Array.isArray(d.config.temas)) {
+        let style = document.getElementById('temas-dinamicos');
+        if (!style) {
+          style = document.createElement('style');
+          style.id = 'temas-dinamicos';
+          document.head.appendChild(style);
+        }
+        style.textContent = d.config.temas.map(function (t) {
+          return 'html[data-tema="' + t.id + '"] {\n' +
+            '  --cor-primaria: ' + t.primaria + ';\n' +
+            '  --cor-escura: ' + t.escura + ';\n' +
+            '  --cor-clara: ' + t.clara + ';\n' +
+            '  --rgb-primaria: ' + (t.rgb || '220,38,38') + ';\n' +
+            '}';
+        }).join('\n');
+      }
+    } catch (e) {
+      console.warn('[temas] Falha:', e.message);
+    }
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', criarUI);
+    document.addEventListener('DOMContentLoaded', carregar);
   } else {
-    criarUI();
+    carregar();
   }
 })();

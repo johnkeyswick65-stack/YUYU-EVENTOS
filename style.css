@@ -26,6 +26,8 @@ html[data-tema="castanho"] {
   --rgb-primaria: 161, 98, 7;
 }
 
+
+
 html[data-tema="azul"] {
   --cor-primaria: #2563eb;
   --cor-escura: #1e3a8a;
@@ -6069,6 +6071,14 @@ html[data-tema="castanho"] {
   --cor-brilho: rgba(161, 98, 7, .35);
 }
 
+html[data-tema="rosa"] {
+  --cor-primaria: #ec4899;
+  --cor-escura: #9d174d;
+  --cor-clara: #f9a8d4;
+  --cor-brilho: rgba(236, 72, 153, .35);
+  --rgb-primaria: 236, 72, 153;
+}
+
 html[data-tema="azul"] {
   --cor-primaria: #2563eb;
   --cor-escura: #1e3a8a;
@@ -6654,4 +6664,13 @@ input:focus,
   ) !important;
   z-index: 2 !important;
   pointer-events: none !important;
+}
+
+
+/* ===== TEMAS: escondidos no menu público (controlados pelo admin) ===== */
+.tema-menu-seccao,
+.tema-menu-titulo,
+.tema-menu-cores,
+.tema-menu-cor {
+  display: none !important;
 }

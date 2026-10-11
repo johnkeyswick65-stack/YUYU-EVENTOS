@@ -4,6 +4,7 @@
 
   const $ = (id) => document.getElementById(id);
   let configAtual = null;
+  let temaAtivo = 'vermelho';
 
   function escapar(t) {
     return String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -40,7 +41,10 @@
         $('heroPlaceholder').hidden = false;
       }
 
-      // Temas
+      // Tema activo
+      temaAtivo = configAtual.tema_ativo || 'vermelho';
+      if (typeof temaAtivo !== 'string') temaAtivo = 'vermelho';
+      renderizarTemaAtivo();
       renderizarTemas(configAtual.temas || []);
 
       $('loading').style.display = 'none';
@@ -48,6 +52,26 @@
     } catch (e) {
       $('loading').innerHTML = '<div style="color:#fca5a5">Erro: ' + escapar(e.message) + '</div>';
     }
+  }
+
+  function renderizarTemaAtivo() {
+    const box = document.getElementById('temaAtivoBox');
+    if (!box) return;
+
+    const temas = configAtual.temas || [];
+    box.innerHTML = temas.map(function (t) {
+      const ativo = t.id === temaAtivo;
+      return `
+        <button type="button" class="ap-tema-card ${ativo ? 'is-ativo' : ''}" data-tema-id="${t.id}">
+          <div class="ap-tema-card-cor" style="background: linear-gradient(135deg, ${t.primaria}, ${t.escura})"></div>
+          <div class="ap-tema-card-info">
+            <strong>${escapar(t.nome)}</strong>
+            <span>${ativo ? 'Ativo' : 'Clique para ativar'}</span>
+          </div>
+          ${ativo ? '<svg class="ap-tema-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"></path></svg>' : ''}
+        </button>
+      `;
+    }).join('');
   }
 
   function renderizarTemas(temas) {
@@ -96,6 +120,24 @@
     const b = parseInt(h.substring(4, 6), 16);
     return r + ',' + g + ',' + b;
   }
+
+  /* Handler: escolher tema ativo */
+  document.addEventListener('click', async function (ev) {
+    const b = ev.target.closest('.ap-tema-card');
+    if (!b) return;
+    const id = b.dataset.temaId;
+    if (!id || id === temaAtivo) return;
+
+    try {
+      await Api.put('/api/admin/config/tema_ativo', { valor: id });
+      temaAtivo = id;
+      configAtual.tema_ativo = id;
+      renderizarTemaAtivo();
+      msg($('heroMsg'), 'Tema ativo: ' + id + ' ✓', 'ok');
+    } catch (e) {
+      msg($('heroMsg'), 'Erro: ' + e.message, 'erro');
+    }
+  });
 
   /* Guardar HERO */
   $('btnGuardarHero').addEventListener('click', async function () {

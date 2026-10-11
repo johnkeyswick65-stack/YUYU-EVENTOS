@@ -2850,3 +2850,80 @@ input, textarea, select {
   border: 0;
   border-radius: 5px;
 }
+
+/* ===== TEMA ATIVO — cards ===== */
+.ap-tema-ativo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.ap-tema-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  background: rgba(255,255,255,.025);
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .18s, background .18s, transform .12s;
+}
+
+.ap-tema-card:hover {
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.18);
+}
+
+.ap-tema-card:active { transform: scale(.98); }
+
+.ap-tema-card.is-ativo {
+  border-color: var(--cor-primaria, #dc2626);
+  background: rgba(var(--rgb-primaria, 220,38,38), .08);
+}
+
+.ap-tema-card-cor {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.12);
+}
+
+.ap-tema-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ap-tema-card-info strong {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ap-tema-card-info span {
+  font-size: 11px;
+  color: rgba(255,255,255,.45);
+}
+
+.ap-tema-card.is-ativo .ap-tema-card-info span {
+  color: #86efac;
+}
+
+.ap-tema-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #86efac;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
