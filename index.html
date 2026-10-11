@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="YUYU EVENTOS — Seu próximo momento começa aqui.">
   <title>YUYU EVENTOS</title>
-  <link rel="stylesheet" href="style.css?v=100">
+  <link rel="stylesheet" href="style.css?v=101">
 </head>
 
 <body>
@@ -53,23 +53,31 @@
       Entrar
     </a>
 
-    <div class="menu-seccao-titulo">Categorias</div>
-    <a href="eventos.html?categoria=musica">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-      Música
-    </a>
-    <a href="eventos.html?categoria=festas">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 22l3-9 9-9 4 4-9 9-7 5z"></path><path d="M14 4l3 3"></path><path d="M18 2l4 4"></path></svg>
-      Festas
-    </a>
-    <a href="eventos.html?categoria=desporto">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"></path></svg>
-      Desporto
-    </a>
-    <a href="eventos.html?categoria=cultura">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4-8 4-8-4 8-4z"></path><path d="M4 11l8 4 8-4"></path><path d="M4 15l8 4 8-4"></path></svg>
-      Cultura
-    </a>
+    <button type="button" class="menu-acordeao-toggle" id="menuCatToggle" aria-expanded="false">
+      <span>Categorias</span>
+      <svg viewBox="0 0 24 24" class="menu-acordeao-svg" aria-hidden="true">
+        <path d="M6 9l6 6 6-6"></path>
+      </svg>
+    </button>
+
+    <div class="menu-acordeao-conteudo" id="menuCatConteudo">
+      <a href="eventos.html?categoria=musica">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+        Música
+      </a>
+      <a href="eventos.html?categoria=festas">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 22l3-9 9-9 4 4-9 9-7 5z"></path><path d="M14 4l3 3"></path><path d="M18 2l4 4"></path></svg>
+        Festas
+      </a>
+      <a href="eventos.html?categoria=desporto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"></path></svg>
+        Desporto
+      </a>
+      <a href="eventos.html?categoria=cultura">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4-8 4-8-4 8-4z"></path><path d="M4 11l8 4 8-4"></path><path d="M4 15l8 4 8-4"></path></svg>
+        Cultura
+      </a>
+    </div>
 
     <a href="politica.html" class="menu-link-politica">
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -306,5 +314,20 @@
 <script src="temas.js?v=2"></script>
 <script src="hero-config.js?v=2"></script>
 <script src="edge-panel.js?v=4"></script>
+
+<script>
+  (function () {
+    var btn = document.getElementById('menuCatToggle');
+    var cont = document.getElementById('menuCatConteudo');
+    if (!btn || !cont) return;
+    btn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      var aberto = cont.classList.toggle('is-aberto');
+      btn.classList.toggle('is-aberto', aberto);
+      btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+    });
+  })();
+</script>
 </body>
 </html>
