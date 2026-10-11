@@ -36,7 +36,7 @@
   function renderCard(e, idx) {
     const poster = e.poster_url || 'imagens/evento-demo.jpg';
     return [
-      '<article class="event-card" data-category="' + escapar(e.categoria) + '">',
+      '<article class="event-card" data-slug="' + escapar(e.slug) + '" data-category="' + escapar(e.categoria) + '">',
         '<div class="event-image">',
           '<div class="event-side-area"></div>',
           '<div class="event-side-bar"></div>',

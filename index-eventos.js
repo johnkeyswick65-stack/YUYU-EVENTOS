@@ -40,7 +40,7 @@
   function renderCard(e) {
     const poster = e.poster_url || 'imagens/evento-demo.jpg';
     return [
-      '<article class="event-card" data-category="' + escapar(e.categoria) + '">',
+      '<article class="event-card" data-slug="' + escapar(e.slug) + '" data-category="' + escapar(e.categoria) + '">',
         '<div class="event-image">',
           '<div class="event-side-area"></div>',
           '<div class="event-side-bar"></div>',
@@ -109,11 +109,13 @@
   }
 
   function renderLista(grid, eventos) {
-    grid.innerHTML = eventos.map(renderCard).join('');
+    window.__yuyuEventos = eventos;
+    grid.innerHTML = eventos.map(function (e, i) { return renderCard(e, i); }).join('');
     grid.dataset.carregado = '1';
     if (typeof window.iniciarContagensRegressivas === 'function') {
       window.iniciarContagensRegressivas();
     }
+    document.dispatchEvent(new CustomEvent('yuyu:eventos-carregados'));
   }
 
   function lerCache() {
