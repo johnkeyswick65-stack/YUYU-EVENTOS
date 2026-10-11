@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Aparência · YUYU EVENTOS</title>
+  <link rel="stylesheet" href="admin.css?v=12">
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg class="admin-brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="3" width="8" height="8" rx="1.5"></rect>
+          <rect x="3" y="13" width="8" height="8" rx="1.5"></rect>
+          <rect x="13" y="13" width="8" height="8" rx="1.5"></rect>
+        </svg>
+        <span class="admin-brand-text">YUYU <span class="admin-brand-accent">EVENTOS</span></span>
+        <span class="admin-brand-badge">Painel</span>
+      </div>
+      <nav class="admin-nav">
+        <a class="admin-nav-link" href="dashboard.html">Dashboard</a>
+        <a class="admin-nav-link" href="eventos.html">Eventos</a>
+        <a class="admin-nav-link" href="bilhetes.html">Bilhetes</a>
+        <a class="admin-nav-link" href="scanner.html">Scanner</a>
+        <a class="admin-nav-link is-active" href="aparencia.html">Aparência</a>
+        <a class="admin-nav-link" href="acessos.html">Acessos</a>
+        <a class="admin-nav-link" href="armazenamento.html">Armazenamento</a>
+      </nav>
+      <div class="admin-user">
+        <span class="admin-username" id="nomeAdmin">—</span>
+        <button type="button" class="admin-logout" id="btnSair">Sair</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <h1 class="admin-title">Aparência</h1>
+    <p class="admin-subtitle">Edita o hero da página inicial e os temas de cor.</p>
+
+    <div id="loading" class="admin-loading">A carregar…</div>
+    <div id="conteudo" style="display:none">
+
+      <!-- HERO -->
+      <section class="dash-section">
+        <h2 class="dash-section-title">Imagem do Hero</h2>
+        <div class="admin-card">
+          <div class="ap-img-wrap">
+            <img id="heroPreview" alt="Preview" class="ap-img-preview" hidden>
+            <div id="heroPlaceholder" class="ap-img-placeholder">Sem imagem</div>
+            <label class="ap-img-upload" for="heroInput">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg>
+              <span>Escolher imagem</span>
+            </label>
+            <input type="file" id="heroInput" accept="image/*" hidden>
+          </div>
+          <p class="ap-aviso">Recomendado: 1600×900 px, formato JPG/PNG. Máximo 8 MB.</p>
+        </div>
+      </section>
+
+      <!-- TEXTOS DO HERO -->
+      <section class="dash-section">
+        <h2 class="dash-section-title">Textos do Hero</h2>
+        <div class="admin-card">
+          <div class="ap-form">
+
+            <div class="ap-field">
+              <label for="heroLabel">Label (pequeno em cima)</label>
+              <input type="text" id="heroLabel" maxlength="60">
+            </div>
+
+            <div class="ap-field">
+              <label for="heroTitulo">Título (linha 1)</label>
+              <input type="text" id="heroTitulo" maxlength="60">
+            </div>
+
+            <div class="ap-field">
+              <label for="heroDestaque">Título (linha 2 — colorida)</label>
+              <input type="text" id="heroDestaque" maxlength="60">
+            </div>
+
+            <div class="ap-field">
+              <label for="heroSubtitulo">Subtítulo</label>
+              <textarea id="heroSubtitulo" rows="2" maxlength="200"></textarea>
+            </div>
+
+            <div class="ap-grid-2">
+              <div class="ap-field">
+                <label for="heroBotao">Texto do botão</label>
+                <input type="text" id="heroBotao" maxlength="40">
+              </div>
+              <div class="ap-field">
+                <label for="heroBotaoLink">Link do botão</label>
+                <input type="text" id="heroBotaoLink" maxlength="60">
+              </div>
+            </div>
+
+            <div class="ap-field">
+              <label for="heroPlaceholder">Placeholder da pesquisa</label>
+              <input type="text" id="heroPlaceholder" maxlength="60">
+            </div>
+
+            <button type="button" class="btn btn-primary" id="btnGuardarHero">Guardar alterações</button>
+            <span id="heroMsg" class="ap-msg"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMAS -->
+      <section class="dash-section">
+        <h2 class="dash-section-title">Temas de cor</h2>
+        <div class="admin-card">
+          <p class="ap-aviso">Edita as 4 cores dos temas. Usa código hexadecimal (ex: <code>#dc2626</code>).</p>
+          <div id="listaTemas" class="ap-temas"></div>
+          <button type="button" class="btn btn-primary" id="btnGuardarTemas" style="margin-top:14px">Guardar temas</button>
+          <span id="temasMsg" class="ap-msg"></span>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="api.js"></script>
+  <script src="aparencia.js?v=1"></script>
+
+</body>
+</html>
