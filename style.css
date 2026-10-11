@@ -7476,3 +7476,59 @@ body.edge-open::before {
   background: transparent;
   z-index: -1;
 }
+
+/* ===== SEÇÕES COM FUNDOS DIFERENCIADOS (explorar eventos) ===== */
+
+/* Cabeçalho "Explorar eventos" — mais escuro, com leve gradiente */
+.explore-header {
+  margin: 0 -22px 20px;
+  padding: 24px 22px 20px;
+  background:
+    radial-gradient(circle at 0% 100%, rgba(var(--rgb-primaria, 220, 38, 38), .08) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.02) 0%, rgba(0,0,0,0) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+/* Barra de pesquisa + filtros + contador — fundo próprio (vidro fosco) */
+.explore-search {
+  background: rgba(22, 22, 26, .55) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, .1) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25) !important;
+}
+
+.explore-filters {
+  margin: 14px -22px 0 !important;
+  padding: 16px 22px 14px !important;
+  background: rgba(255, 255, 255, .015);
+  border-top: 1px solid rgba(255, 255, 255, .05);
+  border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.explore-count {
+  margin: 18px 0 22px !important;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .02);
+  border-left: 3px solid var(--cor-primaria, #dc2626);
+}
+
+/* Lista de eventos — fundo mais escuro para destacar os cards */
+.events-grid {
+  padding: 6px 0 40px;
+}
+
+/* Cada card ganha o efeito vidro */
+.event-card {
+  background: rgba(22, 22, 26, .72) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, .08) !important;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .4) !important;
+}
+
+.event-card:hover {
+  border-color: rgba(var(--rgb-primaria, 220, 38, 38), .35) !important;
+  background: rgba(26, 26, 32, .82) !important;
+}
