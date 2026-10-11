@@ -7433,3 +7433,46 @@ body.edge-open::before {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+
+
+/* ===== EDGE TAB: borda rosa + área de arrastar maior ===== */
+.edge-tab {
+  border: 2px solid var(--cor-primaria, #dc2626) !important;
+  border-right: 0 !important;
+  box-shadow:
+    -4px 0 12px rgba(0, 0, 0, .35),
+    0 0 12px rgba(var(--rgb-primaria, 220, 38, 38), .45),
+    inset 0 0 0 1px rgba(255, 255, 255, .06) !important;
+  color: var(--cor-primaria, #dc2626) !important;
+  border-radius: 10px 0 0 10px !important;
+  width: 26px !important;
+}
+
+.edge-tab:hover {
+  border-color: var(--cor-clara, #fca5a5) !important;
+  color: #fff !important;
+}
+
+.edge-tab svg {
+  color: inherit !important;
+}
+
+.edge-tab svg circle {
+  fill: var(--cor-primaria, #dc2626) !important;
+}
+
+.edge-tab:hover svg circle {
+  fill: #fff !important;
+}
+
+/* Zona invisível de toque mais larga (facilita arrastar) */
+.edge-tab::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  bottom: -30px;
+  left: -40px;
+  right: 0;
+  background: transparent;
+  z-index: -1;
+}

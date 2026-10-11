@@ -84,10 +84,14 @@
     if (ev.key === 'Escape') fechar();
   });
 
-  /* Arrastar da borda direita */
+  /* Arrastar da borda direita — zona maior + mais sensível */
+  const ZONA = 60;      // 60px a partir da direita
+  const DISTANCIA = 30; // 30px de movimento para abrir
+
   document.addEventListener('touchstart', function (ev) {
     const x = ev.touches[0].clientX;
-    if (x > window.innerWidth - 20) {
+    // Se tocar dentro da zona da borda OU em cima da aba, começa a rastrear
+    if (x > window.innerWidth - ZONA || ev.target.closest('.edge-tab')) {
       startX = x;
       tracking = true;
     }
@@ -96,13 +100,36 @@
   document.addEventListener('touchmove', function (ev) {
     if (!tracking) return;
     const x = ev.touches[0].clientX;
-    if (startX - x > 50) {
+    // Se moveu para a esquerda o suficiente, abre
+    if (startX - x > DISTANCIA) {
       abrir();
+      tracking = false;
+    }
+    // Se moveu para a direita (arrastar ao contrário), cancela
+    if (x - startX > 20) {
       tracking = false;
     }
   }, { passive: true });
 
   document.addEventListener('touchend', function () { tracking = false; });
+
+  /* Também aceitar rato (desktop) */
+  document.addEventListener('mousedown', function (ev) {
+    if (ev.clientX > window.innerWidth - ZONA) {
+      startX = ev.clientX;
+      tracking = true;
+    }
+  });
+
+  document.addEventListener('mousemove', function (ev) {
+    if (!tracking) return;
+    if (startX - ev.clientX > DISTANCIA) {
+      abrir();
+      tracking = false;
+    }
+  });
+
+  document.addEventListener('mouseup', function () { tracking = false; });
 
   /* ---------- Acções ---------- */
   panel.addEventListener('click', async function (ev) {
