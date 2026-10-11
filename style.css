@@ -8085,3 +8085,244 @@ html body .event-card:hover {
     padding: 3px;
   }
 }
+
+/* ===== MODAIS CUSTOMIZADOS (substituir alert/prompt) ===== */
+.yu-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  animation: yuFade .2s ease;
+}
+
+@keyframes yuFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.yu-modal {
+  width: 100%;
+  max-width: 420px;
+  background: #16161a;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+  animation: yuPop .28s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #fff;
+}
+
+@keyframes yuPop {
+  from { opacity: 0; transform: scale(.92) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.yu-modal-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.yu-modal-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .55);
+  margin: 0 0 20px;
+  line-height: 1.4;
+}
+
+.yu-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.yu-modal-field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .7);
+}
+
+.yu-modal-field input,
+.yu-modal-field textarea {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(0, 0, 0, .3);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .18s;
+}
+
+.yu-modal-field input:focus,
+.yu-modal-field textarea:focus {
+  border-color: var(--cor-primaria, #dc2626);
+}
+
+.yu-modal-field textarea {
+  resize: vertical;
+  min-height: 90px;
+  font-family: inherit;
+}
+
+.yu-modal-acoes {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.yu-btn {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 0;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s, background .18s;
+}
+
+.yu-btn:active { transform: scale(.97); }
+
+.yu-btn-secundario {
+  background: rgba(255, 255, 255, .06);
+  color: #fff;
+}
+
+.yu-btn-secundario:hover { background: rgba(255, 255, 255, .12); }
+
+.yu-btn-primario {
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(var(--rgb-primaria, 220, 38, 38), .3);
+}
+
+/* ===== JANELA DE PARTILHA ===== */
+.yu-share-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.yu-share-opc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s, transform .12s;
+}
+
+.yu-share-opc:hover { background: rgba(255, 255, 255, .08); }
+.yu-share-opc:active { transform: scale(.95); }
+
+.yu-share-opc svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.yu-share-opc.whats { color: #25D366; }
+.yu-share-opc.copy { color: #93c5fd; }
+.yu-share-opc.nativo { color: var(--cor-clara, #fca5a5); }
+
+/* ===== LISTA DE COMENTÁRIOS ===== */
+.yu-comments-list {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.yu-comment {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .03);
+  border-left: 3px solid var(--cor-primaria, #dc2626);
+}
+
+.yu-comment-autor {
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.yu-comment-texto {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .8);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.yu-comment-vazio {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, .4);
+  font-size: 13px;
+}
+
+/* ===== BARRA SOCIAL MELHORADA ===== */
+.event-card .social-bar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  transform: none;
+  justify-content: center;
+  background: rgba(15, 15, 18, .82);
+  border: 1px solid rgba(255, 255, 255, .15);
+  padding: 5px;
+  gap: 2px;
+}
+
+.social-bar .social-btn {
+  padding: 8px 12px;
+  font-size: 12px;
+  gap: 6px;
+}
+
+.social-bar .social-btn svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+}
+
+.social-bar .social-count {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.social-bar .social-btn:hover {
+  background: rgba(var(--rgb-primaria, 220, 38, 38), .18);
+  color: var(--cor-clara, #fca5a5);
+}
+
+.social-bar .social-btn.is-gostei {
+  background: rgba(244, 114, 182, .18);
+  color: #f472b6;
+}

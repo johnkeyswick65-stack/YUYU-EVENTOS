@@ -1,4 +1,4 @@
-/* ===== BARRA SOCIAL (like · comentar · partilhar) ===== */
+/* ===== BARRA SOCIAL (like · comentar · partilhar) — v2 ===== */
 (function () {
   const API_URL = (function () {
     const h = location.hostname;
@@ -27,9 +27,214 @@
   const SVG = {
     coracao: '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>',
     comentario: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>',
-    partilhar: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>'
+    partilhar: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>',
+    whats: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>',
+    copiar: '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>',
+    share: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>',
+    fechar: '<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>'
   };
 
+  /* ============ MODAL GENÉRICO ============ */
+  function criarModal(html, acoes) {
+    const overlay = document.createElement('div');
+    overlay.className = 'yu-modal-overlay';
+    overlay.innerHTML = `<div class="yu-modal">${html}</div>`;
+
+    const caixa = overlay.querySelector('.yu-modal');
+
+    // Ações
+    if (acoes) {
+      const bar = document.createElement('div');
+      bar.className = 'yu-modal-acoes';
+      acoes.forEach(function (a) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'yu-btn ' + (a.tipo === 'primario' ? 'yu-btn-primario' : 'yu-btn-secundario');
+        b.textContent = a.texto;
+        b.addEventListener('click', function () {
+          if (!a.acao || a.acao(overlay) !== false) fechar();
+        });
+        bar.appendChild(b);
+      });
+      caixa.appendChild(bar);
+    }
+
+    document.body.appendChild(overlay);
+
+    function fechar() {
+      overlay.style.animation = 'yuFade .15s reverse';
+      setTimeout(function () { overlay.remove(); }, 150);
+    }
+
+    overlay.addEventListener('click', function (ev) {
+      if (ev.target === overlay) fechar();
+    });
+
+    document.addEventListener('keydown', function esc(ev) {
+      if (ev.key === 'Escape') {
+        fechar();
+        document.removeEventListener('keydown', esc);
+      }
+    });
+
+    return { overlay: overlay, fechar: fechar };
+  }
+
+  /* ============ JANELA DE COMENTÁRIOS ============ */
+  async function abrirComentarios(slug, eventoNome) {
+    const nav = obterNavegadorId();
+
+    const html = `
+      <h2 class="yu-modal-title">Comentários</h2>
+      <p class="yu-modal-sub">${escapar(eventoNome)}</p>
+      <div class="yu-comments-list" id="yuComList"><div class="yu-comment-vazio">A carregar…</div></div>
+      <div class="yu-modal-field">
+        <label>O teu nome</label>
+        <input type="text" id="yuComNome" maxlength="60" placeholder="Ex: João Silva">
+      </div>
+      <div class="yu-modal-field">
+        <label>Comentário</label>
+        <textarea id="yuComTexto" maxlength="500" placeholder="Escreve o teu comentário..."></textarea>
+      </div>
+    `;
+
+    const m = criarModal(html, [
+      { texto: 'Fechar', tipo: 'secundario' },
+      {
+        texto: 'Publicar',
+        tipo: 'primario',
+        acao: function (overlay) {
+          const nome = overlay.querySelector('#yuComNome').value.trim();
+          const texto = overlay.querySelector('#yuComTexto').value.trim();
+          if (!nome || !texto) {
+            alert('Preenche nome e comentário.');
+            return false;
+          }
+          enviarComentario(slug, nome, texto, nav);
+        }
+      }
+    ]);
+
+    // Carrega lista
+    const lista = m.overlay.querySelector('#yuComList');
+    try {
+      const r = await fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentarios');
+      const d = await r.json();
+      const coms = (d && d.comentarios) || [];
+
+      if (!coms.length) {
+        lista.innerHTML = '<div class="yu-comment-vazio">Ainda sem comentários. Sê o primeiro!</div>';
+      } else {
+        lista.innerHTML = coms.map(function (c) {
+          return `
+            <div class="yu-comment">
+              <div class="yu-comment-autor">${escapar(c.autor_nome)}</div>
+              <div class="yu-comment-texto">${escapar(c.texto)}</div>
+            </div>
+          `;
+        }).join('');
+      }
+    } catch (_) {
+      lista.innerHTML = '<div class="yu-comment-vazio">Erro ao carregar comentários.</div>';
+    }
+  }
+
+  async function enviarComentario(slug, nome, texto, nav) {
+    try {
+      const r = await fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ autor_nome: nome, texto: texto, navegador_id: nav })
+      });
+      const d = await r.json();
+
+      if (d.ok) {
+        // Fecha o modal e mostra mensagem de sucesso
+        document.querySelectorAll('.yu-modal-overlay').forEach(function (o) { o.remove(); });
+        setTimeout(function () {
+          criarModal(
+            `<h2 class="yu-modal-title">Comentário enviado</h2>
+             <p class="yu-modal-sub">Será publicado depois de aprovado pela nossa equipa.</p>`,
+            [{ texto: 'Ok', tipo: 'primario' }]
+          );
+        }, 200);
+      } else {
+        alert(d.error || 'Falhou');
+      }
+    } catch (_) {
+      alert('Erro de rede.');
+    }
+  }
+
+  /* ============ JANELA DE PARTILHA ============ */
+  function abrirPartilha(slug) {
+    const url = location.origin + location.pathname.replace(/\/[^/]*$/, '/') + 'eventos.html?evento=' + slug;
+    const titulo = 'Vê este evento no YUYU EVENTOS';
+
+    const html = `
+      <h2 class="yu-modal-title">Partilhar evento</h2>
+      <p class="yu-modal-sub">Escolhe como queres partilhar este evento.</p>
+
+      <div class="yu-share-grid">
+        <button type="button" class="yu-share-opc whats" data-share="whatsapp">
+          ${SVG.whats}
+          <span>WhatsApp</span>
+        </button>
+        <button type="button" class="yu-share-opc copy" data-share="copiar">
+          ${SVG.copiar}
+          <span>Copiar</span>
+        </button>
+        <button type="button" class="yu-share-opc nativo" data-share="nativo">
+          ${SVG.share}
+          <span>Sistema</span>
+        </button>
+      </div>
+    `;
+
+    const m = criarModal(html, [{ texto: 'Fechar', tipo: 'secundario' }]);
+
+    m.overlay.querySelectorAll('[data-share]').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        const tipo = b.dataset.share;
+
+        if (tipo === 'whatsapp') {
+          const texto = titulo + '\n\n' + url;
+          window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
+          m.fechar();
+          return;
+        }
+
+        if (tipo === 'copiar') {
+          try {
+            await navigator.clipboard.writeText(url);
+          } catch (_) {
+            const tmp = document.createElement('textarea');
+            tmp.value = url;
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand('copy');
+            tmp.remove();
+          }
+          b.querySelector('span').textContent = 'Copiado!';
+          setTimeout(function () { m.fechar(); }, 800);
+          return;
+        }
+
+        if (tipo === 'nativo') {
+          if (navigator.share) {
+            try {
+              await navigator.share({ title: titulo, url: url });
+              m.fechar();
+            } catch (_) {}
+          } else {
+            alert('O teu navegador não suporta partilha nativa.');
+          }
+        }
+      });
+    });
+  }
+
+  /* ============ BARRA ============ */
   function criarBarra(slug, contexto) {
     const barra = document.createElement('div');
     barra.className = 'social-bar';
@@ -54,27 +259,23 @@
     return barra;
   }
 
-  /* Coloca a barra dentro do card, sobre a imagem */
   function aplicarEmCard(card, slug) {
     if (card.querySelector('.social-bar')) return;
-
     const img = card.querySelector('.event-image');
     if (!img) return;
-
     const barra = criarBarra(slug, 'card');
     img.appendChild(barra);
     carregarContadores(barra, slug);
   }
 
-  /* Coloca a barra no detalhe, abaixo do poster */
   function aplicarNoDetalhe(slug) {
     const detail = document.getElementById('eventDetail');
     if (!detail) return;
-    if (detail.querySelector('.social-bar')) {
-      // Atualizar slug
-      const b = detail.querySelector('.social-bar');
-      b.setAttribute('data-slug', slug);
-      carregarContadores(b, slug);
+
+    const existente = detail.querySelector('.social-bar');
+    if (existente) {
+      existente.setAttribute('data-slug', slug);
+      carregarContadores(existente, slug);
       return;
     }
 
@@ -111,7 +312,6 @@
     } catch (_) {}
   }
 
-  /* =========== Acções =========== */
   async function alternarLike(btn, slug) {
     const nav = obterNavegadorId();
     try {
@@ -123,7 +323,6 @@
       });
       const d = await r.json();
       if (!d.ok) throw new Error(d.error || 'Erro');
-
       btn.classList.toggle('is-gostei', d.gostei);
       const num = btn.parentNode.querySelector('.social-likes-num');
       if (num) num.textContent = d.likes;
@@ -134,56 +333,7 @@
     }
   }
 
-  function abrirPartilha(slug) {
-    const url = location.origin + location.pathname.replace(/\/[^/]*$/, '/') + 'eventos.html?evento=' + slug;
-    const titulo = document.title || 'YUYU EVENTOS';
-
-    if (navigator.share) {
-      navigator.share({ title: titulo, url: url }).catch(function () {
-        // Se falhar, copia
-        copiarLink(url);
-      });
-    } else {
-      copiarLink(url);
-    }
-  }
-
-  function copiarLink(url) {
-    try {
-      navigator.clipboard.writeText(url).then(function () {
-        alert('Link copiado:\n' + url);
-      }).catch(function () {
-        prompt('Copia o link:', url);
-      });
-    } catch (_) {
-      prompt('Copia o link:', url);
-    }
-  }
-
-  function abrirComentario(slug, eventoNome) {
-    const nome = prompt('O teu nome (aparecerá publicamente):');
-    if (!nome || !nome.trim()) return;
-    const texto = prompt('Escreve o teu comentário sobre "' + eventoNome + '":');
-    if (!texto || !texto.trim()) return;
-
-    const nav = obterNavegadorId();
-    fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentario', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ autor_nome: nome.trim(), texto: texto.trim(), navegador_id: nav })
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (d.ok) {
-          alert('Comentário enviado! Será publicado após aprovação.');
-        } else {
-          alert('Erro: ' + (d.error || 'falhou'));
-        }
-      })
-      .catch(function () { alert('Erro de rede.'); });
-  }
-
-  /* =========== Delegação de cliques =========== */
+  /* ============ DELEGAÇÃO ============ */
   document.addEventListener('click', function (ev) {
     const btn = ev.target.closest('.social-btn');
     if (!btn) return;
@@ -198,54 +348,31 @@
     const acao = btn.dataset.acao;
     const nomeEvento = (btn.closest('.event-card')?.querySelector('h3')?.textContent)
                     || (document.getElementById('detailNome')?.textContent)
-                    || 'evento';
+                    || 'Evento';
 
     if (acao === 'like') alternarLike(btn, slug);
-    else if (acao === 'comentar') abrirComentario(slug, nomeEvento);
+    else if (acao === 'comentar') abrirComentarios(slug, nomeEvento);
     else if (acao === 'partilhar') abrirPartilha(slug);
   }, true);
 
-  /* =========== Aplicar às várias vistas =========== */
   function varrerCards() {
     document.querySelectorAll('.event-card').forEach(function (card) {
-      // Detecta slug
-      let slug = card.dataset.slug;
-      if (!slug) {
-        // Da API: procura o botão Ver detalhes com onclick ou data-evento
-        const btn = card.querySelector('.event-open[onclick*="__yuyuAbrir"]');
-        if (btn && window.__yuyuEventos) {
-          const m = btn.getAttribute('onclick').match(/__yuyuAbrir\((\d+)\)/);
-          if (m) {
-            const idx = parseInt(m[1], 10);
-            const ev = window.__yuyuEventos[idx];
-            if (ev) slug = ev.slug;
-          }
-        }
-        // Hardcoded
-        if (!slug && card.dataset.eventoUrl) {
-          const m = card.dataset.eventoUrl.match(/evento=([^&]+)/);
-          if (m) slug = decodeURIComponent(m[1]);
-        }
-      }
+      const slug = card.dataset.slug;
       if (slug) aplicarEmCard(card, slug);
     });
   }
 
-  /* Quando o eventos-api terminar de renderizar, aplica social bar */
   document.addEventListener('yuyu:eventos-carregados', function () {
     setTimeout(varrerCards, 30);
   });
 
-  /* Quando o detalhe abrir, aplica social bar */
   window.__aplicarSocialDetalhe = function (slug) {
     if (slug) aplicarNoDetalhe(slug);
   };
 
-  /* Arranque */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       varrerCards();
-      // Também tenta ao fim de 600ms (caso a API ainda esteja a chegar)
       setTimeout(varrerCards, 600);
     });
   } else {
