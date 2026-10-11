@@ -6968,3 +6968,9 @@ input:focus,
 @media (max-width: 720px) {
   .site-footer { display: none !important; }
 }
+
+/* Fix: link da política — só o SVG próprio, sem o ::before genérico */
+.mobile-menu a.menu-link-politica::before {
+  display: none !important;
+  content: none !important;
+}
