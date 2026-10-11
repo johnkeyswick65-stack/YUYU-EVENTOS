@@ -205,3 +205,14 @@
     }, 100);
   }
 })();
+
+/* ===== Fechar menu mobile pelo × ===== */
+(function () {
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('#menuFechar');
+    if (!btn) return;
+    ev.preventDefault();
+    var menu = document.getElementById('mobileMenu');
+    if (menu) menu.classList.remove('open');
+  });
+})();

@@ -7869,3 +7869,45 @@ html body .event-card:hover {
   text-transform: uppercase;
   color: rgba(255, 255, 255, .45);
 }
+
+/* ===== BOTÃO FECHAR × NO CABEÇALHO DO MENU ===== */
+.menu-cabecalho {
+  position: relative;
+  padding-right: 50px !important;
+}
+
+.menu-fechar {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .04);
+  color: rgba(255, 255, 255, .8);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .18s, color .18s, transform .12s, border-color .18s;
+}
+
+.menu-fechar:hover {
+  background: rgba(var(--rgb-primaria, 220, 38, 38), .25);
+  border-color: rgba(var(--rgb-primaria, 220, 38, 38), .5);
+  color: #fff;
+}
+
+.menu-fechar:active {
+  transform: scale(.9);
+}
+
+.menu-fechar svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
