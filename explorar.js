@@ -2,11 +2,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("exploreInput");
   const chips = document.querySelectorAll(".explore-chip");
-  const cards = document.querySelectorAll(".event-card");
+  // Em vez de guardar em memória (que fica desactualizado quando a API re-renderiza),
+  // consulta o DOM sempre que é preciso.
+  function obterCards() {
+    return document.querySelectorAll('.event-card');
+  }
   const count = document.getElementById("exploreCount");
   const grid = document.getElementById("eventsGrid");
 
-  if (!input || !cards.length) return;
+  if (!input) return;
 
   let filtroAtual = "todos";
   let buscaAtual = "";
@@ -24,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function aplicar() {
     let visiveis = 0;
 
-    cards.forEach(card => {
+    obterCards().forEach(card => {
       const categoria = card.dataset.category || "outros";
       const texto = (
         (card.dataset.name || "") + " " +

@@ -118,6 +118,7 @@
   function renderLista(grid, eventos) {
     window.__yuyuEventos = eventos;
     grid.innerHTML = eventos.map(function (e, i) { return renderCard(e, i); }).join('');
+    document.dispatchEvent(new CustomEvent('yuyu:eventos-carregados'));
     grid.dataset.carregado = '1';
 
     // Reaplica countdown
