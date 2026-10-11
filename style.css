@@ -8326,3 +8326,328 @@ html body .event-card:hover {
   background: rgba(244, 114, 182, .18);
   color: #f472b6;
 }
+
+/* ===== BARRA SOCIAL: SEM rectângulo, só ícones ===== */
+.event-card .social-bar {
+  position: absolute !important;
+  left: auto !important;
+  right: 10px !important;
+  bottom: 10px !important;
+  transform: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  gap: 4px !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  display: inline-flex !important;
+}
+
+.social-bar .social-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 6px 10px !important;
+  border-radius: 999px !important;
+  background: rgba(0, 0, 0, .55) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, .1) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .35) !important;
+  transition: background .18s, transform .12s !important;
+}
+
+.social-bar .social-btn:hover {
+  background: rgba(var(--rgb-primaria, 220, 38, 38), .85) !important;
+  transform: translateY(-1px);
+}
+
+.social-bar .social-btn:active {
+  transform: scale(.94);
+}
+
+.social-bar .social-btn svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.social-bar .social-count {
+  font-size: 12px !important;
+  font-family: inherit !important;
+  opacity: 1 !important;
+}
+
+.social-bar .social-btn.is-gostei {
+  background: rgba(244, 114, 182, .85) !important;
+  border-color: rgba(244, 114, 182, .4) !important;
+}
+
+/* Esconder a palavra "Partilhar" no card (só o ícone) */
+.event-card .social-bar .social-partilhar span {
+  display: none !important;
+}
+
+/* ===== MODAL COMENTÁRIOS ESTILO FACEBOOK ===== */
+.yu-modal.yu-modal-comments {
+  max-width: 480px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 88vh;
+}
+
+.yu-comments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.yu-comments-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.yu-comments-header .yu-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, .06);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .18s;
+}
+
+.yu-comments-header .yu-close:hover {
+  background: rgba(255, 255, 255, .12);
+}
+
+.yu-comments-header .yu-close svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.yu-comments-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 200px;
+}
+
+.yu-comments-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.yu-comments-empty svg {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 8px;
+  fill: none;
+  stroke: var(--cor-primaria, #dc2626);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .7;
+}
+
+.yu-comments-empty h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.yu-comments-empty p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, .55);
+  line-height: 1.5;
+}
+
+/* Chip de sugestão (tipo Facebook) */
+.yu-comments-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 4px 0 10px;
+}
+
+.yu-comments-chip {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--rgb-primaria, 220, 38, 38), .45);
+  background: transparent;
+  color: var(--cor-clara, #fca5a5);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s, color .18s;
+}
+
+.yu-comments-chip:hover {
+  background: rgba(var(--rgb-primaria, 220, 38, 38), .15);
+  color: #fff;
+}
+
+/* Comentário individual */
+.yu-comment {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-left: 0;
+}
+
+.yu-comment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
+  color: #fff;
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.yu-comment-balao {
+  background: rgba(255, 255, 255, .06);
+  border-radius: 4px 14px 14px 14px;
+  padding: 10px 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.yu-comment-autor {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.yu-comment-texto {
+  font-size: 14px;
+  color: rgba(255, 255, 255, .82);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.yu-comment-hora {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .4);
+  margin-top: 6px;
+  padding-left: 46px;
+}
+
+/* Rodapé fixo (input + enviar) */
+.yu-comments-footer {
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding: 12px 16px 14px;
+  background: rgba(0, 0, 0, .25);
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.yu-comments-footer .yu-comment-avatar {
+  background: linear-gradient(135deg, #52525b, #27272a);
+}
+
+.yu-comments-input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.yu-comments-input-wrap input,
+.yu-comments-input-wrap textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .05);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color .18s, background .18s;
+}
+
+.yu-comments-input-wrap input:focus,
+.yu-comments-input-wrap textarea:focus {
+  border-color: var(--cor-primaria, #dc2626);
+  background: rgba(255, 255, 255, .08);
+}
+
+.yu-comments-input-wrap textarea {
+  resize: none;
+  min-height: 42px;
+  max-height: 100px;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+.yu-comments-send {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 0;
+  background: linear-gradient(135deg, var(--cor-primaria, #dc2626), var(--cor-escura, #7f1d1d));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(var(--rgb-primaria, 220, 38, 38), .35);
+  transition: transform .12s, box-shadow .18s;
+}
+
+.yu-comments-send:hover {
+  box-shadow: 0 10px 22px rgba(var(--rgb-primaria, 220, 38, 38), .45);
+}
+
+.yu-comments-send:active {
+  transform: scale(.9);
+}
+
+.yu-comments-send svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

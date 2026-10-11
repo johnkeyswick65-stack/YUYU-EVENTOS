@@ -80,93 +80,163 @@
     return { overlay: overlay, fechar: fechar };
   }
 
-  /* ============ JANELA DE COMENTÁRIOS ============ */
-  async function abrirComentarios(slug, eventoNome) {
-    const nav = obterNavegadorId();
+  /* ============ JANELA DE COMENTÁRIOS (estilo Facebook) ============ */
+async function abrirComentarios(slug, eventoNome) {
+  const nav = obterNavegadorId();
 
-    const html = `
-      <h2 class="yu-modal-title">Comentários</h2>
-      <p class="yu-modal-sub">${escapar(eventoNome)}</p>
-      <div class="yu-comments-list" id="yuComList"><div class="yu-comment-vazio">A carregar…</div></div>
-      <div class="yu-modal-field">
-        <label>O teu nome</label>
-        <input type="text" id="yuComNome" maxlength="60" placeholder="Ex: João Silva">
+  const html = `
+    <div class="yu-comments-header">
+      <h2>Comentários</h2>
+      <button type="button" class="yu-close" aria-label="Fechar">
+        <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <div class="yu-comments-body" id="yuComList">
+      <div class="yu-comments-empty">
+        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        <h3>Ainda sem comentários</h3>
+        <p>Sê a primeira pessoa a comentar.</p>
+        <div class="yu-comments-chips" id="yuComChips">
+          <button type="button" class="yu-comments-chip" data-chip="Este evento ainda vai acontecer?">Este evento ainda vai acontecer?</button>
+          <button type="button" class="yu-comments-chip" data-chip="Tenho interesse neste evento!">Tenho interesse neste evento!</button>
+          <button type="button" class="yu-comments-chip" data-chip="Qual é o preço dos bilhetes?">Qual é o preço dos bilhetes?</button>
+        </div>
       </div>
-      <div class="yu-modal-field">
-        <label>Comentário</label>
-        <textarea id="yuComTexto" maxlength="500" placeholder="Escreve o teu comentário..."></textarea>
+    </div>
+
+    <div class="yu-comments-footer">
+      <div class="yu-comment-avatar" id="yuComAvatar">?</div>
+      <div class="yu-comments-input-wrap">
+        <input type="text" id="yuComNome" maxlength="60" placeholder="O teu nome">
+        <textarea id="yuComTexto" maxlength="500" rows="1" placeholder="Escreve um comentário..."></textarea>
       </div>
-    `;
+      <button type="button" class="yu-comments-send" id="yuComEnviar" aria-label="Enviar">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"></path><path d="M22 2 15 22l-4-9-9-4z"></path></svg>
+      </button>
+    </div>
+  `;
 
-    const m = criarModal(html, [
-      { texto: 'Fechar', tipo: 'secundario' },
-      {
-        texto: 'Publicar',
-        tipo: 'primario',
-        acao: function (overlay) {
-          const nome = overlay.querySelector('#yuComNome').value.trim();
-          const texto = overlay.querySelector('#yuComTexto').value.trim();
-          if (!nome || !texto) {
-            alert('Preenche nome e comentário.');
-            return false;
-          }
-          enviarComentario(slug, nome, texto, nav);
-        }
-      }
-    ]);
+  // Modal especial
+  const overlay = document.createElement('div');
+  overlay.className = 'yu-modal-overlay';
+  overlay.innerHTML = '<div class="yu-modal yu-modal-comments">' + html + '</div>';
+  document.body.appendChild(overlay);
 
-    // Carrega lista
-    const lista = m.overlay.querySelector('#yuComList');
-    try {
-      const r = await fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentarios');
-      const d = await r.json();
-      const coms = (d && d.comentarios) || [];
+  function fechar() {
+    overlay.style.animation = 'yuFade .15s reverse';
+    setTimeout(function () { overlay.remove(); }, 150);
+  }
 
-      if (!coms.length) {
-        lista.innerHTML = '<div class="yu-comment-vazio">Ainda sem comentários. Sê o primeiro!</div>';
-      } else {
-        lista.innerHTML = coms.map(function (c) {
-          return `
-            <div class="yu-comment">
-              <div class="yu-comment-autor">${escapar(c.autor_nome)}</div>
-              <div class="yu-comment-texto">${escapar(c.texto)}</div>
+  overlay.querySelector('.yu-close').addEventListener('click', fechar);
+  overlay.addEventListener('click', function (ev) {
+    if (ev.target === overlay) fechar();
+  });
+  document.addEventListener('keydown', function esc(ev) {
+    if (ev.key === 'Escape') { fechar(); document.removeEventListener('keydown', esc); }
+  });
+
+  // Auto-resize do textarea
+  const txt = overlay.querySelector('#yuComTexto');
+  txt.addEventListener('input', function () {
+    txt.style.height = 'auto';
+    txt.style.height = Math.min(txt.scrollHeight, 100) + 'px';
+  });
+
+  // Avatar em tempo real
+  const nomeInput = overlay.querySelector('#yuComNome');
+  const avatar = overlay.querySelector('#yuComAvatar');
+  nomeInput.addEventListener('input', function () {
+    const v = nomeInput.value.trim();
+    avatar.textContent = v ? v.charAt(0).toUpperCase() : '?';
+  });
+
+  // Chips
+  overlay.querySelectorAll('[data-chip]').forEach(function (c) {
+    c.addEventListener('click', function () {
+      txt.value = c.dataset.chip;
+      txt.focus();
+      txt.style.height = 'auto';
+      txt.style.height = Math.min(txt.scrollHeight, 100) + 'px';
+    });
+  });
+
+  // Enviar
+  overlay.querySelector('#yuComEnviar').addEventListener('click', function () {
+    const nome = nomeInput.value.trim();
+    const texto = txt.value.trim();
+    if (!nome) { nomeInput.focus(); return; }
+    if (!texto) { txt.focus(); return; }
+    enviarComentario(slug, nome, texto, nav, fechar);
+  });
+
+  // Carrega lista real
+  const lista = overlay.querySelector('#yuComList');
+  try {
+    const r = await fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentarios');
+    const d = await r.json();
+    const coms = (d && d.comentarios) || [];
+
+    if (coms.length) {
+      lista.innerHTML = coms.map(function (c) {
+        const inicial = (c.autor_nome || '?').charAt(0).toUpperCase();
+        return `
+          <div class="yu-comment">
+            <div class="yu-comment-avatar">${escapar(inicial)}</div>
+            <div style="flex:1;min-width:0">
+              <div class="yu-comment-balao">
+                <div class="yu-comment-autor">${escapar(c.autor_nome)}</div>
+                <div class="yu-comment-texto">${escapar(c.texto)}</div>
+              </div>
+              <div class="yu-comment-hora">${formatarHora(c.criado_em)}</div>
             </div>
-          `;
-        }).join('');
-      }
-    } catch (_) {
-      lista.innerHTML = '<div class="yu-comment-vazio">Erro ao carregar comentários.</div>';
+          </div>
+        `;
+      }).join('');
     }
-  }
+  } catch (_) {}
+}
 
-  async function enviarComentario(slug, nome, texto, nav) {
-    try {
-      const r = await fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentario', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ autor_nome: nome, texto: texto, navegador_id: nav })
-      });
-      const d = await r.json();
+function formatarHora(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const agora = Date.now();
+  const dif = (agora - d.getTime()) / 1000;
+  if (dif < 60) return 'agora';
+  if (dif < 3600) return Math.floor(dif / 60) + ' min';
+  if (dif < 86400) return Math.floor(dif / 3600) + ' h';
+  if (dif < 604800) return Math.floor(dif / 86400) + ' d';
+  const p = n => String(n).padStart(2, '0');
+  return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear();
+}
 
-      if (d.ok) {
-        // Fecha o modal e mostra mensagem de sucesso
-        document.querySelectorAll('.yu-modal-overlay').forEach(function (o) { o.remove(); });
-        setTimeout(function () {
-          criarModal(
-            `<h2 class="yu-modal-title">Comentário enviado</h2>
-             <p class="yu-modal-sub">Será publicado depois de aprovado pela nossa equipa.</p>`,
-            [{ texto: 'Ok', tipo: 'primario' }]
-          );
-        }, 200);
-      } else {
-        alert(d.error || 'Falhou');
-      }
-    } catch (_) {
-      alert('Erro de rede.');
+async function enviarComentario(slug, nome, texto, nav, fechar) {
+  try {
+    const r = await fetch(API_URL + '/api/eventos/' + encodeURIComponent(slug) + '/comentario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ autor_nome: nome, texto: texto, navegador_id: nav })
+    });
+    const d = await r.json();
+
+    if (d.ok) {
+      fechar();
+      setTimeout(function () {
+        criarModal(
+          `<h2 class="yu-modal-title" style="text-align:center">Comentário enviado</h2>
+           <p class="yu-modal-sub" style="text-align:center">Será publicado depois de aprovado pela equipa YUYU EVENTOS.</p>`,
+          [{ texto: 'Ok', tipo: 'primario' }]
+        );
+      }, 250);
+    } else {
+      alert(d.error || 'Falhou');
     }
+  } catch (_) {
+    alert('Erro de rede.');
   }
+}
 
-  /* ============ JANELA DE PARTILHA ============ */
+/* ============ JANELA DE PARTILHA ============ */
   function abrirPartilha(slug) {
     const url = location.origin + location.pathname.replace(/\/[^/]*$/, '/') + 'eventos.html?evento=' + slug;
     const titulo = 'Vê este evento no YUYU EVENTOS';
