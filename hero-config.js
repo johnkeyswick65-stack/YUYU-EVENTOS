@@ -19,43 +19,46 @@
       const hero = d.config && d.config.hero;
       if (!hero) return;
 
-      // 1. Imagem de fundo do hero
+      /* 1. Imagem de fundo do hero (mantém o gradiente escuro por cima) */
       if (hero.imagem_url) {
         const heroEl = document.querySelector('.hero');
         if (heroEl) {
-          heroEl.style.backgroundImage = 'url("' + hero.imagem_url + '")';
+          heroEl.style.background =
+            'linear-gradient(rgba(0, 0, 0, .68), rgba(0, 0, 0, .78)), ' +
+            'url("' + hero.imagem_url + '") center center / cover no-repeat';
         }
       }
 
-      // 2. Label
-      const labelEl = document.querySelector('.hero-label, .hero-eyebrow, .section-label');
+      /* 2. Label */
+      const labelEl = document.querySelector('.hero-label');
       if (labelEl && hero.label) labelEl.textContent = hero.label;
 
-      // 3. Título (linha 1)
-      const tituloEl = document.querySelector('.hero h1');
-      if (tituloEl && hero.titulo) {
-        const destaque = hero.titulo_destaque || '';
-        tituloEl.innerHTML = hero.titulo + (destaque ? ' <span>' + destaque + '</span>' : '');
+      /* 3. Título — usa <strong> para o destaque */
+      const h1El = document.querySelector('.hero h1');
+      if (h1El) {
+        const t = hero.titulo || 'Seu próximo momento';
+        const d2 = hero.titulo_destaque || 'começa aqui.';
+        h1El.innerHTML = t + '\n          <strong>' + d2 + '</strong>';
       }
 
-      // 4. Subtítulo
-      const subEl = document.querySelector('.hero-subtitle, .hero p');
+      /* 4. Subtítulo */
+      const subEl = document.querySelector('.hero-content > p');
       if (subEl && hero.subtitulo) subEl.textContent = hero.subtitulo;
 
-      // 5. Botão
+      /* 5. Botão "Explorar eventos" */
       const botaoEl = document.querySelector('.hero-button');
       if (botaoEl) {
         if (hero.botao_texto) botaoEl.textContent = hero.botao_texto;
         if (hero.botao_link) botaoEl.href = hero.botao_link;
       }
 
-      // 6. Placeholder da pesquisa
-      const inputEl = document.querySelector('#searchInput, .hero-search input, input[type=search]');
+      /* 6. Placeholder da pesquisa */
+      const inputEl = document.querySelector('.search-box input, #searchInput, input[type=search]');
       if (inputEl && hero.placeholder_busca) {
         inputEl.placeholder = hero.placeholder_busca;
       }
 
-      // 7. Temas — aplicar cores
+      /* 7. Temas — aplicar cores dinâmicas */
       if (d.config.temas && Array.isArray(d.config.temas)) {
         let style = document.getElementById('temas-dinamicos');
         if (!style) {
