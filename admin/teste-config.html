@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teste config</title>
+<style>
+body{font-family:monospace;background:#0a0a0a;color:#fff;padding:16px;font-size:12px}
+img{max-width:100%;border:2px solid lime;margin:10px 0}
+pre{background:#000;padding:10px;border-radius:8px;overflow-x:auto}
+</style>
+</head>
+<body>
+<h1>Teste config</h1>
+<pre id="out">A carregar…</pre>
+<img id="img" alt="">
+
+<script src="api.js"></script>
+<script>
+(async () => {
+  const out = document.getElementById('out');
+  try {
+    const r = await Api.get('/api/admin/config');
+    out.textContent = JSON.stringify(r.config.hero, null, 2);
+
+    if (r.config.hero && r.config.hero.imagem_url) {
+      document.getElementById('img').src = r.config.hero.imagem_url;
+    } else {
+      out.textContent += '\n\nSEM IMAGEM_URL';
+    }
+  } catch (e) {
+    out.textContent = 'ERRO: ' + e.message;
+  }
+})();
+</script>
+</body>
+</html>
