@@ -7061,3 +7061,69 @@ input:focus,
     font-size: 8px !important;
   }
 }
+
+/* ===== MENU MOBILE: largura compacta tipo browser ===== */
+@media (max-width: 720px) {
+  html body nav.mobile-menu.open,
+  html body #mobileMenu.open,
+  html body .mobile-menu.open {
+    width: 280px !important;
+    max-width: 82vw !important;
+    left: auto !important;
+    right: 12px !important;
+    top: 76px !important;
+    max-height: 70vh !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    padding: 10px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Links compactos */
+  html body .mobile-menu.open a {
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    margin-bottom: 2px !important;
+  }
+
+  html body .mobile-menu.open a::before {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Rodapé dentro do menu compacto */
+  html body .mobile-menu.open .menu-footer {
+    padding: 12px 8px 0 !important;
+    margin-top: 8px !important;
+    gap: 6px !important;
+  }
+
+  html body .mobile-menu.open .menu-footer .footer-logo strong {
+    font-size: 16px !important;
+  }
+
+  html body .mobile-menu.open .menu-footer-tag {
+    font-size: 11px !important;
+    margin: 3px 0 !important;
+  }
+
+  html body .mobile-menu.open .menu-footer .footer-links {
+    gap: 5px !important;
+    margin: 4px 0 !important;
+  }
+
+  html body .mobile-menu.open .menu-footer .footer-links button {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  html body .mobile-menu.open .menu-footer .footer-links svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  html body .mobile-menu.open .menu-footer-copy {
+    font-size: 9px !important;
+  }
+}
